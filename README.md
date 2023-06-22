@@ -12,7 +12,7 @@
 * [ ] lottie
 * [ ] Kotlin DSL
 * [ ] Clean Architecture
-
+* [ ] 파이어베이스로 버전관리 해보기
 
 ### git comment tag
 
