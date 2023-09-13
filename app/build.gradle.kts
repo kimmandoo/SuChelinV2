@@ -12,12 +12,12 @@ fun getApiKey(propertyKey: String): String {
 
 android {
     namespace = "com.suchelin.android"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.suchelin.android"
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -50,23 +50,23 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.5.3"
-    val fragment_version = "1.5.7"
-
-    implementation("androidx.fragment:fragment-ktx:$fragment_version")
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-    implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.naver.maps:map-sdk:3.17.0")
-
+    implementation(AndroidX.CORE_KTX)
+    implementation(AndroidX.APP_COMPAT)
+    implementation(Google.MATERIAL)
+    implementation(AndroidX.FRAGMENT_KTX)
+    implementation(AndroidX.LIFECYCLE_VIEWMODEL_KTX)
+    testImplementation(AndroidX.JUNIT)
+    androidTestImplementation(AndroidX.EXT_JUNIT)
+    androidTestImplementation(AndroidX.ESPRESSO_CORE)
+    implementation(AndroidX.NAVIGATION_FRAGMENT_KTX)
+    implementation(AndroidX.NAVIGATION_UI_KTX)
+    implementation(AndroidX.PREFERENCES_DATASTORE)
+    implementation(KotlinX.KOTLINX_COROUTINE)
+    implementation(Jakewharton.TIMBER)
+    implementation(AndroidX.SPLASH_SCREEN)
+    implementation(Glide.GLIDE)
+    implementation(AndroidX.NAVIGATION_COMPOSE)
+    implementation(platform(Firebase.FirebaseBom))
+    implementation(Firebase.FirebaseAnalytics)
+    implementation(Naver.NaverMap)
 }
