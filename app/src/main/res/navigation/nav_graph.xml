@@ -6,7 +6,7 @@
     app:startDestination="@id/navigation_main">
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.suchelin.android.feature.view.map.MapFragment"
+        android:name="com.suchelin.android.feature.view.map.MapViewFragment"
         android:label="MapFragment" >
 
     </fragment>
