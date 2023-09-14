@@ -46,6 +46,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        compose = true
     }
 }
 
@@ -55,6 +56,7 @@ dependencies {
     implementation(Google.MATERIAL)
     implementation(AndroidX.FRAGMENT_KTX)
     implementation(AndroidX.LIFECYCLE_VIEWMODEL_KTX)
+    implementation(AndroidX.MATERIAL3_THEME)
     testImplementation(AndroidX.JUNIT)
     androidTestImplementation(AndroidX.EXT_JUNIT)
     androidTestImplementation(AndroidX.ESPRESSO_CORE)

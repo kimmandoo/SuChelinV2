@@ -2,4 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph" />
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_main">
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.suchelin.android.feature.view.map.MapFragment"
+        android:label="MapFragment" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_main"
+        android:name="com.suchelin.android.feature.compose.list.ListFragment"
+        android:label="ListFragment" >
+
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_map"
+            app:destination="@id/navigation_map" />
+    </fragment>
+</navigation>

@@ -16,7 +16,7 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="${NAVER_CLIENT_ID}" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".container.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

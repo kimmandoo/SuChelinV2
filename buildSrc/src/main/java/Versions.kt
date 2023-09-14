@@ -37,4 +37,5 @@ object Versions {
 
     const val FIREBASE = "32.2.3"
     const val NAVER_MAP = "3.17.0"
+    const val MARTERIAL3 = "1.1.1"
 }

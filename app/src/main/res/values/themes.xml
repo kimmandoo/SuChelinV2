@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.SuchelinV2" parent="Base.Theme.SuchelinV2" />
+
+    <style name="Theme.SplashScreen.ShyPolarBear" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.SuchelinV2</item>
+    </style>
 </resources>

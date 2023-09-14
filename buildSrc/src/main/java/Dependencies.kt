@@ -20,6 +20,8 @@ object AndroidX {
 
     const val PREFERENCES_DATASTORE = "androidx.datastore:datastore-preferences:${Versions.DATA_STORE}"
     const val PROTO_DATASTORE = "androidx.datastore:datastore:${Versions.DATA_STORE}"
+
+    const val MATERIAL3_THEME = "androidx.compose.material3:material3:${Versions.MARTERIAL3}"
 }
 
 object Google {
