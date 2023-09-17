@@ -1,7 +1,7 @@
 package com.suchelin.domain.model
 
 data class StoreData(
-    val storeId: String,
+    val storeId: Int,
     val storeDetailData: StoreDetail
 )
 

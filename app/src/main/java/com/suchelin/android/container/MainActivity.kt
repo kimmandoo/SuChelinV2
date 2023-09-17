@@ -1,6 +1,7 @@
 package com.suchelin.android.container
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -23,6 +24,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     }
     override fun initView() {
         initNavBar()
+        viewModel.getMenuData()
         viewModel.getStoreData()
         binding.apply {
             navController.addOnDestinationChangedListener { controller, destination, arguments ->
