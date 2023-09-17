@@ -1,24 +1,36 @@
 package com.suchelin.android.feature.view.map
 
 import android.os.Bundle
-import androidx.fragment.app.viewModels
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.MapFragment
+import android.util.Log
+import androidx.fragment.app.activityViewModels
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
+import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentMapBinding
 import com.suchelin.android.util.initMap
 
-class MapViewFragment : BaseFragment<FragmentMapBinding, MapViewModel>(R.layout.fragment_map),
+const val TAG = "MAP"
+class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout.fragment_map),
     OnMapReadyCallback {
-    override val viewModel: MapViewModel by viewModels()
+    override val viewModel: MainViewModel by activityViewModels()
     private lateinit var mapViewInstance: MapView
     private lateinit var naverMap: NaverMap
+
     override fun initView() {
+
+        viewModel.storeData
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
 
         binding.apply {
             mapViewInstance = mapView

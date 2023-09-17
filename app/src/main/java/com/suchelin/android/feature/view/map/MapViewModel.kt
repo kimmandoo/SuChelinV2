@@ -4,5 +4,4 @@ import com.suchelin.android.base.BaseViewModel
 
 class MapViewModel: BaseViewModel() {
 
-
 }
