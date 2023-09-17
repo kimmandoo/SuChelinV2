@@ -15,11 +15,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.suchelin.android"
+        applicationId = "com.Guide.suchelin"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 10
+        versionName = "2.0.0"
 
         buildConfigField("String", "NAVER_CLIENT_ID", "\"${getApiKey("NAVER_CLIENT_ID")}\"")
         manifestPlaceholders["NAVER_CLIENT_ID"] = getApiKey("NAVER_CLIENT_ID")
