@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "SuchelinV2"
 include(":app")
+include(":domain")

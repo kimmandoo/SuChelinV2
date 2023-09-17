@@ -11,8 +11,12 @@ import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentMapBinding
 import com.suchelin.android.util.initMap
+import com.suchelin.domain.model.StoreData
+import com.suchelin.domain.model.StoreDetail
+import timber.log.Timber
 
 const val TAG = "MAP"
+
 class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout.fragment_map),
     OnMapReadyCallback {
     override val viewModel: MainViewModel by activityViewModels()
@@ -20,17 +24,6 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     private lateinit var naverMap: NaverMap
 
     override fun initView() {
-
-        viewModel.storeData
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
 
         binding.apply {
             mapViewInstance = mapView

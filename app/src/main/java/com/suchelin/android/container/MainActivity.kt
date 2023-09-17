@@ -23,6 +23,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     }
     override fun initView() {
         initNavBar()
+        viewModel.getStoreData()
         binding.apply {
             navController.addOnDestinationChangedListener { controller, destination, arguments ->
                 when(destination.id){
