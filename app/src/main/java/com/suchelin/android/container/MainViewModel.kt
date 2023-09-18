@@ -25,8 +25,13 @@ class MainViewModel : BaseViewModel() {
         _db.collection("menu").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    for(items in document.data["menu"] as List<HashMap<String,String>>){
-                        _menuDetailList.add(StoreMenuDetail(menuPrice = items["menuPrice"] as String, menuName = items["menuName"] as String))
+                    for (items in document.data["menu"] as List<HashMap<String, String>>) {
+                        _menuDetailList.add(
+                            StoreMenuDetail(
+                                menuPrice = items["menuPrice"] as String,
+                                menuName = items["menuName"] as String
+                            )
+                        )
                     }
                     _menuList.add(
                         StoreMenuData(
@@ -55,7 +60,8 @@ class MainViewModel : BaseViewModel() {
                                 imageUrl = document.data["imageUrl"] as String,
                                 latitude = document.data["latitude"] as Double,
                                 longitude = document.data["longitude"] as Double,
-                                menuImageUrl = document.data["menuImageUrl"] as String?
+                                menuImageUrl = document.data["menuImageUrl"] as String?,
+                                type = document.data["type"] as String
                             )
                         )
                     )
