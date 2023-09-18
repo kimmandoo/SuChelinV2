@@ -1,5 +1,7 @@
 package com.suchelin.android.feature.view.map
 
+import android.content.Context
+import android.location.LocationManager
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import com.naver.maps.geometry.LatLng
@@ -7,14 +9,17 @@ import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.util.FusedLocationSource
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentMapBinding
 import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.util.initMap
+import com.suchelin.android.util.initMarker
 
 const val TAG = "MAP"
+private const val LOCATION_PERMISSION_REQUEST_CODE = 10002
 
 class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout.fragment_map),
     OnMapReadyCallback {
@@ -27,13 +32,13 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
 
         binding.apply {
             mapViewInstance = mapView
-
             mapViewInstance.getMapAsync { map ->
                 naverMap = map
                 naverMap.initMap()
+                naverMap.initMarker(requireContext(), viewModel.storeData.value!!)
             }
 
-            sendMail.setOnClickListener{
+            sendMail.setOnClickListener {
                 sendMailDialog.showDialog()
             }
         }
@@ -42,7 +47,6 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     override fun onMapReady(p0: NaverMap) {
 
     }
-
 
 
     override fun onStart() {
