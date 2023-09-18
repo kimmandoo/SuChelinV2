@@ -1,7 +1,6 @@
 package com.suchelin.android.feature.view.map
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.activityViewModels
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
@@ -10,10 +9,8 @@ import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentMapBinding
+import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.util.initMap
-import com.suchelin.domain.model.StoreData
-import com.suchelin.domain.model.StoreDetail
-import timber.log.Timber
 
 const val TAG = "MAP"
 
@@ -24,6 +21,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     private lateinit var naverMap: NaverMap
 
     override fun initView() {
+        val sendMailDialog = SendMailDialog(requireContext())
 
         binding.apply {
             mapViewInstance = mapView
@@ -32,12 +30,21 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
                 naverMap = map
                 naverMap.initMap()
             }
+
+            sendMail.setOnClickListener{
+                sendMailDialog.showDialog()
+            }
+            sendMailDialog.alertDialog.setOnDismissListener {
+
+            }
         }
     }
 
     override fun onMapReady(p0: NaverMap) {
 
     }
+
+
 
     override fun onStart() {
         super.onStart()
