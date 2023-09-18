@@ -26,7 +26,7 @@
             android:id="@+id/editEmail"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_marginHorizontal="4dp"
+            android:layout_margin="4dp"
             android:background="#F4EDED"
             android:gravity="top|start"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,10 @@
             android:id="@+id/email_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
             android:text="gmail로 연결됩니다"
             android:textColor="#949494"
+            app:layout_constraintStart_toStartOf="@id/editEmail"
             app:layout_constraintTop_toBottomOf="@id/editEmail" />
 
         <Button
@@ -55,7 +57,7 @@
             android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="16dp"
             android:backgroundTint="#aaddff"
             android:text="닫기"
             android:textColor="@color/black"

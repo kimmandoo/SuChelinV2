@@ -2,9 +2,11 @@ package com.suchelin.android.feature.view.map
 
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
@@ -33,9 +35,6 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
 
             sendMail.setOnClickListener{
                 sendMailDialog.showDialog()
-            }
-            sendMailDialog.alertDialog.setOnDismissListener {
-
             }
         }
     }
