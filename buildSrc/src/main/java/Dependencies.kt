@@ -63,6 +63,10 @@ object Firebase{
 
 }
 
+object Coil{
+    const val Coil = "io.coil-kt:coil-compose:${Versions.COIL}"
+}
+
 object Naver{
     const val NaverMap = "com.naver.maps:map-sdk:${Versions.NAVER_MAP}"
 }

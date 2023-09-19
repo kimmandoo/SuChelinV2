@@ -56,7 +56,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(Coil.Coil)
     implementation(AndroidX.CORE_KTX)
     implementation(AndroidX.APP_COMPAT)
     implementation(Google.MATERIAL)
