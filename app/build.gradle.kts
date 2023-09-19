@@ -15,6 +15,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
+        manifestPlaceholders += mapOf()
         applicationId = "com.Guide.suchelin"
         minSdk = 28
         targetSdk = 34
@@ -25,6 +26,9 @@ android {
         manifestPlaceholders["NAVER_CLIENT_ID"] = getApiKey("NAVER_CLIENT_ID")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -52,7 +56,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-
+    implementation("io.coil-kt:coil-compose:2.4.0")
     implementation(AndroidX.CORE_KTX)
     implementation(AndroidX.APP_COMPAT)
     implementation(Google.MATERIAL)

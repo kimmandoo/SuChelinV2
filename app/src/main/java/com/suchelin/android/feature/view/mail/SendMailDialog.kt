@@ -11,7 +11,8 @@ import androidx.core.net.toUri
 import com.suchelin.android.R
 import com.suchelin.android.databinding.DialogMailBinding
 
-class SendMailDialog(private val context: Context) {
+class SendMailDialog(private val context: Context, private val type: String) {
+
     private val binding = DialogMailBinding.inflate(LayoutInflater.from(context), null, false)
     lateinit var alertDialog: AlertDialog
 
@@ -24,7 +25,7 @@ class SendMailDialog(private val context: Context) {
         binding.apply {
             btnSend.setOnClickListener {
                 editEmail.text?.let {
-                    sendEmail(content = editEmail.text.toString())
+                    sendEmail(content = editEmail.text.toString(), type)
                 }
 
                 alertDialog.dismiss()
@@ -36,7 +37,7 @@ class SendMailDialog(private val context: Context) {
     }
 
     @SuppressLint("QueryPermissionsNeeded")
-    fun sendEmail(content: String) {
+    fun sendEmail(content: String, tag: String) {
         val emailAddress = "mingyuk1999@gmail.com"
 
         context.startActivity(Intent(Intent.ACTION_SEND).apply {
@@ -44,7 +45,7 @@ class SendMailDialog(private val context: Context) {
                 data = "mailto:".toUri()
             }
             putExtra(Intent.EXTRA_EMAIL, arrayOf(emailAddress))
-            putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.mail_title))
+            putExtra(Intent.EXTRA_SUBJECT, "[$tag]:"+context.getString(R.string.mail_title))
             putExtra(Intent.EXTRA_TEXT, content)
         })
     }

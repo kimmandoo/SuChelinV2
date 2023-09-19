@@ -28,14 +28,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     override fun initView() {
 
 //        setStoreData(
-//            name="",
-//            mainMenu = "",
-//            // imageUrl, menuImageUrl -> Copy Image Address
-//            imageUrl = "",
-//            menuImageUrl = "",
-//            latitude = 0.0, // 30~
-//            longitude = 0.0, // 120~
-//            type = "" // restaurant or cafe
+//            path= 5,
+//            name="코히맨즈",
+//            mainMenu = "수제 스콘, 커피",
+//// image address 이미지 주소
+//            imageUrl = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220213_4%2F1644723595924Xg3Cw_JPEG%2FScreenshot_20220205-152057_Instagram.jpg",
+//            menuImageUrl = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220426_48%2F1650950839211AvuWK_JPEG%2F1650950819553.jpg",
+//            latitude = 37.2112220, // 30~
+//            longitude = 126.9807451, // 120~
+//            type = "cafe" // restaurant or cafe
 //        )
 
         initNavBar()

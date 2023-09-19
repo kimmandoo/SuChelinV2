@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SuchelinV2</string>
     <string name="mail_title">수슐랭 문의</string>
+    <string name="title_activity_list_compose_fragment">ListComposeFragment</string>
 </resources>

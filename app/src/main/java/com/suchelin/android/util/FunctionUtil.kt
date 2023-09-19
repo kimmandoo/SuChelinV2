@@ -2,6 +2,7 @@ package com.suchelin.android.util
 
 import android.content.Context
 import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.naver.maps.geometry.LatLng
@@ -11,6 +12,7 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
+import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 
@@ -105,6 +107,7 @@ private fun InfoWindow.setInfoWindow(context: Context, markerList: List<Marker>,
 }
 
 fun setStoreData(
+    path: Int,
     name: String,
     mainMenu: String,
     imageUrl: String,
@@ -114,10 +117,6 @@ fun setStoreData(
     type: String,
 ) {
     val db = Firebase.firestore
-    var path: Int = 0
-    db.collection("store").get().addOnSuccessListener { result ->
-        path = result.size() + 1
-    }
     val docData = hashMapOf(
         "name" to name,
         "detail" to mainMenu,

@@ -6,11 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suchelin.android.base.BaseViewModel
-import com.suchelin.android.feature.view.map.TAG
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
-import com.suchelin.domain.model.StoreMenuDetail
 import com.suchelin.domain.model.StoreMenuData
+import com.suchelin.domain.model.StoreMenuDetail
 
 class MainViewModel : BaseViewModel() {
     private val _db = Firebase.firestore
@@ -43,7 +42,7 @@ class MainViewModel : BaseViewModel() {
                 _menuData.value = _menuList
             }
             .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
+                Log.w("TAG", "Error getting documents.", exception)
             }
     }
 
@@ -69,7 +68,7 @@ class MainViewModel : BaseViewModel() {
                 _storeData.value = _storeList
             }
             .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
+                Log.w("TAG", "Error getting documents.", exception)
             }
     }
 
