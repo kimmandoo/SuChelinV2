@@ -2,7 +2,6 @@ package com.suchelin.android.util
 
 import android.content.Context
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.naver.maps.geometry.LatLng
@@ -12,12 +11,14 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
-import com.suchelin.android.feature.view.mail.SendMailDialog
+import com.naver.maps.map.overlay.OverlayImage
+import com.suchelin.android.R
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 
 const val MARKER_ICON_HEIGHT = 60
 const val MARKER_ICON_WEIGHT = 60
+const val CAMERA_ZOOM = 18.0
 const val MAIN_GATE = 0
 
 fun NaverMap.initMap() {
@@ -31,50 +32,75 @@ fun NaverMap.initMap() {
         cameraPosition = CameraPosition(
             // 초기 위치 정문
             LatLng(37.214185, 126.978792),
-            18.0
+            CAMERA_ZOOM
         )
     }
 }
 
 fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
     apply {
-        //        val resource = R.drawable.premiumiconlocation1
-//        val markerIconStart = OverlayImage.fromResource(R.drawable.home)
-//        val markerIcon = OverlayImage.fromResource(resource)
+        val markerIcon = OverlayImage.fromResource(R.drawable.ic_pin_3)
         val storeDataList = mutableListOf(
-            StoreData(MAIN_GATE, StoreDetail("수원대학교 정문", "", "", 37.214185, 126.978792, null, "default"))
+            StoreData(
+                MAIN_GATE,
+                StoreDetail("수원대학교 정문", "", "", 37.214185, 126.978792, null, "default")
+            )
         )
         val markerList = mutableListOf<Marker>()
         val infoWindowInstance = InfoWindow()
 
         markerList.add(Marker().apply {
             position = LatLng(37.214185, 126.978792)
-//            icon = markerIconStart
+            icon = markerIcon
             map = this@initMarker
             height = MARKER_ICON_HEIGHT
             width = MARKER_ICON_WEIGHT
         })
 
+        // 정문 마커 클릭 시
         markerList[MAIN_GATE].setOnClickListener {
             moveMarker(MAIN_GATE, storeDataList)
             Log.d("MAP", storeDataList[MAIN_GATE].storeDetailData.name)
-            infoWindowInstance.setInfoWindow(context, markerList, MAIN_GATE, storeDataList[MAIN_GATE].storeDetailData.name)
+            infoWindowInstance.setInfoWindow(
+                context,
+                markerList,
+                MAIN_GATE,
+                storeDataList[MAIN_GATE].storeDetailData.name
+            )
             true
         }
 
         storeList.forEachIndexed { _, data ->
-            val marker = Marker().apply {
-                position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-//                icon = markerIcon
-                map = this@initMarker
-                height = MARKER_ICON_HEIGHT
-                width = MARKER_ICON_WEIGHT
+            val marker = if (data.storeDetailData.type == "cafe") {
+                Marker().apply {
+                    position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                    icon = markerIcon
+                    iconTintColor = context.getColor(R.color.blue)
+                    map = this@initMarker
+                    height = MARKER_ICON_HEIGHT
+                    width = MARKER_ICON_WEIGHT
+                }
+            } else {
+                Marker().apply {
+                    position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                    icon = markerIcon
+                    iconTintColor = context.getColor(R.color.red)
+                    map = this@initMarker
+                    height = MARKER_ICON_HEIGHT
+                    width = MARKER_ICON_WEIGHT
+                }
             }
 
+            // 일반 마커 클릭 시
             marker.setOnClickListener {
                 moveMarker(data.storeId, storeDataList)
                 Log.d("MAP", storeDataList[data.storeId].storeDetailData.name)
-                infoWindowInstance.setInfoWindow(context, markerList, data.storeId, data.storeDetailData.name)
+                infoWindowInstance.setInfoWindow(
+                    context,
+                    markerList,
+                    data.storeId,
+                    data.storeDetailData.name
+                )
                 true
             }
             storeDataList.add(data.storeId, data)
@@ -85,19 +111,24 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
 
 fun NaverMap.moveMarker(id: Int, storeDataList: List<StoreData>) {
     apply {
-        Log.d("MAP", "${storeDataList} , ${storeDataList[id]}")
         moveCamera(
-            CameraUpdate.scrollTo(
+            CameraUpdate.scrollAndZoomTo(
                 LatLng(
                     storeDataList[id].storeDetailData.latitude,
                     storeDataList[id].storeDetailData.longitude
-                )
+                ),
+                CAMERA_ZOOM
             ).animate(CameraAnimation.Fly)
         )
     }
 }
 
-private fun InfoWindow.setInfoWindow(context: Context, markerList: List<Marker>, markerIndex: Int, infoString: String) {
+private fun InfoWindow.setInfoWindow(
+    context: Context,
+    markerList: List<Marker>,
+    markerIndex: Int,
+    infoString: String,
+) {
     adapter = object : InfoWindow.DefaultTextAdapter(context) {
         override fun getText(infoWindow: InfoWindow): CharSequence {
             return infoString
