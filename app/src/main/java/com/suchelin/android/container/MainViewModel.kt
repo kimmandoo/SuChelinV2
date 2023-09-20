@@ -3,6 +3,8 @@ package com.suchelin.android.container
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suchelin.android.base.BaseViewModel
@@ -47,7 +49,8 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun getStoreData() {
-        _db.collection("store").get()
+        _db.collection("store")
+            .orderBy("path", Query.Direction.ASCENDING).get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     _storeList.add(

@@ -77,7 +77,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         Modifier
             .clickable {
                 Toast
-                    .makeText(context, "${store.storeDetailData.name}", Toast.LENGTH_SHORT)
+                    .makeText(context, "${store.storeId}: ${store.storeDetailData.name}", Toast.LENGTH_SHORT)
                     .show()
             }
             .fillMaxWidth()

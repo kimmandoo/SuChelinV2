@@ -149,6 +149,7 @@ fun setStoreData(
 ) {
     val db = Firebase.firestore
     val docData = hashMapOf(
+        "path" to path,
         "name" to name,
         "detail" to mainMenu,
         // imageUrl, menuImageUrl -> Copy Image Address
