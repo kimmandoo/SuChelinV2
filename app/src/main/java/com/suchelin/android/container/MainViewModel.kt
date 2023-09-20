@@ -1,6 +1,5 @@
 package com.suchelin.android.container
 
-import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,12 +7,12 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suchelin.android.base.BaseViewModel
+import com.suchelin.android.util.docPostName
 import com.suchelin.domain.model.PostData
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 import com.suchelin.domain.model.StoreMenuData
 import com.suchelin.domain.model.StoreMenuDetail
-import java.text.SimpleDateFormat
 import java.util.Date
 
 class MainViewModel : BaseViewModel() {
@@ -29,9 +28,6 @@ class MainViewModel : BaseViewModel() {
     private val _postList = mutableListOf<PostData>()
     private val _postData = MutableLiveData<List<PostData>>()
     val postData: LiveData<List<PostData>> = _postData
-
-    @SuppressLint("SimpleDateFormat")
-    val doc = SimpleDateFormat("yyyy-MM-dd")
 
     fun loadMenuData() {
         _db.collection("menu").get()
@@ -87,18 +83,28 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun loadPostData() {
-        _db.collection("suggest").document(doc.format(Date())).get()
+        _db.collection("suggest").document(docPostName.format(Date())).get()
             .addOnSuccessListener { result ->
-                val lines = result.data!!.asIterable().sortedByDescending { it.key }
-                for ((time, post) in lines) {
-                    Log.d("TAG", "${time} : ${post}")
-                    _postList.add(PostData(time, post.toString()))
+                if(result.exists()){
+                    val lines = result.data!!.asIterable().sortedByDescending { it.key }
+                    for ((time, post) in lines) {
+                        Log.d("TAG", "${time} : ${post}")
+                        _postList.add(PostData(time, post.toString()))
+                    }
+                    _postData.value = _postList
+                }else{
+                    emptyPost()
                 }
-                _postData.value = _postList
-//                Log.d("TAG", "${lines}DocumentSnapshot successfully written!")
-            }.addOnFailureListener {
-
             }
+    }
+
+    private fun emptyPost(){
+        _postData.value = listOf(PostData("", "아직 게시글이 없습니다! \n첫 게시글의 주인공이 되어보세요"))
+    }
+
+    fun postRefresh(){
+        _postList.clear()
+        loadPostData()
     }
 
 }

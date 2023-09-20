@@ -15,6 +15,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,7 +69,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
 
     @Composable
     fun StoreRecyclerView(storeDataList: List<StoreData>) {
-        val stores = remember { storeDataList }
+        val stores by remember { mutableStateOf(storeDataList) }
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
         LazyColumn(modifier = Modifier.nestedScroll(nestedScrollInterop), contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)) {
             items(

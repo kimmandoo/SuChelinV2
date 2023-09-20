@@ -1,5 +1,6 @@
 package com.suchelin.android.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
@@ -15,12 +16,14 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.suchelin.android.R
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
+import java.text.SimpleDateFormat
 
 const val MARKER_ICON_HEIGHT = 60
 const val MARKER_ICON_WEIGHT = 60
 const val CAMERA_ZOOM = 18.0
 const val MAIN_GATE = 0
-
+@SuppressLint("SimpleDateFormat")
+val docPostName = SimpleDateFormat("yyyy-MM-dd")
 fun NaverMap.initMap() {
     apply {
         uiSettings.apply {
