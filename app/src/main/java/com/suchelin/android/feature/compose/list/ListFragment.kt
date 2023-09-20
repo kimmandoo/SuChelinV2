@@ -20,9 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.isVisible
@@ -60,7 +62,8 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     @Composable
     fun StoreRecyclerView(storeDataList: List<StoreData>) {
         val stores = remember { storeDataList }
-        LazyColumn(contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)) {
+        val nestedScrollInterop = rememberNestedScrollInteropConnection()
+        LazyColumn(modifier = Modifier.nestedScroll(nestedScrollInterop), contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)) {
             items(
                 count = stores.size,
                 itemContent = { StoreListItem(stores[it]) }
