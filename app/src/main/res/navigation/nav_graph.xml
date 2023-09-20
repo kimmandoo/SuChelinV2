@@ -18,5 +18,12 @@
         <action
             android:id="@+id/action_navigation_main_to_navigation_map"
             app:destination="@id/navigation_map" />
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_suggest"
+            app:destination="@id/navigation_suggest" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_suggest"
+        android:name="com.suchelin.android.feature.view.suggest.SuggestFragment"
+        android:label="SuggestFragment" />
 </navigation>

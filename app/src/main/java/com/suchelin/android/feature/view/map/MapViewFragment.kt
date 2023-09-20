@@ -33,7 +33,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
                 naverMap.initMarker(requireContext(), viewModel.storeData.value!!)
             }
 
-            sendMail.setOnClickListener {
+            contact.setOnClickListener {
                 sendMailDialog.showDialog()
             }
         }

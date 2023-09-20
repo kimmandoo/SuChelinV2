@@ -1,15 +1,12 @@
 package com.suchelin.android.container
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
@@ -29,8 +26,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     override fun initView() {
         initNavBar()
 
-        viewModel.getMenuData()
-        viewModel.getStoreData()
+        viewModel.loadMenuData()
+        viewModel.loadStoreData()
+        viewModel.loadPostData()
         binding.apply {
             navController.addOnDestinationChangedListener { controller, destination, arguments ->
                 when (destination.id) {

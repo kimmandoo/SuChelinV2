@@ -16,15 +16,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content">
+            android:layout_height="68dp">
 
-            <Button
+            <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="email"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수슐랭 리스트"
+                    android:textSize="20sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지도와 같이 보고 싶을 때"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/contact"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="4dp"
-                android:id="@+id/send_mail"/>
+                android:src="@mipmap/ic_launcher_foreground" />
 
         </androidx.appcompat.widget.Toolbar>
         <com.naver.maps.map.MapView

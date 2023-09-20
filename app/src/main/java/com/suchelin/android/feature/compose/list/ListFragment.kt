@@ -35,13 +35,16 @@ import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentListBinding
+import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.domain.model.StoreData
 
 class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.fragment_list) {
 
     override val viewModel: MainViewModel by activityViewModels()
+    private val TAG = "LIST"
 
     override fun initView() {
+        val sendMailDialog = SendMailDialog(requireActivity(), TAG)
         viewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
                 binding.progressCircular.isVisible = false
@@ -56,6 +59,9 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
 
         binding.apply {
             progressCircular.isVisible = true
+            contact.setOnClickListener {
+                sendMailDialog.showDialog()
+            }
         }
     }
 

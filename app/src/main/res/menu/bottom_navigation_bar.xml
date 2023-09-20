@@ -10,8 +10,8 @@
         android:id="@+id/navigation_ranking"
         android:title="투표" />
     <item
-        android:id="@+id/navigation_more"
-        android:title="추천" />
+        android:id="@+id/navigation_suggest"
+        android:title="피드" />
     <!--    <item-->
     <!--        android:id="@+id/navigation_more"-->
     <!--        android:icon="@drawable/ic_navigation_more"-->
