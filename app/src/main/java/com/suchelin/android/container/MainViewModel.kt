@@ -89,7 +89,7 @@ class MainViewModel : BaseViewModel() {
     fun loadPostData() {
         _db.collection("suggest").document(doc.format(Date())).get()
             .addOnSuccessListener { result ->
-                val lines = result.data!!.asIterable()
+                val lines = result.data!!.asIterable().sortedByDescending { it.key }
                 for ((time, post) in lines) {
                     Log.d("TAG", "${time} : ${post}")
                     _postList.add(PostData(time, post.toString()))

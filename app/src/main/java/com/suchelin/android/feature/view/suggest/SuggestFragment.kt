@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -27,9 +28,11 @@ import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.domain.model.PostData
 
-class SuggestFragment: BaseFragment<FragmentSuggestBinding, SuggestViewModel>(R.layout.fragment_suggest) {
+class SuggestFragment :
+    BaseFragment<FragmentSuggestBinding, SuggestViewModel>(R.layout.fragment_suggest) {
     override val viewModel: SuggestViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
+
     override fun initView() {
         sharedViewModel.postData.observe(viewLifecycleOwner) { postList ->
             postList?.let {
@@ -44,18 +47,22 @@ class SuggestFragment: BaseFragment<FragmentSuggestBinding, SuggestViewModel>(R.
         }
         binding.apply {
             btnSuggest.setOnClickListener {
-                etSuggestPost.text?.let { post->
+                etSuggestPost.text?.let { post ->
                     // post전에 욕설 필터링이 필요할 것 같음, 하루 최대 한번만 글 쓸 수 있게 글쓰면 광고 팝업 나오게
                     viewModel.postData(post.toString())
                 }
             }
         }
     }
+
     @Composable
     fun PostRecyclerView(postDataList: List<PostData>) {
-        val posts = postDataList
+        val posts = remember { postDataList }
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
-        LazyColumn(modifier = Modifier.nestedScroll(nestedScrollInterop), contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)) {
+        LazyColumn(
+            modifier = Modifier.nestedScroll(nestedScrollInterop),
+            contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)
+        ) {
             items(
                 count = posts.size,
                 itemContent = { PostListItem(posts[it]) }
