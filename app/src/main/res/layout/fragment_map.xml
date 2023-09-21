@@ -37,10 +37,11 @@
 
             <ImageView
                 android:id="@+id/contact"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:src="@mipmap/ic_launcher_foreground" />
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_contact" />
 
         </androidx.appcompat.widget.Toolbar>
         <com.naver.maps.map.MapView

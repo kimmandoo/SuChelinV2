@@ -54,8 +54,14 @@ class SuggestFragment :
                     // post전에 욕설 필터링이 필요할 것 같음, 하루 최대 한번만 글 쓸 수 있게 글쓰면 광고 팝업 나오게
                     // 50자 제한, 하루 한번 글 쓰기
                     // 다이얼로그로 한번만 글 쓸 수 있고, 부적절한 내용시 삭제가능하다고 안내
-                    viewModel.postData(post.toString())
-                    sharedViewModel.postRefresh()
+                    // 잘못 올린 글은 본인이 삭제할 수 없음
+                    if(post.length < 10){
+                        Toast.makeText(context, "10글자 이상 작성해주세요", Toast.LENGTH_SHORT).show()
+                    }else{
+                        viewModel.postData(post.toString())
+                        etSuggestPost.text.clear()
+                        sharedViewModel.postRefresh()
+                    }
                 }
             }
         }

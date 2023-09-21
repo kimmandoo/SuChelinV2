@@ -8,8 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_marginBottom="60dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progress_circular"
@@ -41,30 +41,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
                     <LinearLayout
-                        android:gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오늘의 수슐랭 피드"
                             android:textSize="20sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_gravity=""
                             android:layout_height="wrap_content"
+                            android:layout_gravity=""
                             android:text="매일 갱신 됩니다"
                             android:textSize="10sp" />
                     </LinearLayout>
 
                     <ImageView
                         android:id="@+id/contact"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_gravity="end"
-                        android:src="@mipmap/ic_launcher_foreground" />
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/ic_contact" />
 
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
@@ -87,13 +91,15 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <EditText
+            android:id="@+id/et_suggest_post"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:maxLength="50"
             android:layout_margin="10dp"
             android:background="@null"
-            android:id="@+id/et_suggest_post"
             android:gravity="start|top"
+            android:hint="@string/suggest_et_hint"
+            android:maxLength="50"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_suggest"
             app:layout_constraintStart_toStartOf="parent"
