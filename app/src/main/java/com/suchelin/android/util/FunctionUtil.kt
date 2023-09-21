@@ -22,6 +22,7 @@ const val MARKER_ICON_HEIGHT = 60
 const val MARKER_ICON_WEIGHT = 60
 const val CAMERA_ZOOM = 18.0
 const val MAIN_GATE = 0
+
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
 fun NaverMap.initMap() {
@@ -74,23 +75,36 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
         }
 
         storeList.forEachIndexed { _, data ->
-            val marker = if (data.storeDetailData.type == "cafe") {
-                Marker().apply {
-                    position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                    icon = markerIcon
-                    iconTintColor = context.getColor(R.color.brown)
-                    map = this@initMarker
-                    height = MARKER_ICON_HEIGHT
-                    width = MARKER_ICON_WEIGHT
+            val marker = when (data.storeDetailData.type) {
+                "cafe" -> {
+                    Marker().apply {
+                        position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                        icon = markerIcon
+                        iconTintColor = context.getColor(R.color.brown)
+                        map = this@initMarker
+                        height = MARKER_ICON_HEIGHT
+                        width = MARKER_ICON_WEIGHT
+                    }
                 }
-            } else {
-                Marker().apply {
-                    position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                    icon = markerIcon
-                    iconTintColor = context.getColor(R.color.purple)
-                    map = this@initMarker
-                    height = MARKER_ICON_HEIGHT
-                    width = MARKER_ICON_WEIGHT
+                "restaurant" -> {
+                    Marker().apply {
+                        position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                        icon = markerIcon
+                        iconTintColor = context.getColor(R.color.purple)
+                        map = this@initMarker
+                        height = MARKER_ICON_HEIGHT
+                        width = MARKER_ICON_WEIGHT
+                    }
+                }
+                else -> { // pub
+                    Marker().apply {
+                        position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                        icon = markerIcon
+                        iconTintColor = context.getColor(R.color.red)
+                        map = this@initMarker
+                        height = MARKER_ICON_HEIGHT
+                        width = MARKER_ICON_WEIGHT
+                    }
                 }
             }
 

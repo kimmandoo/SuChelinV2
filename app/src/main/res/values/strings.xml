@@ -3,4 +3,5 @@
     <string name="mail_title">수슐랭 문의</string>
     <string name="title_activity_list_compose_fragment">ListComposeFragment</string>
     <string name="suggest_et_hint">한 번 게시된 글은 본인이 삭제할 수 없습니다.\n10글자 이상 작성해주세요</string>
+    <string name="empty_post">아직 게시글이 없습니다! \n첫 게시글의 주인공이 되어보세요</string>
 </resources>

@@ -2,7 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SuchelinV2" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#003670</item>
+        <item name="colorSecondary">#7399C1</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="useMaterialThemeColors">false</item>
     </style>
 
     <style name="Theme.SuchelinV2" parent="Base.Theme.SuchelinV2" />

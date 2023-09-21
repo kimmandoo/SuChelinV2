@@ -17,6 +17,8 @@ import java.util.Date
 
 class MainViewModel : BaseViewModel() {
     private val _db = Firebase.firestore
+    private val _isInit = MutableLiveData<Boolean>(false)
+    val isInit: LiveData<Boolean> = _isInit
     private val _storeList = mutableListOf<StoreData>()
     private val _storeData = MutableLiveData<List<StoreData>>()
     private val _menuDetailList = mutableListOf<StoreMenuDetail>()
@@ -82,7 +84,7 @@ class MainViewModel : BaseViewModel() {
             }
     }
 
-    fun loadPostData() {
+    fun loadPostData(initText: String) {
         _db.collection("suggest").document(docPostName.format(Date())).get()
             .addOnSuccessListener { result ->
                 if(result.exists()){
@@ -93,18 +95,25 @@ class MainViewModel : BaseViewModel() {
                     }
                     _postData.value = _postList
                 }else{
-                    emptyPost()
+                    emptyPost(initText)
                 }
             }
     }
 
-    private fun emptyPost(){
-        _postData.value = listOf(PostData("", "아직 게시글이 없습니다! \n첫 게시글의 주인공이 되어보세요"))
+    private fun emptyPost(initText: String){
+        _postData.value = listOf(PostData("", initText))
     }
 
-    fun postRefresh(){
+    fun postRefresh(initText: String){
         _postList.clear()
-        loadPostData()
+        loadPostData(initText)
+    }
+
+    fun initData(initText: String){
+        loadPostData(initText)
+        loadStoreData()
+        loadMenuData()
+        _isInit.value = true
     }
 
 }
