@@ -103,7 +103,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                             .build(),
                         placeholder = painterResource(R.drawable.ic_launcher_foreground),
                         contentDescription = "img",
-                        contentScale = ContentScale.FillBounds,
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier.clip(RectangleShape)
                     )
                 }
