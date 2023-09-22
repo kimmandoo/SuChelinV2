@@ -68,6 +68,7 @@ class SuggestFragment :
                 }
             }
         }
+
         binding.apply {
             btnSuggest.setOnClickListener {
                 etSuggestPost.text?.let { post ->
@@ -79,6 +80,7 @@ class SuggestFragment :
                         Toast.makeText(context, "10글자 이상 작성해주세요", Toast.LENGTH_SHORT).show()
                     } else {
                         viewModel.postData(post.toString())
+                        // 첫 글이면 갱신이 안되어보이는 버그가 있음
                         etSuggestPost.text.clear()
                         sharedViewModel.postRefresh(getString(R.string.empty_post))
                     }

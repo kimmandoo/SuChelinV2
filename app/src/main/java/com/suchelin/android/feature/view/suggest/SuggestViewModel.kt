@@ -25,7 +25,7 @@ class SuggestViewModel: BaseViewModel() {
         )
         db.collection("suggest").document(docPostName.format(Date()))
             .update(postTime.format(Date()), post)
-            .addOnSuccessListener {  }
+            .addOnSuccessListener {}
             .addOnFailureListener { e ->
                 db.collection("suggest").document(docPostName.format(Date())).set(docData)
                 Log.w("TAG", "Error writing document", e)
