@@ -16,6 +16,8 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.suchelin.android.R
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
+import com.suchelin.domain.model.StoreMenuData
+import com.suchelin.domain.model.StoreMenuDetail
 import java.text.SimpleDateFormat
 
 const val MARKER_ICON_HEIGHT = 60
@@ -181,4 +183,25 @@ fun setStoreData(
         .set(docData)
         .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
         .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+}
+
+fun setStoreMenu(
+    image: Boolean = false,
+    menu: List<Any>,
+    path: Int
+){
+    val db = Firebase.firestore
+
+    val docData = hashMapOf(
+        "image" to image,
+        "menu" to menu,
+        "path" to path,
+    )
+
+    // 3까지 입력 됐음
+    db.collection("menu").document(path.toString())
+        .set(docData)
+        .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+        .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+
 }

@@ -21,11 +21,10 @@ class MainViewModel : BaseViewModel() {
     val isInit: LiveData<Boolean> = _isInit
     private val _storeList = mutableListOf<StoreData>()
     private val _storeData = MutableLiveData<List<StoreData>>()
-    private val _menuDetailList = mutableListOf<StoreMenuDetail>()
-    private val _menuList = mutableListOf<StoreMenuData>()
-    private val _menuData = MutableLiveData<List<StoreMenuData>>()
+    private val _menuList = hashMapOf<Int,StoreMenuData>()
+    private val _menuData = MutableLiveData<HashMap<Int,StoreMenuData>>()
     val storeData: LiveData<List<StoreData>> = _storeData
-    val menuData: LiveData<List<StoreMenuData>> = _menuData
+    val menuData: LiveData<HashMap<Int,StoreMenuData>> = _menuData
     private val _postList = mutableListOf<PostData>()
     private val _postData = MutableLiveData<List<PostData>>()
     val postData: LiveData<List<PostData>> = _postData
@@ -34,18 +33,30 @@ class MainViewModel : BaseViewModel() {
         _db.collection("menu").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    for (items in document.data["menu"] as List<HashMap<String, String>>) {
-                        _menuDetailList.add(
-                            StoreMenuDetail(
-                                menuPrice = items["menuPrice"] as String,
-                                menuName = items["menuName"] as String
+                    val menuDetailList = mutableListOf<Any>()
+                    val isImage = document.data["image"] as Boolean
+                    if(!isImage){
+                        for (item in document.data["menu"] as List<HashMap<String, String>>) {
+                            menuDetailList.add(
+                                StoreMenuDetail(
+                                    menuPrice = item["menuPrice"] as String,
+                                    menuName = item["menuName"] as String
+                                )
                             )
-                        )
+                        }
+                    }else{
+                        for (item in document.data["menu"] as List<String>) {
+                            menuDetailList.add(
+                                item
+                            )
+                        }
                     }
-                    _menuList.add(
+
+                    _menuList.put(
+                        document.id.toInt(),
                         StoreMenuData(
-                            document.id.toInt(),
-                            _menuDetailList
+                            isImage,
+                            menuDetailList
                         )
                     )
                 }

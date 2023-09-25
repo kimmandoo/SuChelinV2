@@ -17,6 +17,8 @@ import com.suchelin.android.R
 import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
 import com.suchelin.android.util.setStoreData
+import com.suchelin.android.util.setStoreMenu
+import com.suchelin.domain.model.StoreMenuDetail
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main) {
@@ -73,17 +75,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     }
 
     private fun apply() {
-        setStoreData(
-            path= 36,
-            imageUrl= "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190729_287%2F15643747443442hJLb_JPEG%2FT1DA9F9EFpqpk38ChzKZkvab.jpg",
-            menuImageUrl = null,
-        name = "최고당돈가스 수원대점",
-        mainMenu = "돈가스",
-        latitude = 37.2141215,
-        longitude = 126.973927,
-        type = "restaurant"
+//        setStoreData(
+//
+//        )
+        setStoreMenu(
+            path = 54,
+            image = false, // 일일이 넣기 힘들 정도로 메뉴가 많으면
+            menu = listOf( // 메뉴판 여러 장도 가능
+                StoreMenuDetail("한식 뷔페","7000원"),
+            ),
         )
-
     }
 
 }

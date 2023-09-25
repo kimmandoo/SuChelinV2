@@ -1,5 +1,6 @@
 package com.suchelin.android.feature.compose.list
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -61,6 +62,12 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
             }
         }
 
+        viewModel.menuData.observe(viewLifecycleOwner){menuList ->
+            menuList?.let{
+                Log.d("menu", "${viewModel.menuData.value}")
+            }
+        }
+
         binding.apply {
             progressCircular.isVisible = true
             contact.setOnClickListener {
@@ -87,7 +94,8 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         Modifier
             .clickable {
                 Toast
-                    .makeText(context, "${store.storeId}: ${store.storeDetailData.name}", Toast.LENGTH_SHORT)
+                    .makeText(context, "${store.storeId}: ${store.storeDetailData.name}\n${viewModel.menuData.value?.get(store.storeId)
+                    }", Toast.LENGTH_SHORT)
                     .show()
             }
             .fillMaxWidth()
