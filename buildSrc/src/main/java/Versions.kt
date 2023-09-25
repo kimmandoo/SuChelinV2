@@ -1,6 +1,6 @@
 object Versions {
     const val GRADLE = "8.0.1"
-    const val KOTLIN_VERSION = "1.7.20"
+    const val KOTLIN_VERSION = "1.8.0"
 
     const val APP_COMPAT = "1.6.1"
     const val CORE_KTX = "1.8.0"
@@ -35,7 +35,7 @@ object Versions {
 
     const val DATA_STORE = "1.0.0"
 
-    const val FIREBASE = "32.2.3"
+    const val FIREBASE = "32.3.1"
     const val NAVER_MAP = "3.17.0"
     const val MARTERIAL3 = "1.1.1"
     const val COIL = "2.4.0"

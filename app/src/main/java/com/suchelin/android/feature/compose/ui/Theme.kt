@@ -1,4 +1,4 @@
-package com.suchelin.android.feature.compose
+package com.suchelin.android.feature.compose.ui
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme

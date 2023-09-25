@@ -60,7 +60,7 @@ object Firebase{
     const val FirebaseBom = "com.google.firebase:firebase-bom:${Versions.FIREBASE}"
     const val FirebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
     const val FirebasFireStore = "com.google.firebase:firebase-firestore-ktx"
-
+    const val FirebaseAuth = "com.google.firebase:firebase-auth-ktx"
 }
 
 object Coil{

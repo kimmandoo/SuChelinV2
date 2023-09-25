@@ -48,6 +48,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.0"
+    }
+
     buildFeatures {
         dataBinding = true
         compose = true
@@ -64,6 +69,8 @@ dependencies {
     implementation(AndroidX.LIFECYCLE_VIEWMODEL_KTX)
     implementation(AndroidX.MATERIAL3_THEME)
     implementation(Firebase.FirebasFireStore)
+    implementation(Firebase.FirebaseAuth)
+
     testImplementation(AndroidX.JUNIT)
     androidTestImplementation(AndroidX.EXT_JUNIT)
     androidTestImplementation(AndroidX.ESPRESSO_CORE)
