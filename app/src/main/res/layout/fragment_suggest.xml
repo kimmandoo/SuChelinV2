@@ -24,6 +24,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:trackThickness="5dp" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin = "12dp"
+            android:visibility="gone"
+            android:id="@+id/refresh_suggest"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/baseline_refresh_24"
+            app:layout_constraintBottom_toTopOf="@id/btn_suggest"/>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

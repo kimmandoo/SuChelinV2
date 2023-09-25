@@ -26,7 +26,6 @@ class MainViewModel : BaseViewModel() {
     private val _menuData = MutableLiveData<List<StoreMenuData>>()
     val storeData: LiveData<List<StoreData>> = _storeData
     val menuData: LiveData<List<StoreMenuData>> = _menuData
-
     private val _postList = mutableListOf<PostData>()
     private val _postData = MutableLiveData<List<PostData>>()
     val postData: LiveData<List<PostData>> = _postData
@@ -93,15 +92,11 @@ class MainViewModel : BaseViewModel() {
                         Log.d("TAG", "${time} : ${post}")
                         _postList.add(PostData(time, post.toString()))
                     }
-                    _postData.value = _postList
                 }else{
-                    emptyPost(initText)
+                    _postList.add(PostData("", initText))
                 }
+                _postData.value = _postList
             }
-    }
-
-    private fun emptyPost(initText: String){
-        _postData.value = listOf(PostData("", initText))
     }
 
     fun postRefresh(initText: String){

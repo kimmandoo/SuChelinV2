@@ -48,6 +48,7 @@ import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.AppTheme
 import com.suchelin.android.feature.compose.LightColors
 import com.suchelin.domain.model.PostData
+import okhttp3.internal.notify
 
 class SuggestFragment :
     BaseFragment<FragmentSuggestBinding, SuggestViewModel>(R.layout.fragment_suggest) {
@@ -70,6 +71,7 @@ class SuggestFragment :
         }
 
         binding.apply {
+            binding.progressCircular.isVisible = true
             btnSuggest.setOnClickListener {
                 etSuggestPost.text?.let { post ->
                     // post전에 욕설 필터링이 필요할 것 같음, 하루 최대 한번만 글 쓸 수 있게 글쓰면 광고 팝업 나오게
@@ -81,9 +83,14 @@ class SuggestFragment :
                     } else {
                         viewModel.postData(post.toString())
                         // 첫 글이면 갱신이 안되어보이는 버그가 있음
-                        etSuggestPost.text.clear()
+
                         sharedViewModel.postRefresh(getString(R.string.empty_post))
+                        etSuggestPost.text.clear()
                     }
+                }
+
+                refreshSuggest.setOnClickListener {
+                    sharedViewModel.postRefresh(getString(R.string.empty_post))
                 }
             }
         }
