@@ -193,6 +193,7 @@ fun setStoreData(
 fun setStoreMenu(
     image: Boolean = false,
     menu: List<Any>,
+    tel: String,
     path: Int
 ){
     val db = Firebase.firestore
@@ -201,6 +202,7 @@ fun setStoreMenu(
         "image" to image,
         "menu" to menu,
         "path" to path,
+        "tel" to tel
     )
 
     // 3까지 입력 됐음

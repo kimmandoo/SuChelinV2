@@ -84,6 +84,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
             menu = listOf( // 메뉴판 여러 장도 가능
                 StoreMenuDetail("한식 뷔페","7000원"),
             ),
+            tel = "010-1234-5678"
         )
     }
 

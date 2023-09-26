@@ -25,6 +25,8 @@ class DetailFragment :
             menuData?.let {
                 // rv에 데이터 값 넣기
                 val currentStoreMenu = menuData[storeId]?.storeMenu
+                val storeTel = menuData[storeId]?.tel
+                Log.d("Tag","${currentStoreMenu}, ${storeTel}")
                 // rv에 넣을때 item 타입이 StoreMenuDetail 인지, String인지 확인해서 rv 돌리기
             }
         }

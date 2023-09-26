@@ -35,6 +35,8 @@ class MainViewModel : BaseViewModel() {
                 for (document in result) {
                     val menuDetailList = mutableListOf<Any>()
                     val isImage = document.data["image"] as Boolean
+                    val tel = document.data["tel"] as String
+
                     if(!isImage){
                         for (item in document.data["menu"] as List<HashMap<String, String>>) {
                             menuDetailList.add(
@@ -56,7 +58,8 @@ class MainViewModel : BaseViewModel() {
                         document.id.toInt(),
                         StoreMenuData(
                             isImage,
-                            menuDetailList
+                            menuDetailList,
+                            tel
                         )
                     )
                 }
