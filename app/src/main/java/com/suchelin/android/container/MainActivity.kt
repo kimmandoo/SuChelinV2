@@ -57,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
         binding.apply {
             navController.addOnDestinationChangedListener { controller, destination, arguments ->
                 when (destination.id) {
-                    1 -> bottomNavigationBar.visibility =
+                    R.id.navigation_detail -> bottomNavigationBar.visibility =
                         View.INVISIBLE // bottomNavBar를 보여주지 않을 곳 지정
                     else -> bottomNavigationBar.visibility = View.VISIBLE
                 }

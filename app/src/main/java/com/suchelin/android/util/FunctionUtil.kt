@@ -93,7 +93,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                         width = MARKER_ICON_WEIGHT
                     }
                 }
-                "restaurant" -> {
+                "pub" -> { // pub
                     Marker().apply {
                         position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
@@ -103,11 +103,11 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                         width = MARKER_ICON_WEIGHT
                     }
                 }
-                else -> { // pub
+                else -> { // restaurant
                     Marker().apply {
                         position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
-                        iconTintColor = context.getColor(R.color.red)
+                        iconTintColor = context.getColor(R.color.green)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
