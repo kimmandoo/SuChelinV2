@@ -38,6 +38,8 @@ class DetailFragment :
             }
         }
 
+
+
         binding.apply {
             detailToTel.setOnClickListener {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("tel:${storeTel}")))
