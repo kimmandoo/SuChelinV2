@@ -9,6 +9,9 @@
         android:name="com.suchelin.android.feature.view.map.MapViewFragment"
         android:label="MapFragment" >
 
+        <action
+            android:id="@+id/action_navigation_map_to_navigation_detail"
+            app:destination="@id/navigation_detail" />
     </fragment>
     <fragment
         android:id="@+id/navigation_main"
@@ -21,9 +24,32 @@
         <action
             android:id="@+id/action_navigation_main_to_navigation_suggest"
             app:destination="@id/navigation_suggest" />
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_vote"
+            app:destination="@id/navigation_vote" />
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_detail"
+            app:destination="@id/navigation_detail">
+            <argument
+                android:name="storeId"
+                app:argType="integer"/>
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/navigation_suggest"
-        android:name="com.suchelin.android.feature.view.suggest.SuggestFragment"
+        android:name="com.suchelin.android.feature.view.feed.FeedFragment"
         android:label="SuggestFragment" />
+    <fragment
+        android:id="@+id/navigation_vote"
+        android:name="com.suchelin.android.feature.view.vote.VoteFragment"
+        android:label="VoteFragment" />
+    <fragment
+        android:id="@+id/navigation_detail"
+        android:name="com.suchelin.android.feature.compose.detail.DetailFragment"
+        android:label="DetailFragment">
+        <argument
+            android:name="storeId"
+            app:argType="integer"/>
+    </fragment>
 </navigation>

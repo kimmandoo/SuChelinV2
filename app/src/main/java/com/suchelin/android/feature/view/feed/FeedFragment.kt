@@ -1,4 +1,4 @@
-package com.suchelin.android.feature.view.suggest
+package com.suchelin.android.feature.view.feed
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -32,11 +32,10 @@ import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.domain.model.PostData
-import okhttp3.internal.notify
 
-class SuggestFragment :
-    BaseFragment<FragmentSuggestBinding, SuggestViewModel>(R.layout.fragment_suggest) {
-    override val viewModel: SuggestViewModel by viewModels()
+class FeedFragment :
+    BaseFragment<FragmentSuggestBinding, FeedViewModel>(R.layout.fragment_suggest) {
+    override val viewModel: FeedViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
 
     override fun initView() {

@@ -34,6 +34,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.suchelin.android.R
@@ -47,7 +49,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
 
     override val viewModel: MainViewModel by activityViewModels()
     private val TAG = "LIST"
-
+    lateinit var sendStoreId: NavDirections
     override fun initView() {
         val sendMailDialog = SendMailDialog(requireActivity(), TAG)
         viewModel.storeData.observe(viewLifecycleOwner) { storeList ->
@@ -62,8 +64,8 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
             }
         }
 
-        viewModel.menuData.observe(viewLifecycleOwner){menuList ->
-            menuList?.let{
+        viewModel.menuData.observe(viewLifecycleOwner) { menuList ->
+            menuList?.let {
                 Log.d("menu", "${viewModel.menuData.value}")
             }
         }
@@ -80,7 +82,10 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     fun StoreRecyclerView(storeDataList: List<StoreData>) {
         val stores by remember { mutableStateOf(storeDataList) }
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
-        LazyColumn(modifier = Modifier.nestedScroll(nestedScrollInterop), contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)) {
+        LazyColumn(
+            modifier = Modifier.nestedScroll(nestedScrollInterop),
+            contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)
+        ) {
             items(
                 count = stores.size,
                 itemContent = { StoreListItem(stores[it]) }
@@ -93,10 +98,15 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         Box(modifier =
         Modifier
             .clickable {
+                sendStoreId = ListFragmentDirections.actionNavigationMainToNavigationDetail(store.storeId)
                 Toast
-                    .makeText(context, "${store.storeId}: ${store.storeDetailData.name}\n${viewModel.menuData.value?.get(store.storeId)
-                    }", Toast.LENGTH_SHORT)
+                    .makeText(
+                        context, "${store.storeId}: ${store.storeDetailData.name}\n${
+                            viewModel.menuData.value?.get(store.storeId)
+                        }", Toast.LENGTH_SHORT
+                    )
                     .show()
+                findNavController().navigate(sendStoreId)
             }
             .fillMaxWidth()
             .padding(0.dp, 0.dp, 0.dp, 8.dp)) {

@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 fun getApiKey(propertyKey: String): String {
@@ -70,7 +71,6 @@ dependencies {
     implementation(AndroidX.MATERIAL3_THEME)
     implementation(Firebase.FirebasFireStore)
     implementation(Firebase.FirebaseAuth)
-
     testImplementation(AndroidX.JUNIT)
     androidTestImplementation(AndroidX.EXT_JUNIT)
     androidTestImplementation(AndroidX.ESPRESSO_CORE)

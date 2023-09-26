@@ -1,18 +1,15 @@
-package com.suchelin.android.feature.view.suggest
+package com.suchelin.android.feature.view.feed
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suchelin.android.base.BaseViewModel
 import com.suchelin.android.util.docPostName
-import com.suchelin.domain.model.PostData
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class SuggestViewModel: BaseViewModel() {
+class FeedViewModel: BaseViewModel() {
     private val db = Firebase.firestore
 
     @SuppressLint("SimpleDateFormat")
