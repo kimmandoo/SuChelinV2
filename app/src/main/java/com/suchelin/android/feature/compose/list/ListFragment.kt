@@ -64,12 +64,6 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
             }
         }
 
-        viewModel.menuData.observe(viewLifecycleOwner) { menuList ->
-            menuList?.let {
-                Log.d("menu", "${viewModel.menuData.value}")
-            }
-        }
-
         binding.apply {
             progressCircular.isVisible = true
             contact.setOnClickListener {

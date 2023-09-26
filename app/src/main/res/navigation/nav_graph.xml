@@ -11,7 +11,11 @@
 
         <action
             android:id="@+id/action_navigation_map_to_navigation_detail"
-            app:destination="@id/navigation_detail" />
+            app:destination="@id/navigation_detail">
+            <argument
+                android:name="storeId"
+                app:argType="integer"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/navigation_main"

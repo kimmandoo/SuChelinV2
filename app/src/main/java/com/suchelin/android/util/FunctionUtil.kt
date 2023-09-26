@@ -2,7 +2,11 @@ package com.suchelin.android.util
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Rect
 import android.util.Log
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.naver.maps.geometry.LatLng
@@ -42,6 +46,7 @@ fun NaverMap.initMap() {
         )
     }
 }
+
 
 fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
     apply {

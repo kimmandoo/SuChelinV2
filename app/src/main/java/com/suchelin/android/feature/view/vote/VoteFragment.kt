@@ -11,6 +11,6 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     override val viewModel: VoteViewModel by viewModels()
     val sharedViewModel: MainViewModel by activityViewModels()
     override fun initView() {
-        TODO("Not yet implemented")
+
     }
 }
