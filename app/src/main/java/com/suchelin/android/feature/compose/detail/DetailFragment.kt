@@ -1,6 +1,7 @@
 package com.suchelin.android.feature.compose.detail
 
-import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,11 +14,13 @@ import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentDetailBinding
 import com.suchelin.android.util.parcelable.StoreDataArgs
 
+
 class DetailFragment :
     BaseFragment<FragmentDetailBinding, DetailViewModel>(R.layout.fragment_detail) {
     override val viewModel: DetailViewModel by viewModels()
     val sharedViewModel: MainViewModel by activityViewModels()
     private val args: DetailFragmentArgs by navArgs()
+    lateinit var storeTel: String
     override fun initView() {
         val storeInfo: StoreDataArgs = args.storeInfo
         Log.d("id","${storeInfo}")
@@ -26,8 +29,8 @@ class DetailFragment :
             menuData?.let {
                 // rv에 데이터 값 넣기
                 val currentStoreMenu = menuData[storeInfo.storeId]?.storeMenu
-                val storeTel = menuData[storeInfo.storeId]?.tel
-                binding.detailToTel.text = storeTel
+                storeTel = menuData[storeInfo.storeId]?.tel!!
+                binding.tvDetailToTel.text = storeTel
                 binding.detailStoreName.text = storeInfo.storeName
                 Glide.with(this).load(storeInfo.imageUrl).centerCrop().into(binding.detailStoreImg)
                 Log.d("Tag","${currentStoreMenu}, ${storeTel}")
@@ -36,13 +39,12 @@ class DetailFragment :
         }
 
         binding.apply {
+            detailToTel.setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("tel:${storeTel}")))
+            }
 
             btnBack.setOnClickListener {
                 findNavController().popBackStack()
-            }
-
-            detailToTel.setOnClickListener {
-                // 전화로 연결
             }
         }
     }

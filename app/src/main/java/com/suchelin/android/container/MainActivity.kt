@@ -40,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val userId = auth.currentUser?.uid
-                    if(!viewModel.isInit.value!!){
+                    if (!viewModel.isInit.value!!) {
                         viewModel.initData(getString(R.string.empty_post))
                     }
                     Log.d("TAG", "auth success: ${userId}")
@@ -75,17 +75,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     }
 
     private fun apply() {
-//        setStoreData(
-//
+//        setStoreMenu(//신동랩
 //        )
-        setStoreMenu(
-            path = 54,
-            image = false, // 일일이 넣기 힘들 정도로 메뉴가 많으면
-            menu = listOf( // 메뉴판 여러 장도 가능
-                StoreMenuDetail("한식 뷔페","7000원"),
-            ),
-            tel = "010-1234-5678"
-        )
+//        setStoreData()
+
+
     }
 
 }
