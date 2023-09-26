@@ -1,6 +1,5 @@
 package com.suchelin.android.feature.compose.list
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,9 +21,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -44,23 +40,29 @@ import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentListBinding
 import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.domain.model.StoreData
+import com.suchelin.android.util.parcelable.StoreDataArgs
 
 class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.fragment_list) {
 
     override val viewModel: MainViewModel by activityViewModels()
     private val TAG = "LIST"
-    lateinit var sendStoreId: NavDirections
+    private lateinit var sendStoreInfo: NavDirections
+    private lateinit var storeListReference: List<StoreData>
+
+    enum class StoreFilter {
+        CAFE,
+        RESTAURANT,
+        PUB,
+        ALL
+    }
+
     override fun initView() {
         val sendMailDialog = SendMailDialog(requireActivity(), TAG)
         viewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
+                storeListReference = it
                 binding.progressCircular.isVisible = false
-                binding.composeView.apply {
-                    setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                    setContent() {
-                        StoreRecyclerView(it)
-                    }
-                }
+                setComposeView(it, StoreFilter.ALL)
             }
         }
 
@@ -69,20 +71,48 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
             contact.setOnClickListener {
                 sendMailDialog.showDialog()
             }
+
+            val filterButtons = mapOf(
+                all to StoreFilter.ALL,
+                restaurant to StoreFilter.RESTAURANT,
+                pub to StoreFilter.PUB,
+                cafe to StoreFilter.CAFE
+            )
+
+            filterButtons.forEach { (button, filter) ->
+                button.setOnClickListener {
+                    setComposeView(storeListReference, filter)
+                }
+            }
+        }
+    }
+
+    private fun setComposeView(storeList: List<StoreData>, filter: StoreFilter) {
+        binding.composeView.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent() {
+                StoreRecyclerView(storeList, filter)
+            }
         }
     }
 
     @Composable
-    fun StoreRecyclerView(storeDataList: List<StoreData>) {
+    fun StoreRecyclerView(storeDataList: List<StoreData>, filter: StoreFilter) {
         val stores by remember { mutableStateOf(storeDataList) }
+        val filteredStores = when (filter) {
+            StoreFilter.CAFE -> stores.filter { it.storeDetailData.type == "cafe" }
+            StoreFilter.RESTAURANT -> stores.filter { it.storeDetailData.type == "restaurant" }
+            StoreFilter.PUB -> stores.filter { it.storeDetailData.type == "pub" }
+            StoreFilter.ALL -> stores
+        }
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
         LazyColumn(
             modifier = Modifier.nestedScroll(nestedScrollInterop),
             contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)
         ) {
             items(
-                count = stores.size,
-                itemContent = { StoreListItem(stores[it]) }
+                count = filteredStores.size,
+                itemContent = { StoreListItem(filteredStores[it]) }
             )
         }
     }
@@ -92,7 +122,8 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         Box(modifier =
         Modifier
             .clickable {
-                sendStoreId = ListFragmentDirections.actionNavigationMainToNavigationDetail(store.storeId)
+                sendStoreInfo =
+                    ListFragmentDirections.actionNavigationMainToNavigationDetail(StoreDataArgs(store.storeId, store.storeDetailData.name, store.storeDetailData.imageUrl))
                 Toast
                     .makeText(
                         context, "${store.storeId}: ${store.storeDetailData.name}\n${
@@ -100,7 +131,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                         }", Toast.LENGTH_SHORT
                     )
                     .show()
-                findNavController().navigate(sendStoreId)
+                findNavController().navigate(sendStoreInfo)
             }
             .fillMaxWidth()
             .padding(0.dp, 0.dp, 0.dp, 8.dp)) {

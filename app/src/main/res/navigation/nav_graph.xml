@@ -13,8 +13,8 @@
             android:id="@+id/action_navigation_map_to_navigation_detail"
             app:destination="@id/navigation_detail">
             <argument
-                android:name="storeId"
-                app:argType="integer"/>
+                android:name="storeInfo"
+                app:argType="com.suchelin.android.util.parcelable.StoreDataArgs"/>
         </action>
     </fragment>
     <fragment
@@ -35,9 +35,15 @@
             android:id="@+id/action_navigation_main_to_navigation_detail"
             app:destination="@id/navigation_detail">
             <argument
-                android:name="storeId"
-                app:argType="integer"/>
+                android:name="storeInfo"
+                app:argType="com.suchelin.android.util.parcelable.StoreDataArgs"/>
         </action>
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_detail2"
+            app:destination="@id/navigation_detail" />
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_detail3"
+            app:destination="@id/navigation_detail" />
 
     </fragment>
     <fragment
@@ -53,7 +59,7 @@
         android:name="com.suchelin.android.feature.compose.detail.DetailFragment"
         android:label="DetailFragment">
         <argument
-            android:name="storeId"
-            app:argType="integer"/>
+            android:name="storeInfo"
+            app:argType="com.suchelin.android.util.parcelable.StoreDataArgs"/>
     </fragment>
 </navigation>

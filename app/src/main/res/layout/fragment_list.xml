@@ -65,6 +65,55 @@
                         android:layout_gravity="end"/>
 
                 </androidx.appcompat.widget.Toolbar>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:paddingVertical="2dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="전체"
+                        android:layout_marginEnd="8dp"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_filter"
+                        android:id="@+id/all"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_filter"
+                        android:text="밥집"
+                        android:id="@+id/restaurant"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:paddingVertical="4dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_filter"
+                        android:text="술집"
+                        android:id="@+id/pub"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="카페"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_filter"
+                        android:id="@+id/cafe"/>
+                </LinearLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.compose.ui.platform.ComposeView
