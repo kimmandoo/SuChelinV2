@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFF0DF"/>
-    <corners android:radius="10dp"/>
-</shape>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="translucent"
+    >
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#FFF0DF"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/mascot12"
+        android:gravity="center"
+        android:width="180dp"
+        android:height="191dp"
+        />
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#A4FFF0DF"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+</layer-list>
+

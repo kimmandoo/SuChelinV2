@@ -17,22 +17,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
-            app:indicatorColor="@color/blue"
+            app:indicatorColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:trackThickness="5dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin = "12dp"
-            android:visibility="gone"
-            android:id="@+id/refresh_suggest"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/baseline_refresh_24"
-            app:layout_constraintBottom_toTopOf="@id/btn_suggest"/>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -49,7 +39,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="68dp"
+                    android:layout_height="64dp"
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                     <LinearLayout
@@ -74,11 +64,12 @@
 
                     <ImageView
                         android:id="@+id/contact"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_gravity="end"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical|end"
                         android:layout_marginEnd="12dp"
-                        android:src="@drawable/ic_contact" />
+                        android:src="@drawable/bx_question"
+                        app:tint="@color/primary" />
 
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
@@ -112,17 +103,32 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_suggest"
+            app:layout_constraintHorizontal_weight="4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guide_line" />
 
-        <Button
+        <View
             android:id="@+id/btn_suggest"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="4dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_filter"
             android:text="게시"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/et_suggest_post"
             app:layout_constraintTop_toBottomOf="@+id/guide_line" />
+
+        <ImageView
+            android:id="@+id/btn_iv_suggest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bx_feed_send"
+            app:layout_constraintBottom_toBottomOf="@id/btn_suggest"
+            app:layout_constraintEnd_toEndOf="@id/btn_suggest"
+            app:layout_constraintStart_toStartOf="@id/btn_suggest"
+            app:layout_constraintTop_toTopOf="@id/btn_suggest"
+            app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

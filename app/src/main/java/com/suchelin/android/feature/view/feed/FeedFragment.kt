@@ -71,10 +71,6 @@ class FeedFragment :
                         etSuggestPost.text.clear()
                     }
                 }
-
-                refreshSuggest.setOnClickListener {
-                    sharedViewModel.postRefresh(getString(R.string.empty_post))
-                }
             }
         }
     }

@@ -50,7 +50,7 @@ fun NaverMap.initMap() {
 
 fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
     apply {
-        val markerIcon = OverlayImage.fromResource(R.drawable.ic_pin_3)
+        val markerIcon = OverlayImage.fromResource(R.drawable.bx_pin)
         val storeDataList = mutableListOf(
             StoreData(
                 MAIN_GATE,
