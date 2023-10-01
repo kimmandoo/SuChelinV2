@@ -1,5 +1,7 @@
 package com.suchelin.android.feature.compose.list
 
+import android.content.res.Resources.Theme
+import android.graphics.fonts.FontStyle
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -27,7 +29,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavDirections
@@ -38,6 +42,7 @@ import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentListBinding
+import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.domain.model.StoreData
 import com.suchelin.android.util.parcelable.StoreDataArgs
@@ -123,7 +128,13 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         Modifier
             .clickable {
                 sendStoreInfo =
-                    ListFragmentDirections.actionNavigationMainToNavigationDetail(StoreDataArgs(store.storeId, store.storeDetailData.name, store.storeDetailData.imageUrl))
+                    ListFragmentDirections.actionNavigationMainToNavigationDetail(
+                        StoreDataArgs(
+                            store.storeId,
+                            store.storeDetailData.name,
+                            store.storeDetailData.imageUrl
+                        )
+                    )
                 Toast
                     .makeText(
                         context, "${store.storeId}: ${store.storeDetailData.name}\n${
@@ -155,11 +166,15 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                 Column(Modifier.padding(8.dp, 0.dp)) {
                     Text(
                         text = store.storeDetailData.name,
-                        style = MaterialTheme.typography.titleMedium
+                        fontFamily = jamsil,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
                     )
+                    Box(modifier = Modifier.size(4.dp))
                     Text(
                         text = store.storeDetailData.detail,
-                        style = MaterialTheme.typography.labelSmall
+                        fontFamily = jamsil,
+                        fontWeight = FontWeight.Normal
                     )
                 }
             }

@@ -22,7 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -31,6 +33,7 @@ import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.ui.AppTheme
+import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.domain.model.PostData
 
 class FeedFragment :
@@ -102,16 +105,17 @@ class FeedFragment :
                         .show()
                 }
                 .fillMaxWidth()
-                .padding(0.dp, 2.dp, 0.dp, 10.dp)) {
+                .padding(0.dp, 2.dp, 0.dp, 4.dp)) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth().padding(0.dp,4.dp)
             ) {
                 Column(Modifier.padding(8.dp, 2.dp)) {
                     Text(
                         text = post.post,
-                        style = MaterialTheme.typography.titleMedium
+                        fontFamily = jamsil,
+                        fontWeight = FontWeight.Bold
                     )
                     Box(
                         contentAlignment = Alignment.BottomEnd,
@@ -121,7 +125,9 @@ class FeedFragment :
                     ) {
                         Text(
                             text = post.date,
-                            style = MaterialTheme.typography.labelSmall,
+                            fontFamily = jamsil,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 10.sp
                         )
                     }
                 }

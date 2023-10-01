@@ -36,7 +36,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="60dp"
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                     <LinearLayout
@@ -49,13 +49,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="수슐랭 리스트"
-                            android:textSize="20sp" />
+                            style="@style/H1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            style="@style/B1"
                             android:text="빠르게 목록을 보고 싶을 때"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <ImageView
@@ -82,6 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        style="@style/B2"
                         android:background="@drawable/bg_filter"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
@@ -95,6 +97,7 @@
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_filter"
                         android:paddingHorizontal="8dp"
+                        style="@style/B2"
                         android:paddingVertical="4dp"
                         android:text="밥집"
                         android:textColor="@color/white" />
@@ -105,6 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_filter"
+                        style="@style/B2"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
                         android:text="술집"
@@ -115,6 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_filter"
+                        style="@style/B2"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
                         android:text="카페"

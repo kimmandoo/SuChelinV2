@@ -39,7 +39,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="60dp"
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                     <LinearLayout
@@ -52,14 +52,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오늘의 수슐랭 피드"
-                            android:textSize="20sp" />
+                            style="@style/H1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity=""
+                            style="@style/B1"
                             android:text="매일 갱신 됩니다"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <ImageView
@@ -95,7 +95,10 @@
             android:id="@+id/et_suggest_post"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="2dp"
+            style="@style/B1"
             android:background="@null"
             android:gravity="start|top"
             android:hint="@string/suggest_et_hint"
