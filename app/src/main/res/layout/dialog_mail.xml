@@ -16,9 +16,9 @@
             android:id="@+id/contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/H1"
             android:layout_margin="4dp"
             android:text="문의사항"
-            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_margin="8dp"
+            style="@style/B1"
             android:background="@drawable/bg_round_10"
             android:gravity="top|start"
             android:paddingHorizontal="12dp"
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="4dp"
             android:text="@string/gmail"
+            style="@style/B2"
             android:textColor="#949494"
             app:layout_constraintStart_toStartOf="@id/editEmail"
             app:layout_constraintTop_toBottomOf="@id/editEmail" />
@@ -49,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="보내기"
+            style="@style/B1"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_close"
@@ -60,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="닫기"
+            style="@style/B1"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/btnSend"
             app:layout_constraintHorizontal_chainStyle="packed"
