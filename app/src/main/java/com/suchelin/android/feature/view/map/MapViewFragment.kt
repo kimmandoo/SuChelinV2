@@ -2,7 +2,6 @@ package com.suchelin.android.feature.view.map
 
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.activityViewModels
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
@@ -16,9 +15,6 @@ import com.suchelin.android.databinding.FragmentMapBinding
 import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.util.initMap
 import com.suchelin.android.util.initMarker
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 10002
 

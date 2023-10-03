@@ -38,12 +38,6 @@
                 android:name="storeInfo"
                 app:argType="com.suchelin.android.util.parcelable.StoreDataArgs"/>
         </action>
-        <action
-            android:id="@+id/action_navigation_main_to_navigation_detail2"
-            app:destination="@id/navigation_detail" />
-        <action
-            android:id="@+id/action_navigation_main_to_navigation_detail3"
-            app:destination="@id/navigation_detail" />
 
     </fragment>
     <fragment
@@ -53,7 +47,15 @@
     <fragment
         android:id="@+id/navigation_vote"
         android:name="com.suchelin.android.feature.view_compose.vote.VoteFragment"
-        android:label="VoteFragment" />
+        android:label="VoteFragment" >
+        <action
+            android:id="@+id/action_navigation_vote_to_navigation_detail"
+            app:destination="@id/navigation_detail">
+            <argument
+                android:name="storeInfo"
+                app:argType="com.suchelin.android.util.parcelable.StoreDataArgs"/>
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/navigation_detail"
         android:name="com.suchelin.android.feature.view_compose.detail.DetailFragment"
@@ -61,5 +63,8 @@
         <argument
             android:name="storeInfo"
             app:argType="com.suchelin.android.util.parcelable.StoreDataArgs"/>
+        <action
+            android:id="@+id/action_navigation_detail_to_navigation_vote"
+            app:destination="@id/navigation_vote" />
     </fragment>
 </navigation>

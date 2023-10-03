@@ -83,7 +83,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
-                        iconTintColor = context.getColor(R.color.brown)
+                        iconTintColor = context.getColor(R.color.yellow)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
@@ -95,7 +95,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
-                        iconTintColor = context.getColor(R.color.purple)
+                        iconTintColor = context.getColor(R.color.dark_red)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
@@ -107,7 +107,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
-                        iconTintColor = context.getColor(R.color.green)
+                        iconTintColor = context.getColor(R.color.primary)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT

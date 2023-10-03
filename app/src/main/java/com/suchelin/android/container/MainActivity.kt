@@ -75,9 +75,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     }
 
     private fun apply() {
-//        setStoreMenu(//신동랩
+//        setStoreData(
+//            path=90,
+//            imageUrl = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzA1MDJfMzcg%2FMDAxNjgyOTk1NjY2NTY5.IzJ8T4q6Mx53tQyPe9YhJErOSQ5JwpS1KdvODpeUqlIg.FT9k0Lf2VBnxy9JOtVJE1P8o84ae20uomxYa_NB27AQg.JPEG.asdzxc1412%2FIMG_6195.JPG",
+//            menuImageUrl = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190515_139%2F1557917202917I0lXX_JPEG%2Fx-0f2C3z9rBeHEv4TSznE65M.jpeg.jpg",
+//            name= "여장군 수원대점",
+//            mainMenu= "소막창구이",
+//            latitude= 37.2141219,
+//            longitude= 126.9758427,
+//            type= "restaurant" // cafe, restaurant, pub
 //        )
-//        setStoreData()
+//        setStoreMenu()
 
 
     }
