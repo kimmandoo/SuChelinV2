@@ -49,6 +49,7 @@ import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.feature.view_compose.list.ListFragmentDirections.Companion.actionNavigationMainToNavigationDetail
 import com.suchelin.android.feature.view_compose.list.StoreFilter
 import com.suchelin.android.util.parcelable.StoreDataArgs
+import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
 
 class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.fragment_vote) {
@@ -67,11 +68,9 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
             }
         }
 
-        val sendMailDialog = SendMailDialog(requireActivity(), TAG)
-
         binding.apply {
             contact.setOnClickListener {
-                sendMailDialog.showDialog()
+                sendMail(requireContext(), TAG)
             }
 
             val filterButtons = mapOf(

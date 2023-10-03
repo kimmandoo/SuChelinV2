@@ -15,6 +15,7 @@ import com.suchelin.android.databinding.FragmentMapBinding
 import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.util.initMap
 import com.suchelin.android.util.initMarker
+import com.suchelin.android.util.sendMail
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 10002
 
@@ -28,8 +29,6 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     private lateinit var locationManager: LocationManager
 
     override fun initView() {
-        val sendMailDialog = SendMailDialog(requireActivity(), TAG)
-
         binding.apply {
             mapViewInstance = mapView
             mapViewInstance.getMapAsync { map ->
@@ -39,7 +38,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
             }
 
             contact.setOnClickListener {
-                sendMailDialog.showDialog()
+                sendMail(requireContext(), TAG)
             }
         }
     }

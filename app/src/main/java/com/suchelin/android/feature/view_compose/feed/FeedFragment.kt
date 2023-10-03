@@ -33,12 +33,14 @@ import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.android.feature.compose.ui.jamsil
+import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.PostData
 
 class FeedFragment :
     BaseFragment<FragmentSuggestBinding, FeedViewModel>(R.layout.fragment_suggest) {
     override val viewModel: FeedViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
+    private val TAG = "FEED"
 
     override fun initView() {
         sharedViewModel.postData.observe(viewLifecycleOwner) { postList ->
@@ -57,6 +59,9 @@ class FeedFragment :
 
         binding.apply {
             binding.progressCircular.isVisible = true
+            contact.setOnClickListener {
+                sendMail(requireContext(), TAG)
+            }
             btnSuggest.setOnClickListener {
                 etSuggestPost.text?.let { post ->
                     // post전에 욕설 필터링이 필요할 것 같음, 하루 최대 한번만 글 쓸 수 있게 글쓰면 광고 팝업 나오게
@@ -108,7 +113,8 @@ class FeedFragment :
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .fillMaxWidth().padding(0.dp,4.dp)
+                    .fillMaxWidth()
+                    .padding(0.dp, 4.dp)
             ) {
                 Column(Modifier.padding(8.dp, 2.dp)) {
                     Text(

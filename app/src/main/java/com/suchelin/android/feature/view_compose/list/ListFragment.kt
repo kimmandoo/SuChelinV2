@@ -42,6 +42,7 @@ import com.suchelin.android.databinding.FragmentListBinding
 import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.util.parcelable.StoreDataArgs
+import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
 
 
@@ -60,7 +61,6 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     private lateinit var storeListReference: List<StoreData>
 
     override fun initView() {
-        val sendMailDialog = SendMailDialog(requireActivity(), TAG)
         viewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
                 storeListReference = it
@@ -72,7 +72,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         binding.apply {
             progressCircular.isVisible = true
             contact.setOnClickListener {
-                sendMailDialog.showDialog()
+                sendMail(requireContext(), TAG)
             }
 
             val filterButtons = mapOf(

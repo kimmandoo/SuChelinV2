@@ -14,6 +14,7 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.suchelin.android.R
+import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 import java.text.SimpleDateFormat
@@ -26,6 +27,10 @@ const val MAIN_GATE = 0
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
 
+fun sendMail(context: Context, tag: String){
+    val sendMailDialog = SendMailDialog(context, tag)
+    sendMailDialog.showDialog()
+}
 fun NaverMap.initMap() {
     apply {
         uiSettings.apply {
