@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,9 +35,7 @@ import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentDetailBinding
-import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.android.feature.compose.ui.jamsil
-import com.suchelin.android.feature.compose.ui.md_theme_light_surface
 import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.domain.model.StoreMenuDetail
 
@@ -111,19 +110,23 @@ class DetailFragment :
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = menu.menuName,
-                    fontFamily = jamsil,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(end = 12.dp)
-                )
-                Text(
-                    text = menu.menuPrice,
-                    fontFamily = jamsil,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                )
+                Box(modifier = Modifier.width(240.dp)){
+                    Text(
+                        text = menu.menuName,
+                        fontFamily = jamsil,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(end = 12.dp)
+                    )
+                }
+                Box(){
+                    Text(
+                        text = menu.menuPrice,
+                        fontFamily = jamsil,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
             }
         }
         Box(
