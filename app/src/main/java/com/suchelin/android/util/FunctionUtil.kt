@@ -2,11 +2,7 @@ package com.suchelin.android.util
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Rect
 import android.util.Log
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.naver.maps.geometry.LatLng
@@ -20,8 +16,6 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.suchelin.android.R
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
-import com.suchelin.domain.model.StoreMenuData
-import com.suchelin.domain.model.StoreMenuDetail
 import java.text.SimpleDateFormat
 
 const val MARKER_ICON_HEIGHT = 60
@@ -31,6 +25,7 @@ const val MAIN_GATE = 0
 
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
+
 fun NaverMap.initMap() {
     apply {
         uiSettings.apply {
@@ -85,7 +80,8 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
             val marker = when (data.storeDetailData.type) {
                 "cafe" -> {
                     Marker().apply {
-                        position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                        position =
+                            LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
                         iconTintColor = context.getColor(R.color.brown)
                         map = this@initMarker
@@ -93,9 +89,11 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                         width = MARKER_ICON_WEIGHT
                     }
                 }
+
                 "pub" -> { // pub
                     Marker().apply {
-                        position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                        position =
+                            LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
                         iconTintColor = context.getColor(R.color.purple)
                         map = this@initMarker
@@ -103,9 +101,11 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                         width = MARKER_ICON_WEIGHT
                     }
                 }
+
                 else -> { // restaurant
                     Marker().apply {
-                        position = LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
+                        position =
+                            LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
                         icon = markerIcon
                         iconTintColor = context.getColor(R.color.green)
                         map = this@initMarker
@@ -194,8 +194,8 @@ fun setStoreMenu(
     image: Boolean = false,
     menu: List<Any>,
     tel: String,
-    path: Int
-){
+    path: Int,
+) {
     val db = Firebase.firestore
 
     val docData = hashMapOf(

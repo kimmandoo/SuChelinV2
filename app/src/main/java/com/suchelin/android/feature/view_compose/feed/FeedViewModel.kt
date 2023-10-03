@@ -1,4 +1,4 @@
-package com.suchelin.android.feature.view.feed
+package com.suchelin.android.feature.view_compose.feed
 
 import android.annotation.SuppressLint
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.suchelin.android.feature.view.vote
+package com.suchelin.android.feature.view_compose.vote
 
 import com.suchelin.android.base.BaseViewModel
 

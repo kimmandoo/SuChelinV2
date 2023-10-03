@@ -1,4 +1,4 @@
-package com.suchelin.android.feature.compose.list
+package com.suchelin.android.feature.view_compose.list
 
 import com.suchelin.android.base.BaseViewModel
 

@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_main"
-        android:name="com.suchelin.android.feature.compose.list.ListFragment"
+        android:name="com.suchelin.android.feature.view_compose.list.ListFragment"
         android:label="ListFragment" >
 
         <action
@@ -48,15 +48,15 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_suggest"
-        android:name="com.suchelin.android.feature.view.feed.FeedFragment"
+        android:name="com.suchelin.android.feature.view_compose.feed.FeedFragment"
         android:label="SuggestFragment" />
     <fragment
         android:id="@+id/navigation_vote"
-        android:name="com.suchelin.android.feature.view.vote.VoteFragment"
+        android:name="com.suchelin.android.feature.view_compose.vote.VoteFragment"
         android:label="VoteFragment" />
     <fragment
         android:id="@+id/navigation_detail"
-        android:name="com.suchelin.android.feature.compose.detail.DetailFragment"
+        android:name="com.suchelin.android.feature.view_compose.detail.DetailFragment"
         android:label="DetailFragment">
         <argument
             android:name="storeInfo"
