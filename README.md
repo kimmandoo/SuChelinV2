@@ -2,12 +2,13 @@
 
 ### 2023/09/25 ~ 공사중
 
-* [ ] 부분 컴포즈 도입(recycler view -> lazy column)
-* [ ] UI 수정
+* [x] 부분 컴포즈 도입(recycler view -> lazy column, lazy vertical grid)
+* [x] UI 수정
 * [ ] Hilt 도입(배포 후)
-* [ ] Kotlin DSL
-* [ ] Firebase(Real-time DB, FireStore, authentication)
-* [ ] 네이버 Map API(Maps API, GeoCoding API)
+* [ ] lottie
+* [x] Kotlin DSL
+* [x] Firebase(Real-time DB, FireStore, authentication)
+* [x] 네이버 Map API(Maps API, GeoCoding API)
 
 ### git comment tag
 
