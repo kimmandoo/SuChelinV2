@@ -10,18 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            app:indicatorColor="@color/primary"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:trackThickness="5dp" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -46,15 +45,15 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/H1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="수슐랭 리스트"
-                            style="@style/H1" />
+                            android:text="수슐랭 리스트" />
 
                         <TextView
+                            style="@style/B1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/B1"
                             android:text="빠르게 목록을 보고 싶을 때"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -73,17 +72,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                     android:layout_marginVertical="4dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                     <TextView
                         android:id="@+id/all"
+                        style="@style/B2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        style="@style/B2"
                         android:background="@drawable/bg_filter"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
@@ -92,23 +91,23 @@
 
                     <TextView
                         android:id="@+id/restaurant"
+                        style="@style/B2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_filter"
                         android:paddingHorizontal="8dp"
-                        style="@style/B2"
                         android:paddingVertical="4dp"
                         android:text="밥집"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/pub"
+                        style="@style/B2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_filter"
-                        style="@style/B2"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
                         android:text="술집"
@@ -116,10 +115,10 @@
 
                     <TextView
                         android:id="@+id/cafe"
+                        style="@style/B2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_filter"
-                        style="@style/B2"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
                         android:text="카페"

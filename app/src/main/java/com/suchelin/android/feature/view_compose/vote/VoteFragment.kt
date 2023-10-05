@@ -1,5 +1,7 @@
 package com.suchelin.android.feature.view_compose.vote
 
+import android.opengl.Visibility
+import android.view.View
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -34,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -63,12 +66,15 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
 
         sharedViewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
+                binding.loading.isVisible = false
                 storeListReference = it
                 setComposeView(it, StoreFilter.ALL)
             }
         }
 
         binding.apply {
+            binding.loading.isVisible = true
+
             contact.setOnClickListener {
                 sendMail(requireContext(), TAG)
             }

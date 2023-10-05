@@ -45,7 +45,7 @@ class FeedFragment :
     override fun initView() {
         sharedViewModel.postData.observe(viewLifecycleOwner) { postList ->
             postList?.let {
-                binding.progressCircular.isVisible = false
+                binding.loading.isVisible = false
                 binding.composeView.apply {
                     setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                     setContent() {
@@ -58,7 +58,7 @@ class FeedFragment :
         }
 
         binding.apply {
-            binding.progressCircular.isVisible = true
+            binding.loading.isVisible = true
             contact.setOnClickListener {
                 sendMail(requireContext(), TAG)
             }

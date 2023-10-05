@@ -64,13 +64,13 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         viewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
                 storeListReference = it
-                binding.progressCircular.isVisible = false
                 setComposeView(it, StoreFilter.ALL)
+                binding.loading.isVisible = false
             }
         }
 
         binding.apply {
-            progressCircular.isVisible = true
+            loading.isVisible = true
             contact.setOnClickListener {
                 sendMail(requireContext(), TAG)
             }
