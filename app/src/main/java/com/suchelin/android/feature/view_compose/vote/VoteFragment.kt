@@ -1,12 +1,9 @@
 package com.suchelin.android.feature.view_compose.vote
 
-import android.opengl.Visibility
-import android.view.View
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -48,8 +44,6 @@ import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentVoteBinding
 import com.suchelin.android.feature.compose.ui.jamsil
-import com.suchelin.android.feature.view.mail.SendMailDialog
-import com.suchelin.android.feature.view_compose.list.ListFragmentDirections.Companion.actionNavigationMainToNavigationDetail
 import com.suchelin.android.feature.view_compose.list.StoreFilter
 import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
@@ -57,7 +51,7 @@ import com.suchelin.domain.model.StoreData
 
 class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.fragment_vote) {
     override val viewModel: VoteViewModel by viewModels()
-    val sharedViewModel: MainViewModel by activityViewModels()
+    private val sharedViewModel: MainViewModel by activityViewModels()
     private val TAG = "VOTE"
     private lateinit var storeListReference: List<StoreData>
     private lateinit var sendStoreInfo: NavDirections
@@ -97,7 +91,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     private fun setComposeView(storeList: List<StoreData>, filter: StoreFilter) {
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent() {
+            setContent{
                 VoteGrid(storeList, filter)
             }
         }
@@ -121,27 +115,6 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                 itemContent = {
                     StoreListItem(filteredStores[it])
                 }
-            )
-        }
-    }
-
-    @Composable
-    fun VoteRecyclerView(storeDataList: List<StoreData>, filter: StoreFilter) {
-        val stores by remember { mutableStateOf(storeDataList) }
-        val filteredStores = when (filter) {
-            StoreFilter.CAFE -> stores.filter { it.storeDetailData.type == "cafe" }
-            StoreFilter.RESTAURANT -> stores.filter { it.storeDetailData.type == "restaurant" }
-            StoreFilter.PUB -> stores.filter { it.storeDetailData.type == "pub" }
-            StoreFilter.ALL -> stores
-        }
-        val nestedScrollInterop = rememberNestedScrollInteropConnection()
-        LazyColumn(
-            modifier = Modifier.nestedScroll(nestedScrollInterop),
-            contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)
-        ) {
-            items(
-                count = filteredStores.size,
-                itemContent = { StoreListItem(filteredStores[it]) }
             )
         }
     }

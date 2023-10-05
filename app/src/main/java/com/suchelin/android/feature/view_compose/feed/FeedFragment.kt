@@ -1,6 +1,10 @@
 package com.suchelin.android.feature.view_compose.feed
 
+import android.content.DialogInterface
+import android.content.res.Resources.Theme
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,6 +40,7 @@ import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.PostData
 
+
 class FeedFragment :
     BaseFragment<FragmentSuggestBinding, FeedViewModel>(R.layout.fragment_suggest) {
     override val viewModel: FeedViewModel by viewModels()
@@ -48,7 +53,7 @@ class FeedFragment :
                 binding.loading.isVisible = false
                 binding.composeView.apply {
                     setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                    setContent() {
+                    setContent {
                         AppTheme {
                             PostRecyclerView(it)
                         }
@@ -56,7 +61,7 @@ class FeedFragment :
                 }
             }
         }
-
+        val postAlert = PostAlertDialog(requireContext())
         binding.apply {
             binding.loading.isVisible = true
             contact.setOnClickListener {
@@ -71,15 +76,46 @@ class FeedFragment :
                     if (post.length < 10) {
                         Toast.makeText(context, "10글자 이상 작성해주세요", Toast.LENGTH_SHORT).show()
                     } else {
-                        viewModel.postData(post.toString())
-                        // 첫 글이면 갱신이 안되어보이는 버그가 있음
+                        postAlert.showDialog()
+                        postAlert.alertDialog.apply {
+                            setOnCancelListener {
+                                viewModel.postData(post.toString())
+                                // 첫 글이면 갱신이 안되어보이는 버그가 있음
+                                sharedViewModel.postRefresh(getString(R.string.empty_post))
+                                etSuggestPost.text.clear()
+                            }
+                            setOnDismissListener{
 
-                        sharedViewModel.postRefresh(getString(R.string.empty_post))
-                        etSuggestPost.text.clear()
+                            }
+                        }
+
                     }
                 }
             }
         }
+    }
+
+    fun showDialog() {
+        val postMessage = AlertDialog.Builder(requireContext())
+            .setIcon(resources.getDrawable(R.drawable.ic_post_alert, null))
+            .setMessage("하루 한 번만 게시 가능합니다.")
+            .setPositiveButton("확인") { dialogInterface, i ->
+                Toast.makeText(
+                    requireContext(),
+                    "네",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .setNegativeButton("취소"
+            ) { dialogInterface, i ->
+                Toast.makeText(
+                    requireContext(),
+                    "안 끔",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .create()
+            .show()
     }
 
     @Composable

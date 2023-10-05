@@ -3,6 +3,8 @@ package com.suchelin.android.container
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
@@ -28,6 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
         installSplashScreen()
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
+
     }
 
     override fun onStart() {

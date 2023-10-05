@@ -57,6 +57,7 @@ object Firebase{
     const val FirebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
     const val FirebasFireStore = "com.google.firebase:firebase-firestore-ktx"
     const val FirebaseAuth = "com.google.firebase:firebase-auth-ktx"
+    const val FirebaseCrash = "com.google.firebase:firebase-crashlytics-ktx"
 }
 
 object Coil{

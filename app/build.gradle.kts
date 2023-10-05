@@ -6,6 +6,7 @@ plugins {
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("com.google.firebase.crashlytics")
 }
 
 fun getApiKey(propertyKey: String): String {
@@ -72,6 +73,7 @@ dependencies {
     implementation(AndroidX.MATERIAL3_THEME)
     implementation(Firebase.FirebasFireStore)
     implementation(Firebase.FirebaseAuth)
+    implementation(Firebase.FirebaseCrash)
     testImplementation(AndroidX.JUNIT)
     androidTestImplementation(AndroidX.EXT_JUNIT)
     androidTestImplementation(AndroidX.ESPRESSO_CORE)

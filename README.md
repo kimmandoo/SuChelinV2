@@ -7,7 +7,7 @@
 * [ ] Hilt 도입(배포 후)
 * [ ] lottie
 * [x] Kotlin DSL
-* [x] Firebase(Real-time DB, FireStore, authentication)
+* [x] Firebase(Real-time DB, FireStore, Authentication, Crashlytics)
 * [x] 네이버 Map API(Maps API, GeoCoding API)
 
 ### git comment tag

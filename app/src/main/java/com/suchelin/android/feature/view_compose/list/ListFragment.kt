@@ -1,6 +1,5 @@
 package com.suchelin.android.feature.view_compose.list
 
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,7 +39,6 @@ import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentListBinding
 import com.suchelin.android.feature.compose.ui.jamsil
-import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
@@ -93,7 +91,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     private fun setComposeView(storeList: List<StoreData>, filter: StoreFilter) {
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent() {
+            setContent{
                 StoreRecyclerView(storeList, filter)
             }
         }
@@ -111,7 +109,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
         LazyColumn(
             modifier = Modifier.nestedScroll(nestedScrollInterop),
-            contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 60.dp)
+            contentPadding = PaddingValues(12.dp, 0.dp, 12.dp, 60.dp)
         ) {
             items(
                 count = filteredStores.size,
@@ -133,13 +131,6 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                             store.storeDetailData.imageUrl
                         )
                     )
-                Toast
-                    .makeText(
-                        context, "${store.storeId}: ${store.storeDetailData.name}\n${
-                            viewModel.menuData.value?.get(store.storeId)
-                        }", Toast.LENGTH_SHORT
-                    )
-                    .show()
                 findNavController().navigate(sendStoreInfo)
             }
             .fillMaxWidth()

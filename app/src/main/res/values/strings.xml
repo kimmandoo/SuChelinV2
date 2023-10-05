@@ -5,4 +5,5 @@
     <string name="suggest_et_hint">한 번 게시된 글은 본인이 삭제할 수 없습니다.\n10글자 이상 작성해주세요(최대 50자)</string>
     <string name="empty_post">아직 게시글이 없습니다! \n첫 게시글의 주인공이 되어보세요</string>
     <string name="gmail">Gmail로 연결됩니다</string>
+    <string name="post_alert">하루 한번 글 게시 가능하고, 부적절한 내용이 들어있을 경우 삭제될 수 있습니다.(비방, 욕설포함)\n잘못 올린 글은 본인이 삭제할 수 없고 삭제요청은 앱 상단의 ?를 눌러 보내주세요!</string>
 </resources>
