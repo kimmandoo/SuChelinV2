@@ -2,11 +2,14 @@
 
 ### 2023/09/25 ~ 공사중
 
-* [x] 부분 컴포즈 도입(recycler view -> lazy column, lazy vertical grid)
+* [x] 부분 컴포즈 도입(ComposeView 사용)
 * [x] UI 수정
+* [x] Jetpack Navigation
+* [ ] SharedPreferences(개인정보가 아닌 단일설정값 저장용)
+* [ ] DataStore
 * [ ] Hilt 도입(배포 후)❎
 * [x] lottie(progress bar 대용)
-* [x] Kotlin DSL
+* [x] Kotlin DSL + buildSrc
 * [ ] Firebase(Real-time DB❎, FireStore✅, Authentication✅, Crashlytics✅)
 * [x] 네이버 Map API(Maps API✅, GeoCoding API✅)
 
