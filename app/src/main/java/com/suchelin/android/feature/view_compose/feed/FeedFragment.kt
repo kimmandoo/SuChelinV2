@@ -34,6 +34,7 @@ import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.android.feature.compose.ui.jamsil
+import com.suchelin.android.util.adRequest
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.toastMessageShort
 import com.suchelin.domain.model.PostData
@@ -46,6 +47,7 @@ class FeedFragment :
     private val TAG = "FEED"
 
     override fun initView() {
+        binding.adView.loadAd(adRequest)
         sharedViewModel.postData.observe(viewLifecycleOwner) { postList ->
             postList?.let {
                 binding.loading.isVisible = false

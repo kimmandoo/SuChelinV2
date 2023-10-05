@@ -22,6 +22,10 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="${NAVER_CLIENT_ID}" />
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${ADMOB_ID}"/>
+
         <activity
             android:name=".container.MainActivity"
             android:exported="true">

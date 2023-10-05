@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -25,16 +26,16 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/H1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="수슐랭 리스트"
-                    style="@style/H1"/>
+                    android:text="수슐랭 리스트" />
 
                 <TextView
+                    style="@style/B1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="지도와 같이 보고 싶을 때"
-                    style="@style/B1"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -56,6 +57,16 @@
             android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            ads:layout_constraintBottom_toBottomOf="@id/map_view"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mapViewpager2"

@@ -28,6 +28,9 @@ android {
         buildConfigField("String", "NAVER_CLIENT_ID", "\"${getApiKey("NAVER_CLIENT_ID")}\"")
         manifestPlaceholders["NAVER_CLIENT_ID"] = getApiKey("NAVER_CLIENT_ID")
 
+        buildConfigField("String", "ADMOB_ID", "\"${getApiKey("ADMOB_ID")}\"")
+        manifestPlaceholders["ADMOB_ID"] = getApiKey("ADMOB_ID")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -89,4 +92,5 @@ dependencies {
     implementation(Firebase.FirebaseAnalytics)
     implementation(Naver.NaverMap)
     implementation(Airbnb.Lottie)
+    implementation(Admob.Admob)
 }

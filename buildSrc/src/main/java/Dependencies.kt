@@ -71,3 +71,7 @@ object Naver{
 object Airbnb{
     const val Lottie = "com.airbnb.android:lottie:${Versions.LOTTIE}"
 }
+
+object Admob{
+    const val Admob = "com.google.android.gms:play-services-ads:22.4.0"
+}

@@ -3,6 +3,7 @@ package com.suchelin.android.feature.view.map
 import android.location.LocationManager
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
+import com.google.android.gms.ads.AdRequest
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
@@ -11,8 +12,10 @@ import com.naver.maps.map.util.FusedLocationSource
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
+import com.suchelin.android.container.testAdId
 import com.suchelin.android.databinding.FragmentMapBinding
 import com.suchelin.android.feature.view.mail.SendMailDialog
+import com.suchelin.android.util.adRequest
 import com.suchelin.android.util.initMap
 import com.suchelin.android.util.initMarker
 import com.suchelin.android.util.sendMail
@@ -30,6 +33,8 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
 
     override fun initView() {
         binding.apply {
+            adView.loadAd(adRequest)
+
             mapViewInstance = mapView
             mapViewInstance.getMapAsync { map ->
                 naverMap = map

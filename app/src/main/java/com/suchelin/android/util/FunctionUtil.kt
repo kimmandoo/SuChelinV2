@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.naver.maps.geometry.LatLng
@@ -29,6 +30,7 @@ const val MAIN_GATE = 0
 
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
+val adRequest = AdRequest.Builder().build()
 
 fun Fragment.sendMail(tag: String){
     val sendMailDialog = SendMailDialog(requireActivity(), tag)
