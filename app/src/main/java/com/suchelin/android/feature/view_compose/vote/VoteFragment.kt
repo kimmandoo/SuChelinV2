@@ -70,7 +70,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
             binding.loading.isVisible = true
 
             contact.setOnClickListener {
-                sendMail(requireContext(), TAG)
+                sendMail(TAG)
             }
 
             val filterButtons = mapOf(

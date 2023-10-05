@@ -38,7 +38,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
             }
 
             contact.setOnClickListener {
-                sendMail(requireContext(), TAG)
+                sendMail(TAG)
             }
         }
     }

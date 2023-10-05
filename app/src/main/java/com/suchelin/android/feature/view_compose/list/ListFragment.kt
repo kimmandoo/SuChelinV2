@@ -70,7 +70,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
         binding.apply {
             loading.isVisible = true
             contact.setOnClickListener {
-                sendMail(requireContext(), TAG)
+                sendMail(TAG)
             }
 
             val filterButtons = mapOf(

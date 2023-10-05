@@ -1,8 +1,11 @@
 package com.suchelin.android.util
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.naver.maps.geometry.LatLng
@@ -27,9 +30,13 @@ const val MAIN_GATE = 0
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
 
-fun sendMail(context: Context, tag: String){
-    val sendMailDialog = SendMailDialog(context, tag)
+fun Fragment.sendMail(tag: String){
+    val sendMailDialog = SendMailDialog(requireActivity(), tag)
     sendMailDialog.showDialog()
+}
+
+fun Fragment.toastMessageShort(message: String){
+    Toast.makeText(context, message ,Toast.LENGTH_SHORT).show()
 }
 fun NaverMap.initMap() {
     apply {

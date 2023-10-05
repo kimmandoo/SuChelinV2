@@ -1,8 +1,5 @@
 package com.suchelin.android.feature.view_compose.feed
 
-import android.content.DialogInterface
-import android.content.res.Resources.Theme
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.clickable
@@ -38,6 +35,7 @@ import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.util.sendMail
+import com.suchelin.android.util.toastMessageShort
 import com.suchelin.domain.model.PostData
 
 
@@ -65,7 +63,7 @@ class FeedFragment :
         binding.apply {
             binding.loading.isVisible = true
             contact.setOnClickListener {
-                sendMail(requireContext(), TAG)
+                sendMail(TAG)
             }
             btnSuggest.setOnClickListener {
                 etSuggestPost.text?.let { post ->
@@ -74,7 +72,7 @@ class FeedFragment :
                     // 다이얼로그로 한번만 글 쓸 수 있고, 부적절한 내용시 삭제가능하다고 안내
                     // 잘못 올린 글은 본인이 삭제할 수 없음
                     if (post.length < 10) {
-                        Toast.makeText(context, "10글자 이상 작성해주세요", Toast.LENGTH_SHORT).show()
+                        toastMessageShort(getString(R.string.post_min_len))
                     } else {
                         postAlert.showDialog()
                         postAlert.alertDialog.apply {
@@ -84,8 +82,8 @@ class FeedFragment :
                                 sharedViewModel.postRefresh(getString(R.string.empty_post))
                                 etSuggestPost.text.clear()
                             }
-                            setOnDismissListener{
-
+                            setOnDismissListener {
+                                toastMessageShort(getString(R.string.post_cancel))
                             }
                         }
 
@@ -106,7 +104,8 @@ class FeedFragment :
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            .setNegativeButton("취소"
+            .setNegativeButton(
+                "취소"
             ) { dialogInterface, i ->
                 Toast.makeText(
                     requireContext(),

@@ -4,11 +4,11 @@
 
 * [x] 부분 컴포즈 도입(recycler view -> lazy column, lazy vertical grid)
 * [x] UI 수정
-* [ ] Hilt 도입(배포 후)
-* [ ] lottie
+* [ ] Hilt 도입(배포 후)❎
+* [x] lottie(progress bar 대용)
 * [x] Kotlin DSL
-* [x] Firebase(Real-time DB, FireStore, Authentication, Crashlytics)
-* [x] 네이버 Map API(Maps API, GeoCoding API)
+* [ ] Firebase(Real-time DB❎, FireStore✅, Authentication✅, Crashlytics✅)
+* [x] 네이버 Map API(Maps API✅, GeoCoding API✅)
 
 ### git comment tag
 
