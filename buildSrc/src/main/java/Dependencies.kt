@@ -31,10 +31,10 @@ object Google {
 }
 
 object SquareUp {
-    const val RETROFIT2 = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT2}"
-    const val RETROFIT2_CONVERTER_GSON =
-        "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT2}"
-    const val OKHTTP3_BOM = "com.squareup.okhttp3:okhttp-bom:${Versions.OKHTTP3_BOM}"
+//    const val RETROFIT2 = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT2}"
+//    const val RETROFIT2_CONVERTER_GSON =
+//        "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT2}"
+//    const val OKHTTP3_BOM = "com.squareup.okhttp3:okhttp-bom:${Versions.OKHTTP3_BOM}"
     const val OKHTTP3 = "com.squareup.okhttp3:okhttp"
     const val OKHTTP3_LOGGING = "com.squareup.okhttp3:logging-interceptor"
 }
@@ -46,10 +46,6 @@ object KotlinX {
 
 object Jakewharton {
     const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
-}
-
-object PowerMenu {
-    const val POWER_MENU = "com.github.skydoves:powermenu:${Versions.POWER_MENU}"
 }
 
 object Glide {
@@ -71,6 +67,6 @@ object Naver{
     const val NaverMap = "com.naver.maps:map-sdk:${Versions.NAVER_MAP}"
 }
 
-object Kakao {
-    const val KAKAO = "com.kakao.sdk:v2-all:${Versions.KAKAO}"
+object Airbnb{
+    const val Lottie = "com.airbnb.android:lottie:${Versions.LOTTIE}"
 }

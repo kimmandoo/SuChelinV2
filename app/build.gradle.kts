@@ -86,4 +86,5 @@ dependencies {
     implementation(platform(Firebase.FirebaseBom))
     implementation(Firebase.FirebaseAnalytics)
     implementation(Naver.NaverMap)
+    implementation(Airbnb.Lottie)
 }
