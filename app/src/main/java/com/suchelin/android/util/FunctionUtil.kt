@@ -59,7 +59,6 @@ fun NaverMap.initMap() {
 
 fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
     apply {
-        val markerIcon = OverlayImage.fromResource(R.drawable.bx_pin)
         val storeDataList = mutableListOf(
             StoreData(
                 MAIN_GATE,
@@ -71,7 +70,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
 
         markerList.add(Marker().apply {
             position = LatLng(37.214185, 126.978792)
-            icon = markerIcon
+            icon = OverlayImage.fromResource(R.drawable.school)
             map = this@initMarker
             height = MARKER_ICON_HEIGHT
             width = MARKER_ICON_WEIGHT
@@ -96,8 +95,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                        icon = markerIcon
-                        iconTintColor = context.getColor(R.color.yellow)
+                        icon =  OverlayImage.fromResource(R.drawable.tea)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
@@ -108,8 +106,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                        icon = markerIcon
-                        iconTintColor = context.getColor(R.color.dark_red)
+                        icon =  OverlayImage.fromResource(R.drawable.beer)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
@@ -120,8 +117,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                        icon = markerIcon
-                        iconTintColor = context.getColor(R.color.primary)
+                        icon =  OverlayImage.fromResource(R.drawable.rice)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
