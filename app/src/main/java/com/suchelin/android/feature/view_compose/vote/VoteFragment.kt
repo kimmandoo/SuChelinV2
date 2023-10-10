@@ -53,7 +53,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     private val TAG = "VOTE"
     private lateinit var storeListReference: List<StoreData>
     private lateinit var sendStoreInfo: NavDirections
-    var currentFilter : StoreFilter = StoreFilter.ALL
+    private var currentFilter : StoreFilter = StoreFilter.ALL
 
     override fun initView() {
         viewModel.readRTDB()
