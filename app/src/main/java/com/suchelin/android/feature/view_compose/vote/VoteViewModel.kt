@@ -10,6 +10,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.suchelin.android.base.BaseViewModel
+import com.suchelin.android.feature.view_compose.list.StoreFilter
 import com.suchelin.domain.model.StoreMenuData
 
 class VoteViewModel : BaseViewModel() {
@@ -17,6 +18,7 @@ class VoteViewModel : BaseViewModel() {
     private val votedValue = hashMapOf<String, Long>()
     private val _rtData = MutableLiveData<HashMap<String, Long>>()
     val rtData: LiveData<HashMap<String, Long>> = _rtData
+
     fun readRTDB() {
         database.reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

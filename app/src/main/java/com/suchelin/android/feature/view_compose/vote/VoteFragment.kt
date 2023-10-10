@@ -17,9 +17,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -56,7 +53,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     private val TAG = "VOTE"
     private lateinit var storeListReference: List<StoreData>
     private lateinit var sendStoreInfo: NavDirections
-
+    var currentFilter : StoreFilter = StoreFilter.ALL
 
     override fun initView() {
         viewModel.readRTDB()
@@ -71,7 +68,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
             votedData?.let {
                 binding.loading.isVisible = false
                 if (::storeListReference.isInitialized) {
-                    setComposeView(storeListReference, StoreFilter.ALL)
+                    setComposeView(storeListReference, currentFilter)
                 }
             }
         }
@@ -87,12 +84,14 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                 all to StoreFilter.ALL,
                 restaurant to StoreFilter.RESTAURANT,
                 pub to StoreFilter.PUB,
-                cafe to StoreFilter.CAFE
+                cafe to StoreFilter.CAFE,
+                rank to StoreFilter.RANK
             )
 
             filterButtons.forEach { (button, filter) ->
                 button.setOnClickListener {
                     setComposeView(storeListReference, filter)
+                    currentFilter = filter
                 }
             }
         }
@@ -100,22 +99,28 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
 
     private fun setComposeView(storeList: List<StoreData>, filter: StoreFilter) {
         binding.composeView.apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool)
             setContent {
                 VoteGrid(storeList, filter)
             }
         }
     }
 
+    private fun rankingFilter(storeDataList: List<StoreData>): List<StoreData> {
+        val sortedRT = viewModel.rtData.value?.entries?.sortedBy { it.value }?.map { it.key }
+        return storeDataList.sortedByDescending { sortedRT!!.indexOf(it.storeId.toString()) }
+    }
+
     @Composable
     fun VoteGrid(storeDataList: List<StoreData>, filter: StoreFilter) {
-        val stores by remember { mutableStateOf(storeDataList) }
         val filteredStores = when (filter) {
-            StoreFilter.CAFE -> stores.filter { it.storeDetailData.type == "cafe" }
-            StoreFilter.RESTAURANT -> stores.filter { it.storeDetailData.type == "restaurant" }
-            StoreFilter.PUB -> stores.filter { it.storeDetailData.type == "pub" }
-            StoreFilter.ALL -> stores
+            StoreFilter.CAFE -> storeDataList.filter { it.storeDetailData.type == "cafe" }
+            StoreFilter.RESTAURANT -> storeDataList.filter { it.storeDetailData.type == "restaurant" }
+            StoreFilter.PUB -> storeDataList.filter { it.storeDetailData.type == "pub" }
+            StoreFilter.ALL -> storeDataList
+            StoreFilter.RANK -> rankingFilter(storeDataList)
         }
+
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -123,14 +128,16 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
         ) {
             items(count = filteredStores.size,
                 itemContent = {
-                    StoreListItem(filteredStores[it])
+                    StoreListItem(
+                        filteredStores[it]
+                    ) { viewModel.addVote(filteredStores[it].storeId.toString()) }
                 }
             )
         }
     }
 
     @Composable
-    fun StoreListItem(store: StoreData) {
+    fun StoreListItem(store: StoreData, onClick: () -> Unit) {
         Box(
             modifier =
             Modifier
@@ -201,19 +208,16 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                             .align(CenterVertically)
                             .padding(end = 8.dp)
                     )
-                    vote(resources.getDrawable(R.drawable.heart, null), store.storeId.toString())
+                    vote(resources.getDrawable(R.drawable.heart, null), onClick)
                 }
             }
         }
     }
 
     @Composable
-    fun vote(img: Drawable, path: String) {
-        // 이미지 클릭 핸들러
-        val onClick = {
-            viewModel.addVote(path)
-        }
-
+    fun vote(
+        img: Drawable, onClick: () -> Unit
+    ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(img)

@@ -48,7 +48,8 @@ enum class StoreFilter(val type: String) {
     CAFE("cafe"),
     RESTAURANT("restaurant"),
     PUB("pub"),
-    ALL("all")
+    ALL("all"),
+    RANK("rank")
 }
 
 class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.fragment_list) {
@@ -105,6 +106,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
             StoreFilter.RESTAURANT -> stores.filter { it.storeDetailData.type == "restaurant" }
             StoreFilter.PUB -> stores.filter { it.storeDetailData.type == "pub" }
             StoreFilter.ALL -> stores
+            else -> {stores}
         }
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
         LazyColumn(
