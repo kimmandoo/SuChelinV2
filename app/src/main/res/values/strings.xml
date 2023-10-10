@@ -8,4 +8,11 @@
     <string name="post_alert">하루 한번 글 게시 가능하고, 부적절한 내용이 들어있을 경우 삭제될 수 있습니다.(비방, 욕설포함)\n잘못 올린 글은 본인이 삭제할 수 없고 삭제요청은 앱 상단의 ?를 눌러 보내주세요!</string>
     <string name="post_cancel">취소되었습니다</string>
     <string name="post_min_len">10글자 이상 작성해주세요</string>
+    <string name="title_vote">수슐랭 투표</string>
+    <string name="detail_vote">좋았던 가게에 하트를!</string>
+    <string name="title_feed">오늘의 수슐랭 피드</string>
+    <string name="detail_feed">매일 갱신 됩니다</string>
+    <string name="title_main">수슐랭 리스트</string>
+    <string name="detail_map">지도와 같이 보고 싶을 때</string>
+    <string name="detail_list">빠르게 목록을 보고 싶을 때</string>
 </resources>

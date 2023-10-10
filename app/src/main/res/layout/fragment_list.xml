@@ -48,13 +48,13 @@
                             style="@style/H1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="수슐랭 리스트" />
+                            android:text="@string/title_main" />
 
                         <TextView
                             style="@style/B1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="빠르게 목록을 보고 싶을 때"
+                            android:text="@string/detail_list"
                             android:textSize="12sp" />
                     </LinearLayout>
 

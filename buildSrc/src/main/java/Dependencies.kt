@@ -58,6 +58,7 @@ object Firebase{
     const val FirebasFireStore = "com.google.firebase:firebase-firestore-ktx"
     const val FirebaseAuth = "com.google.firebase:firebase-auth-ktx"
     const val FirebaseCrash = "com.google.firebase:firebase-crashlytics-ktx"
+    const val FirebaseRTDB = "com.google.firebase:firebase-database-ktx"
 }
 
 object Coil{

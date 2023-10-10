@@ -50,14 +50,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="오늘의 수슐랭 피드"
+                            android:text="@string/title_feed"
                             style="@style/H1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/B1"
-                            android:text="매일 갱신 됩니다"
+                            android:text="@string/detail_feed"
                             android:textSize="12sp" />
                     </LinearLayout>
 

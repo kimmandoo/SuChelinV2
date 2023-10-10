@@ -47,14 +47,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="수슐랭 투표"
+                            android:text="@string/title_vote"
                             style="@style/H1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/B1"
-                            android:text="좋았던 가게에 엄지를!"
+                            android:text="@string/detail_vote"
                             android:textSize="12sp" />
                     </LinearLayout>
 

@@ -44,11 +44,11 @@ import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
 
 
-enum class StoreFilter {
-    CAFE,
-    RESTAURANT,
-    PUB,
-    ALL
+enum class StoreFilter(val type: String) {
+    CAFE("cafe"),
+    RESTAURANT("restaurant"),
+    PUB("pub"),
+    ALL("all")
 }
 
 class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.fragment_list) {

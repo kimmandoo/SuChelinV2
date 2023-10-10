@@ -11,8 +11,8 @@
         android:title="지도" />
     <item
         android:id="@+id/navigation_vote"
-        android:icon="@drawable/bx_like"
-        android:title="추천" />
+        android:icon="@drawable/bx_heart"
+        android:title="좋아요" />
     <item
         android:id="@+id/navigation_suggest"
         android:icon="@drawable/bx_feed"

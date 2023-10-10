@@ -90,6 +90,7 @@ dependencies {
     implementation(AndroidX.NAVIGATION_COMPOSE)
     implementation(platform(Firebase.FirebaseBom))
     implementation(Firebase.FirebaseAnalytics)
+    implementation(Firebase.FirebaseRTDB)
     implementation(Naver.NaverMap)
     implementation(Airbnb.Lottie)
     implementation(Admob.Admob)

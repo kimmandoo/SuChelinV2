@@ -1,5 +1,6 @@
 package com.suchelin.android.feature.view_compose.vote
 
+import android.graphics.drawable.Drawable
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -9,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -21,8 +21,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -56,13 +57,22 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     private lateinit var storeListReference: List<StoreData>
     private lateinit var sendStoreInfo: NavDirections
 
+
     override fun initView() {
+        viewModel.readRTDB()
 
         sharedViewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
-                binding.loading.isVisible = false
                 storeListReference = it
-                setComposeView(it, StoreFilter.ALL)
+            }
+        }
+
+        viewModel.rtData.observe(viewLifecycleOwner) { votedData ->
+            votedData?.let {
+                binding.loading.isVisible = false
+                if (::storeListReference.isInitialized) {
+                    setComposeView(storeListReference, StoreFilter.ALL)
+                }
             }
         }
 
@@ -91,7 +101,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     private fun setComposeView(storeList: List<StoreData>, filter: StoreFilter) {
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent{
+            setContent {
                 VoteGrid(storeList, filter)
             }
         }
@@ -141,24 +151,28 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                         placeholder = painterResource(R.drawable.ic_launcher_foreground),
                         contentDescription = "img",
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize().clickable {
-                            sendStoreInfo =
-                                VoteFragmentDirections.actionNavigationVoteToNavigationDetail(
-                                    StoreDataArgs(
-                                        store.storeId,
-                                        store.storeDetailData.name,
-                                        store.storeDetailData.imageUrl
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clickable {
+                                sendStoreInfo =
+                                    VoteFragmentDirections.actionNavigationVoteToNavigationDetail(
+                                        StoreDataArgs(
+                                            store.storeId,
+                                            store.storeDetailData.name,
+                                            store.storeDetailData.imageUrl
+                                        )
                                     )
-                                )
-                            Toast
-                                .makeText(
-                                    context, "${store.storeId}: ${store.storeDetailData.name}\n${
-                                        sharedViewModel.menuData.value?.get(store.storeId)
-                                    }", Toast.LENGTH_SHORT
-                                )
-                                .show()
-                            findNavController().navigate(sendStoreInfo)
-                        }
+                                Toast
+                                    .makeText(
+                                        context,
+                                        "${store.storeId}: ${store.storeDetailData.name}\n${
+                                            sharedViewModel.menuData.value?.get(store.storeId)
+                                        }",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                    .show()
+                                findNavController().navigate(sendStoreInfo)
+                            }
                     )
                 }
                 Column(Modifier.padding(0.dp, 8.dp)) {
@@ -173,54 +187,45 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                         maxLines = 1
                     )
                 }
-                Row {
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(R.drawable.bx_like)
-                            .crossfade(true)
-                            .build(),
-                        placeholder = painterResource(R.drawable.bx_like),
-                        contentDescription = "img",
-                        contentScale = ContentScale.Fit,
+                Row(modifier = Modifier.align(CenterHorizontally)) {
+                    Text(
+                        text = if (viewModel.rtData.value!![store.storeId.toString()] != null) {
+                            viewModel.rtData.value!![store.storeId.toString()].toString()
+                        } else {
+                            "0"
+                        },
+                        fontFamily = jamsil,
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 12.sp,
                         modifier = Modifier
-                            .height(24.dp)
-                            .width(24.dp)
-                            .clickable {
-                                // onClick
-                                // 한번만 가능 하다고 팝업 띄우기
-                                Toast
-                                    .makeText(context, "업데이트 예정입니다", Toast.LENGTH_SHORT)
-                                    .show()
-//                                Toast
-//                                    .makeText(context, "${store.storeId}: 추천했습니다", Toast.LENGTH_SHORT)
-//                                    .show()
-                            }
+                            .align(CenterVertically)
+                            .padding(end = 8.dp)
                     )
-                    Box(modifier = Modifier.size(24.dp))
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(R.drawable.bx_like)
-                            .crossfade(true)
-                            .build(),
-                        placeholder = painterResource(R.drawable.bx_like),
-                        contentDescription = "img",
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .height(24.dp)
-                            .width(24.dp)
-                            .rotate(180f)
-                            .clickable {
-                                // onClick
-                                Toast
-                                    .makeText(context, "업데이트 예정입니다", Toast.LENGTH_SHORT)
-                                    .show()
-//                                Toast
-//                                    .makeText(context, "${store.storeId}: 비추천했습니다", Toast.LENGTH_SHORT)
-//                                    .show()
-                            }
-                    )
+                    vote(resources.getDrawable(R.drawable.heart, null), store.storeId.toString())
                 }
             }
         }
+    }
+
+    @Composable
+    fun vote(img: Drawable, path: String) {
+        // 이미지 클릭 핸들러
+        val onClick = {
+            viewModel.addVote(path)
+        }
+
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(img)
+                .crossfade(true)
+                .build(),
+            placeholder = painterResource(R.drawable.heart),
+            contentDescription = "img",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .height(24.dp)
+                .width(24.dp)
+                .clickable(onClick = onClick)
+        )
     }
 }

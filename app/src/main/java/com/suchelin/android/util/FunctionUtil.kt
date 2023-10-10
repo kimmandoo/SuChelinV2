@@ -19,6 +19,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.suchelin.android.R
 import com.suchelin.android.feature.view.mail.SendMailDialog
+import com.suchelin.android.feature.view_compose.list.StoreFilter
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 import java.text.SimpleDateFormat
@@ -56,7 +57,6 @@ fun NaverMap.initMap() {
     }
 }
 
-
 fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
     apply {
         val storeDataList = mutableListOf(
@@ -91,7 +91,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
 
         storeList.forEachIndexed { _, data ->
             val marker = when (data.storeDetailData.type) {
-                "cafe" -> {
+                StoreFilter.CAFE.type -> {
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
@@ -102,7 +102,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     }
                 }
 
-                "pub" -> { // pub
+                StoreFilter.PUB.type -> { // pub
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
