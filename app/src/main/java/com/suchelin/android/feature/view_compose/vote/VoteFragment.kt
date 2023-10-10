@@ -53,8 +53,6 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     private val TAG = "VOTE"
     private lateinit var storeListReference: List<StoreData>
     private lateinit var sendStoreInfo: NavDirections
-    private var currentFilter : StoreFilter = StoreFilter.ALL
-
     override fun initView() {
         viewModel.readRTDB()
 
@@ -68,7 +66,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
             votedData?.let {
                 binding.loading.isVisible = false
                 if (::storeListReference.isInitialized) {
-                    setComposeView(storeListReference, currentFilter)
+                    setComposeView(storeListReference, viewModel.currentFilter)
                 }
             }
         }
@@ -91,7 +89,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
             filterButtons.forEach { (button, filter) ->
                 button.setOnClickListener {
                     setComposeView(storeListReference, filter)
-                    currentFilter = filter
+                    viewModel.currentFilter = filter
                 }
             }
         }

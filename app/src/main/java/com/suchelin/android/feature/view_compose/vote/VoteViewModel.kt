@@ -18,6 +18,7 @@ class VoteViewModel : BaseViewModel() {
     private val votedValue = hashMapOf<String, Long>()
     private val _rtData = MutableLiveData<HashMap<String, Long>>()
     val rtData: LiveData<HashMap<String, Long>> = _rtData
+    var currentFilter : StoreFilter = StoreFilter.ALL
 
     fun readRTDB() {
         database.reference.addValueEventListener(object : ValueEventListener {
