@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
@@ -37,6 +38,8 @@ import com.suchelin.android.util.adRequest
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.toastMessageShort
 import com.suchelin.domain.model.PostData
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 
 class FeedFragment :
@@ -78,9 +81,13 @@ class FeedFragment :
                         postAlert.showDialog()
                         postAlert.alertDialog.apply {
                             setOnCancelListener {
-                                viewModel.postData(post.toString())
-                                sharedViewModel.postRefresh()
-                                etSuggestPost.text.clear()
+                                loading.isVisible = true
+                                lifecycleScope.launch {
+                                    viewModel.postData(post.toString()).await()
+                                    sharedViewModel.postRefresh()
+                                    loading.isVisible = false
+                                    etSuggestPost.text.clear()
+                                }
                             }
                         }
                     }
