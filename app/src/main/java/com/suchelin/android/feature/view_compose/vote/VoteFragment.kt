@@ -65,6 +65,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
         viewModel.rtData.observe(viewLifecycleOwner) { votedData ->
             votedData?.let {
                 binding.loading.isVisible = false
+                binding.filterBar.isVisible = true
                 if (::storeListReference.isInitialized) {
                     setComposeView(storeListReference, viewModel.currentFilter)
                 }

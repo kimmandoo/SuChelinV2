@@ -65,6 +65,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                 storeListReference = it
                 setComposeView(it, StoreFilter.ALL)
                 binding.loading.isVisible = false
+                binding.filterBar.isVisible = true
             }
         }
 

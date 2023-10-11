@@ -73,6 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="4dp"
+                    android:id="@+id/filter_bar"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
