@@ -1,10 +1,7 @@
 package com.suchelin.android.container
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
@@ -17,8 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
-import com.suchelin.android.util.setStoreMenu
-import com.suchelin.domain.model.StoreMenuDetail
+import timber.log.Timber
 
 
 const val testAdId = "ca-app-pub-3940256099942544/6300978111"
@@ -44,11 +40,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
                 if (task.isSuccessful) {
                     val userId = auth.currentUser?.uid
                     if (!viewModel.isInit.value!!) {
-                        viewModel.initData(getString(R.string.empty_post))
+                        viewModel.initData()
                     }
-                    Log.d("TAG", "auth success: ${userId}")
-                } else {
-
+                    Timber.tag("TAG").d("auth success: %s", userId)
                 }
             }
     }

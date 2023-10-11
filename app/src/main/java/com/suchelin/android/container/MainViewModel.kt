@@ -1,6 +1,5 @@
 package com.suchelin.android.container
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.Query
@@ -13,6 +12,8 @@ import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 import com.suchelin.domain.model.StoreMenuData
 import com.suchelin.domain.model.StoreMenuDetail
+import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.Date
 
 class MainViewModel : BaseViewModel() {
@@ -21,15 +22,15 @@ class MainViewModel : BaseViewModel() {
     val isInit: LiveData<Boolean> = _isInit
     private val _storeList = mutableListOf<StoreData>()
     private val _storeData = MutableLiveData<List<StoreData>>()
-    private val _menuList = hashMapOf<Int,StoreMenuData>()
-    private val _menuData = MutableLiveData<HashMap<Int,StoreMenuData>>()
+    private val _menuList = hashMapOf<Int, StoreMenuData>()
+    private val _menuData = MutableLiveData<HashMap<Int, StoreMenuData>>()
     val storeData: LiveData<List<StoreData>> = _storeData
-    val menuData: LiveData<HashMap<Int,StoreMenuData>> = _menuData
+    val menuData: LiveData<HashMap<Int, StoreMenuData>> = _menuData
     private val _postList = mutableListOf<PostData>()
     private val _postData = MutableLiveData<List<PostData>>()
     val postData: LiveData<List<PostData>> = _postData
 
-    fun loadMenuData() {
+    private fun loadMenuData() {
         _db.collection("menu").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -37,7 +38,7 @@ class MainViewModel : BaseViewModel() {
                     val isImage = document.data["image"] as Boolean
                     val tel = document.data["tel"] as String
 
-                    if(!isImage){
+                    if (!isImage) {
                         for (item in document.data["menu"] as List<HashMap<String, String>>) {
                             menuDetailList.add(
                                 StoreMenuDetail(
@@ -46,7 +47,7 @@ class MainViewModel : BaseViewModel() {
                                 )
                             )
                         }
-                    }else{
+                    } else {
                         for (item in document.data["menu"] as List<String>) {
                             menuDetailList.add(
                                 item
@@ -54,23 +55,20 @@ class MainViewModel : BaseViewModel() {
                         }
                     }
 
-                    _menuList.put(
-                        document.id.toInt(),
-                        StoreMenuData(
-                            isImage,
-                            menuDetailList,
-                            tel
-                        )
+                    _menuList[document.id.toInt()] = StoreMenuData(
+                        isImage,
+                        menuDetailList,
+                        tel
                     )
                 }
                 _menuData.value = _menuList
             }
             .addOnFailureListener { exception ->
-                Log.w("TAG", "Error getting documents.", exception)
+                Timber.tag("TAG").w(exception, "Error getting documents.")
             }
     }
 
-    fun loadStoreData() {
+    private fun loadStoreData() {
         _db.collection("store")
             .orderBy("path", Query.Direction.ASCENDING).get()
             .addOnSuccessListener { result ->
@@ -93,33 +91,39 @@ class MainViewModel : BaseViewModel() {
                 _storeData.value = _storeList
             }
             .addOnFailureListener { exception ->
-                Log.w("TAG", "Error getting documents.", exception)
+                Timber.tag("TAG").w(exception, "Error getting documents.")
             }
     }
 
-    fun loadPostData(initText: String) {
+    private fun loadPostData() {
         _db.collection("suggest").document(docPostName.format(Date())).get()
             .addOnSuccessListener { result ->
-                if(result.exists()){
+                if (result.exists()) {
                     val lines = result.data!!.asIterable().sortedByDescending { it.key }
                     for ((time, post) in lines) {
-                        Log.d("TAG", "${time} : ${post}")
+                        Timber.tag("TAG").d("$time : $post")
                         _postList.add(PostData(time, post.toString()))
                     }
-                }else{
-                    _postList.add(PostData("", initText))
+                } else {
+                    val postTime = SimpleDateFormat("YYYY-MM-dd")
+                    val initPost = "오늘은 " + postTime.format(Date()) + " 입니다"
+                    _postList.add(PostData("", post = initPost))
+                    val docData = hashMapOf(
+                        postTime.format(Date()) to initPost
+                    )
+                    _db.collection("suggest").document(docPostName.format(Date())).set(docData)
                 }
                 _postData.value = _postList
             }
     }
 
-    fun postRefresh(initText: String){
+    fun postRefresh() {
         _postList.clear()
-        loadPostData(initText)
+        loadPostData()
     }
 
-    fun initData(initText: String){
-        loadPostData(initText)
+    fun initData() {
+        loadPostData()
         loadStoreData()
         loadMenuData()
         _isInit.value = true

@@ -1,7 +1,6 @@
 package com.suchelin.android.feature.view_compose.feed
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.suchelin.android.base.BaseViewModel
@@ -22,10 +21,11 @@ class FeedViewModel: BaseViewModel() {
         )
         db.collection("suggest").document(docPostName.format(Date()))
             .update(postTime.format(Date()), post)
-            .addOnSuccessListener {}
+            .addOnSuccessListener {
+
+            }
             .addOnFailureListener { e ->
                 db.collection("suggest").document(docPostName.format(Date())).set(docData)
-                Log.w("TAG", "Error writing document", e)
             }
     }
 }

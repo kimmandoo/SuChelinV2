@@ -1,7 +1,6 @@
 package com.suchelin.android.feature.view_compose.feed
 
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,7 +54,7 @@ class FeedFragment :
                     setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                     setContent {
                         AppTheme {
-                            PostRecyclerView(it)
+                            PostRecyclerView(postList)
                         }
                     }
                 }
@@ -80,48 +79,24 @@ class FeedFragment :
                         postAlert.alertDialog.apply {
                             setOnCancelListener {
                                 viewModel.postData(post.toString())
-                                // 첫 글이면 갱신이 안되어보이는 버그가 있음
-                                sharedViewModel.postRefresh(getString(R.string.empty_post))
+                                sharedViewModel.postRefresh()
                                 etSuggestPost.text.clear()
                             }
-                            setOnDismissListener {
-                                toastMessageShort(getString(R.string.post_cancel))
-                            }
                         }
-
                     }
                 }
             }
         }
     }
 
-    fun showDialog() {
-        val postMessage = AlertDialog.Builder(requireContext())
-            .setIcon(resources.getDrawable(R.drawable.ic_post_alert, null))
-            .setMessage("하루 한 번만 게시 가능합니다.")
-            .setPositiveButton("확인") { dialogInterface, i ->
-                Toast.makeText(
-                    requireContext(),
-                    "네",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            .setNegativeButton(
-                "취소"
-            ) { dialogInterface, i ->
-                Toast.makeText(
-                    requireContext(),
-                    "안 끔",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            .create()
-            .show()
-    }
-
     @Composable
     fun PostRecyclerView(postDataList: List<PostData>) {
-        val posts by remember { mutableStateOf(postDataList) }
+        val posts by remember {
+            mutableStateOf(
+                postDataList
+            )
+        }
+
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
         LazyColumn(
             modifier = Modifier.nestedScroll(nestedScrollInterop),

@@ -1,13 +1,18 @@
 package com.suchelin.android.feature.view_compose.feed
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import com.suchelin.android.R
 import com.suchelin.android.databinding.DialogPostBinding
+import com.suchelin.android.util.toastMessageShort
 
-class PostAlertDialog(private val context: Context) {
+class PostAlertDialog(private val context: Context){
     private val binding = DialogPostBinding.inflate(LayoutInflater.from(context), null, false)
     lateinit var alertDialog: AlertDialog
 
@@ -19,6 +24,7 @@ class PostAlertDialog(private val context: Context) {
         alertDialog.show()
         binding.apply {
             btnCancel.setOnClickListener {
+                Toast.makeText(context, context.getString(R.string.post_cancel) ,Toast.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
             btnConfirm.setOnClickListener {
