@@ -105,8 +105,9 @@ class MainViewModel : BaseViewModel() {
                         _postList.add(PostData(time, post.toString()))
                     }
                 } else {
-                    val postTime = SimpleDateFormat("YYYY-MM-dd")
-                    val initPost = "오늘은 " + postTime.format(Date()) + " 입니다"
+                    val initPostDate = SimpleDateFormat("yyyy년 MM월 dd일")
+                    val initPost = "오늘은 " + initPostDate.format(Date()) + " 입니다"
+                    val postTime = SimpleDateFormat("HH-mm-ss")
                     _postList.add(PostData("", post = initPost))
                     val docData = hashMapOf(
                         postTime.format(Date()) to initPost

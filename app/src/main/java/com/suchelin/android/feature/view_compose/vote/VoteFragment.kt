@@ -168,15 +168,6 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                                             store.storeDetailData.imageUrl
                                         )
                                     )
-                                Toast
-                                    .makeText(
-                                        context,
-                                        "${store.storeId}: ${store.storeDetailData.name}\n${
-                                            sharedViewModel.menuData.value?.get(store.storeId)
-                                        }",
-                                        Toast.LENGTH_SHORT
-                                    )
-                                    .show()
                                 findNavController().navigate(sendStoreInfo)
                             }
                     )
