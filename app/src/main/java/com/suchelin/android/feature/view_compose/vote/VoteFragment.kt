@@ -165,7 +165,9 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                                         StoreDataArgs(
                                             store.storeId,
                                             store.storeDetailData.name,
-                                            store.storeDetailData.imageUrl
+                                            store.storeDetailData.imageUrl,
+                                            store.storeDetailData.latitude,
+                                            store.storeDetailData.longitude
                                         )
                                     )
                                 findNavController().navigate(sendStoreInfo)

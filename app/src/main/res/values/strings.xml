@@ -15,4 +15,6 @@
     <string name="title_main">수슐랭 리스트</string>
     <string name="detail_map">지도와 같이 보고 싶을 때</string>
     <string name="detail_list">빠르게 목록을 보고 싶을 때</string>
+    <string name="empty_store">아직 가게 정보가 없습니다</string>
+    <string name="empty_menu">메뉴가 곧 업데이트 될 예정입니다</string>
 </resources>
