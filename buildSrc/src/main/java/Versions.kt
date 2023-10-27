@@ -28,4 +28,6 @@ object Versions {
     const val MARTERIAL3 = "1.1.1"
     const val COIL = "2.4.0"
     const val LOTTIE = "6.1.0"
+
+    const val ACCOMPANIST = "0.20.1"
 }

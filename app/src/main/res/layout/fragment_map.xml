@@ -69,13 +69,11 @@
             ads:layout_constraintStart_toStartOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/mapViewpager2"
+            android:id="@+id/mapViewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/adView"
+            android:layout_marginBottom="10dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

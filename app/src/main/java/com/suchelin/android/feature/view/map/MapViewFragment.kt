@@ -1,9 +1,11 @@
 package com.suchelin.android.feature.view.map
 
+import android.graphics.Rect
 import android.location.LocationManager
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.activityViewModels
-import com.google.android.gms.ads.AdRequest
+import androidx.recyclerview.widget.RecyclerView
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
@@ -12,12 +14,11 @@ import com.naver.maps.map.util.FusedLocationSource
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
-import com.suchelin.android.container.testAdId
 import com.suchelin.android.databinding.FragmentMapBinding
-import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.android.util.adRequest
 import com.suchelin.android.util.initMap
 import com.suchelin.android.util.initMarker
+import com.suchelin.android.util.initViewPager
 import com.suchelin.android.util.sendMail
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 10002
@@ -34,6 +35,9 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     override fun initView() {
         binding.apply {
             adView.loadAd(adRequest)
+            val mapStoreAdapter = MapViewAdapter(viewModel.storeData.value!!)
+            mapViewpager.adapter = mapStoreAdapter
+            mapViewpager.initViewPager()
 
             mapViewInstance = mapView
             mapViewInstance.getMapAsync { map ->
@@ -56,7 +60,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions,
@@ -69,7 +73,6 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
             return
         }
     }
-
 
 
     override fun onStart() {

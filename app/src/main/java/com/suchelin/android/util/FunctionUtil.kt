@@ -1,11 +1,14 @@
 package com.suchelin.android.util
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
+import android.graphics.Rect
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.ads.AdRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -28,6 +31,8 @@ const val MARKER_ICON_HEIGHT = 60
 const val MARKER_ICON_WEIGHT = 60
 const val CAMERA_ZOOM = 18.0
 const val MAIN_GATE = 0
+private const val VISIBLE_ITEM_SIZE_X = 140
+private const val PAGE_TRANSLATION_X = 280
 
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
@@ -54,6 +59,26 @@ fun NaverMap.initMap() {
             LatLng(37.214185, 126.978792),
             CAMERA_ZOOM
         )
+    }
+}
+
+fun ViewPager2.initViewPager(){
+    this.apply {
+        addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                outRect.right = VISIBLE_ITEM_SIZE_X
+                outRect.left = VISIBLE_ITEM_SIZE_X
+            }
+        })
+        offscreenPageLimit = 1
+        setPageTransformer { page, position ->
+            page.translationX = -PAGE_TRANSLATION_X * (position)
+        }
     }
 }
 
