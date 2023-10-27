@@ -29,5 +29,5 @@ object Versions {
     const val COIL = "2.4.0"
     const val LOTTIE = "6.1.0"
 
-    const val ACCOMPANIST = "0.20.1"
+    const val COMPOSE_UI = "1.5.4"
 }

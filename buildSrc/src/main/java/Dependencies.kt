@@ -24,6 +24,12 @@ object AndroidX {
     const val MATERIAL3_THEME = "androidx.compose.material3:material3:${Versions.MARTERIAL3}"
 }
 
+object Compose{
+    const val UI = "androidx.compose.ui:ui:${Versions.COMPOSE_UI}"
+    const val Material= "androidx.compose.material:material:${Versions.COMPOSE_UI}"
+    const val Foundation ="androidx.compose.foundation:foundation:${Versions.COMPOSE_UI}"
+}
+
 object Google {
     const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
     const val HILT_ANDROID = "com.google.dagger:hilt-android:${Versions.HILT}"
