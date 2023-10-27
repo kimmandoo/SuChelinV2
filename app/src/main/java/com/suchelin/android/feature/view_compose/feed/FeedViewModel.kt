@@ -26,7 +26,7 @@ class FeedViewModel: BaseViewModel() {
             .addOnSuccessListener {
 
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener { _ ->
                 db.collection("suggest").document(docPostName.format(Date())).set(docData)
             }
 

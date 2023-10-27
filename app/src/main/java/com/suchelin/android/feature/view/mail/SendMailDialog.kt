@@ -14,7 +14,7 @@ import com.suchelin.android.databinding.DialogMailBinding
 class SendMailDialog(private val context: Context, private val type: String) {
 
     private val binding = DialogMailBinding.inflate(LayoutInflater.from(context), null, false)
-    lateinit var alertDialog: AlertDialog
+    private lateinit var alertDialog: AlertDialog
 
     init {
         initDialog()

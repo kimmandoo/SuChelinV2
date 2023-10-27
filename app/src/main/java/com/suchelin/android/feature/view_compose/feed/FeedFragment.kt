@@ -41,12 +41,12 @@ import com.suchelin.domain.model.PostData
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-
+private const val TAG = "FEED"
 class FeedFragment :
     BaseFragment<FragmentSuggestBinding, FeedViewModel>(R.layout.fragment_suggest) {
     override val viewModel: FeedViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
-    private val TAG = "FEED"
+
 
     override fun initView() {
         binding.adView.loadAd(adRequest)

@@ -3,7 +3,6 @@ package com.suchelin.android.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -22,17 +21,9 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.suchelin.android.R
 import com.suchelin.android.feature.view.mail.SendMailDialog
-import com.suchelin.android.feature.view_compose.list.StoreFilter
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 import java.text.SimpleDateFormat
-
-const val MARKER_ICON_HEIGHT = 60
-const val MARKER_ICON_WEIGHT = 60
-const val CAMERA_ZOOM = 18.0
-const val MAIN_GATE = 0
-private const val VISIBLE_ITEM_SIZE_X = 140
-private const val PAGE_TRANSLATION_X = 280
 
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
@@ -129,7 +120,6 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>, mapViewPag
         // 정문 마커 클릭 시
         markerList[MAIN_GATE].setOnClickListener {
             moveMarker(MAIN_GATE, storeDataList)
-            Log.d("MAP", storeDataList[MAIN_GATE].storeDetailData.name)
             infoWindowInstance.setInfoWindow(
                 context,
                 markerList,
@@ -178,7 +168,6 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>, mapViewPag
             // 일반 마커 클릭 시
             marker.setOnClickListener {
                 moveMarker(data.storeId, storeDataList)
-                Log.d("MAP", storeDataList[data.storeId].storeDetailData.name)
                 infoWindowInstance.setInfoWindow(
                     context,
                     markerList,
@@ -247,8 +236,8 @@ fun setStoreData(
     // 3까지 입력 됐음
     db.collection("store").document(path.toString())
         .set(docData)
-        .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-        .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+        .addOnSuccessListener {  }
+        .addOnFailureListener { _ ->  }
 }
 
 fun setStoreMenu(
@@ -269,7 +258,7 @@ fun setStoreMenu(
     // 3까지 입력 됐음
     db.collection("menu").document(path.toString())
         .set(docData)
-        .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-        .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+        .addOnSuccessListener { }
+        .addOnFailureListener { _ ->  }
 
 }

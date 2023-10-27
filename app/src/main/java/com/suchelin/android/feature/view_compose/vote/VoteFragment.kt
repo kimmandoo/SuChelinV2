@@ -1,7 +1,6 @@
 package com.suchelin.android.feature.view_compose.vote
 
 import android.graphics.drawable.Drawable
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,15 +41,16 @@ import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentVoteBinding
 import com.suchelin.android.feature.compose.ui.jamsil
-import com.suchelin.android.feature.view_compose.list.StoreFilter
+import com.suchelin.android.util.StoreFilter
 import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
 
+private const val TAG = "VOTE"
+
 class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.fragment_vote) {
     override val viewModel: VoteViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
-    private val TAG = "VOTE"
     private lateinit var storeListReference: List<StoreData>
     private lateinit var sendStoreInfo: NavDirections
     override fun initView() {

@@ -22,12 +22,11 @@ import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
 
-private const val LOCATION_PERMISSION_REQUEST_CODE = 10002
+private const val TAG = "MAP"
 
 class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout.fragment_map),
     OnMapReadyCallback {
     override val viewModel: MainViewModel by activityViewModels()
-    private val TAG = "MAP"
     private lateinit var mapViewInstance: MapView
     private lateinit var naverMap: NaverMap
     private lateinit var sendStoreInfo: NavDirections
@@ -87,7 +86,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
             )
         ) {
             if (!locationSource.isActivated) { // 권한 거부됨
-                naverMap?.locationTrackingMode = LocationTrackingMode.None
+                naverMap.locationTrackingMode = LocationTrackingMode.None
             }
             return
         }

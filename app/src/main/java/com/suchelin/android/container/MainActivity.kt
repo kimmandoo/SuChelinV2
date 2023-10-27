@@ -14,12 +14,9 @@ import com.google.firebase.ktx.Firebase
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
-import com.suchelin.android.util.setStoreMenu
-import com.suchelin.domain.model.StoreMenuDetail
 import timber.log.Timber
 
 
-const val testAdId = "ca-app-pub-3940256099942544/6300978111"
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main) {
     override val viewModel: MainViewModel by viewModels()
@@ -55,7 +52,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
 //        apply()
 
         binding.apply {
-            navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            navController.addOnDestinationChangedListener { _, destination, arguments ->
                 when (destination.id) {
                     R.id.navigation_detail -> bottomNavigationBar.visibility =
                         View.INVISIBLE // bottomNavBar를 보여주지 않을 곳 지정

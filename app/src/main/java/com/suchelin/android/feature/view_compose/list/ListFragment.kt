@@ -39,23 +39,17 @@ import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentListBinding
 import com.suchelin.android.feature.compose.ui.jamsil
+import com.suchelin.android.util.StoreFilter
 import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
 
 
-enum class StoreFilter(val type: String) {
-    CAFE("cafe"),
-    RESTAURANT("restaurant"),
-    PUB("pub"),
-    ALL("all"),
-    RANK("rank")
-}
 
+private const val TAG = "LIST"
 class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.fragment_list) {
 
     override val viewModel: MainViewModel by activityViewModels()
-    private val TAG = "LIST"
     private lateinit var sendStoreInfo: NavDirections
     private lateinit var storeListReference: List<StoreData>
 

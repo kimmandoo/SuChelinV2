@@ -7,11 +7,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.suchelin.android.base.BaseViewModel
-import com.suchelin.android.feature.view_compose.list.StoreFilter
-import com.suchelin.domain.model.StoreMenuData
+import com.suchelin.android.util.StoreFilter
 
 class VoteViewModel : BaseViewModel() {
     private val database = Firebase.database
