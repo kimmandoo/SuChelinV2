@@ -1,11 +1,10 @@
 package com.suchelin.android.feature.view.map
 
-import android.graphics.Rect
 import android.location.LocationManager
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
@@ -19,7 +18,9 @@ import com.suchelin.android.util.adRequest
 import com.suchelin.android.util.initMap
 import com.suchelin.android.util.initMarker
 import com.suchelin.android.util.initViewPager
+import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
+import com.suchelin.domain.model.StoreData
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 10002
 
@@ -29,13 +30,17 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     private val TAG = "MAP"
     private lateinit var mapViewInstance: MapView
     private lateinit var naverMap: NaverMap
+    private lateinit var sendStoreInfo: NavDirections
     private lateinit var locationSource: FusedLocationSource
     private lateinit var locationManager: LocationManager
 
     override fun initView() {
         binding.apply {
             adView.loadAd(adRequest)
-            val mapStoreAdapter = MapViewAdapter(viewModel.storeData.value!!)
+            val mapStoreAdapter = MapViewAdapter(viewModel.storeData.value!!) { store: StoreData ->
+                setOnMapItemClick(store)
+            }
+
             mapViewpager.adapter = mapStoreAdapter
             mapViewpager.initViewPager()
 
@@ -54,6 +59,20 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
 
     override fun onMapReady(p0: NaverMap) {
 
+    }
+
+    private fun setOnMapItemClick(store: StoreData) {
+        sendStoreInfo =
+            MapViewFragmentDirections.actionNavigationMapToNavigationDetail(
+                StoreDataArgs(
+                    store.storeId,
+                    store.storeDetailData.name,
+                    store.storeDetailData.imageUrl,
+                    store.storeDetailData.latitude,
+                    store.storeDetailData.longitude
+                )
+            )
+        findNavController().navigate(sendStoreInfo)
     }
 
 
