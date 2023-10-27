@@ -38,14 +38,15 @@ private const val PAGE_TRANSLATION_X = 280
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
 val adRequest = AdRequest.Builder().build()
 
-fun Fragment.sendMail(tag: String){
+fun Fragment.sendMail(tag: String) {
     val sendMailDialog = SendMailDialog(requireActivity(), tag)
     sendMailDialog.showDialog()
 }
 
-fun Fragment.toastMessageShort(message: String){
-    Toast.makeText(context, message ,Toast.LENGTH_SHORT).show()
+fun Fragment.toastMessageShort(message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
+
 fun NaverMap.initMap() {
     apply {
         uiSettings.apply {
@@ -62,14 +63,14 @@ fun NaverMap.initMap() {
     }
 }
 
-fun ViewPager2.initViewPager(){
+fun ViewPager2.initViewPager() {
     this.apply {
         addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
                 parent: RecyclerView,
-                state: RecyclerView.State
+                state: RecyclerView.State,
             ) {
                 outRect.right = VISIBLE_ITEM_SIZE_X
                 outRect.left = VISIBLE_ITEM_SIZE_X
@@ -82,7 +83,7 @@ fun ViewPager2.initViewPager(){
     }
 }
 
-fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
+fun NaverMap.initMarker(context: Context, storeList: List<StoreData>, mapViewPager: ViewPager2) {
     apply {
         val storeDataList = mutableListOf(
             StoreData(
@@ -92,6 +93,30 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
         )
         val markerList = mutableListOf<Marker>()
         val infoWindowInstance = InfoWindow()
+
+        mapViewPager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    moveCamera(
+                        CameraUpdate.scrollAndZoomTo(
+                            LatLng(
+                                storeList[position].storeDetailData.latitude,
+                                storeList[position].storeDetailData.longitude
+                            ),
+                            CAMERA_ZOOM
+                        ).animate(CameraAnimation.Easing)
+                    )
+                    infoWindowInstance.setInfoWindow(
+                        context,
+                        markerList,
+                        storeList[position].storeId,
+                        storeList[position].storeDetailData.name
+                    )
+                }
+            }
+        )
+
 
         markerList.add(Marker().apply {
             position = LatLng(37.214185, 126.978792)
@@ -120,7 +145,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                        icon =  OverlayImage.fromResource(R.drawable.tea)
+                        icon = OverlayImage.fromResource(R.drawable.tea)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
@@ -131,7 +156,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                        icon =  OverlayImage.fromResource(R.drawable.beer)
+                        icon = OverlayImage.fromResource(R.drawable.beer)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
@@ -142,7 +167,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     Marker().apply {
                         position =
                             LatLng(data.storeDetailData.latitude, data.storeDetailData.longitude)
-                        icon =  OverlayImage.fromResource(R.drawable.rice)
+                        icon = OverlayImage.fromResource(R.drawable.rice)
                         map = this@initMarker
                         height = MARKER_ICON_HEIGHT
                         width = MARKER_ICON_WEIGHT
@@ -160,6 +185,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>) {
                     data.storeId,
                     data.storeDetailData.name
                 )
+                mapViewPager.currentItem = data.storeId-1
                 true
             }
             storeDataList.add(data.storeId, data)
@@ -177,7 +203,7 @@ fun NaverMap.moveMarker(id: Int, storeDataList: List<StoreData>) {
                     storeDataList[id].storeDetailData.longitude
                 ),
                 CAMERA_ZOOM
-            ).animate(CameraAnimation.Fly)
+            ).animate(CameraAnimation.Easing)
         )
     }
 }

@@ -43,7 +43,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
             mapViewInstance.getMapAsync { map ->
                 naverMap = map
                 naverMap.initMap()
-                naverMap.initMarker(requireContext(), viewModel.storeData.value!!)
+                naverMap.initMarker(requireContext(), viewModel.storeData.value!!, mapViewpager)
             }
 
             contact.setOnClickListener {
