@@ -8,7 +8,7 @@
 * [ ] SharedPreferences(개인정보가 아닌 단일설정값 저장용)
 * [ ] DataStore
 * [ ] Hilt 도입(배포 후)❎
-* [ ] Jsoup으로 학식 크롤링
+* [x] Jsoup으로 학식 크롤링
 * [x] lottie(progress bar 대용)
 * [x] Kotlin DSL + buildSrc
 * [x] Firebase(Real-time DB✅, FireStore✅, Authentication✅, Crashlytics✅)
