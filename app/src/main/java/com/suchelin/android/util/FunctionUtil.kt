@@ -3,6 +3,7 @@ package com.suchelin.android.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -23,11 +24,35 @@ import com.suchelin.android.R
 import com.suchelin.android.feature.view.mail.SendMailDialog
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.jsoup.Jsoup
 import java.text.SimpleDateFormat
 
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
 val adRequest = AdRequest.Builder().build()
+
+fun loadSchoolMealMenu(){
+    CoroutineScope(Dispatchers.IO).launch {
+        val url = SCHOOL_MEAL
+        val docs = Jsoup.connect(url).get()
+        val tableElement = docs.select("div[class=contents_table2]").select("table")
+        val weekDays = tableElement.select("thead").select("th").text().split(" ").subList(1,6) // 월 화 수 목 금
+        val meal = tableElement.select("tbody").select("td")
+        val mealList = mutableListOf<String>()
+        for(item in meal){
+            mealList.add(item.text())
+        }
+        if(mealList.isNotEmpty()){
+            val momsCook = mealList.subList(2,7)
+            val littleKitchen = mealList.subList(9,14)
+            val officer = mealList.subList(15,mealList.size)
+            Log.d("Jsoup","$momsCook\n$littleKitchen\n$officer")
+        }
+    }
+}
 
 fun Fragment.sendMail(tag: String) {
     val sendMailDialog = SendMailDialog(requireActivity(), tag)

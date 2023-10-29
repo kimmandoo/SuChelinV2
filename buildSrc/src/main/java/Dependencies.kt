@@ -82,3 +82,6 @@ object Airbnb{
 object Admob{
     const val Admob = "com.google.android.gms:play-services-ads:22.4.0"
 }
+object Jsoup{
+    const val Jsoup = "org.jsoup:jsoup:1.16.2"
+}

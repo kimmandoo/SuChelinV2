@@ -1,9 +1,11 @@
 package com.suchelin.android.container
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -14,6 +16,12 @@ import com.google.firebase.ktx.Firebase
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
+import com.suchelin.android.util.SCHOOL_MEAL
+import com.suchelin.android.util.loadSchoolMealMenu
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.jsoup.Jsoup
 import timber.log.Timber
 
 
@@ -49,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
 
     override fun initView() {
         initNavBar()
-//        apply()
+        loadSchoolMealMenu()
 
         binding.apply {
             navController.addOnDestinationChangedListener { _, destination, arguments ->

@@ -9,7 +9,7 @@ enum class StoreFilter(val type: String) {
 }
 
 const val testAdId = "ca-app-pub-3940256099942544/6300978111"
-
+const val SCHOOL_MEAL = "https://www.suwon.ac.kr/index.html?menuno=762"
 const val LOCATION_PERMISSION_REQUEST_CODE = 10002
 const val MARKER_ICON_HEIGHT = 60
 const val MARKER_ICON_WEIGHT = 60

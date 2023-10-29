@@ -97,4 +97,5 @@ dependencies {
     implementation(Compose.UI)
     implementation(Compose.Material)
     implementation(Compose.Foundation)
+    implementation(Jsoup.Jsoup)
 }
