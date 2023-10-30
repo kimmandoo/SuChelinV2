@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     id("com.android.application")
@@ -6,6 +7,7 @@ plugins {
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
     id("com.google.firebase.crashlytics")
 }
 
@@ -98,4 +100,8 @@ dependencies {
     implementation(Compose.Material)
     implementation(Compose.Foundation)
     implementation(Jsoup.Jsoup)
+    implementation(AndroidX.ROOM)
+    implementation(AndroidX.ROOM_COROUTINE)
+    annotationProcessor(AndroidX.ROOM_PROCESSOR)
+    ksp(AndroidX.ROOM_COMPILER)
 }

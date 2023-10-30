@@ -21,6 +21,11 @@ object AndroidX {
     const val PREFERENCES_DATASTORE = "androidx.datastore:datastore-preferences:${Versions.DATA_STORE}"
     const val PROTO_DATASTORE = "androidx.datastore:datastore:${Versions.DATA_STORE}"
 
+    const val ROOM = "androidx.room:room-runtime:${Versions.ROOM}"
+    const val ROOM_PROCESSOR = "androidx.room:room-compiler:${Versions.ROOM}"
+    const val ROOM_COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"
+    const val ROOM_COROUTINE = "androidx.room:room-ktx:${Versions.ROOM}"
+
     const val MATERIAL3_THEME = "androidx.compose.material3:material3:${Versions.MARTERIAL3}"
 }
 
