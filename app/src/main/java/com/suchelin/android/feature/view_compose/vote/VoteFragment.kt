@@ -1,8 +1,6 @@
 package com.suchelin.android.feature.view_compose.vote
 
 import android.graphics.drawable.Drawable
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import coil.compose.AsyncImage
@@ -49,11 +46,7 @@ import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.room.LikeDbInstance
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.toastMessageShort
-import com.suchelin.android.util.todayDate
 import com.suchelin.domain.model.StoreData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 private const val TAG = "VOTE"
 
