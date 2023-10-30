@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.suchelin.android.databinding.ItemMapBinding
 import com.suchelin.domain.model.StoreData
 
-class MapViewAdapter(private var storeList: List<StoreData>,
+class MapViewAdapter(private val storeList: List<StoreData>,
                      private val onMapItemClick: (store: StoreData) -> Unit = {  }) :
     RecyclerView.Adapter<MapViewAdapter.ItemMapBindingViewHolder>() {
     inner class ItemMapBindingViewHolder(private val binding: ItemMapBinding) :
