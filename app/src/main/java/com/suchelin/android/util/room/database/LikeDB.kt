@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.suchelin.android.util.room.dao.LikeDao
 import com.suchelin.android.util.room.dto.LikeData
 
-@Database(entities = [LikeData::class], version = 1)
+@Database(entities = [LikeData::class], version = 1, exportSchema = false)
 abstract class LikeDB : RoomDatabase() {
     abstract fun likeDao(): LikeDao
 }

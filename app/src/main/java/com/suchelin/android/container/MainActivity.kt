@@ -1,5 +1,6 @@
 package com.suchelin.android.container
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -18,6 +20,8 @@ import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
 import com.suchelin.android.util.SCHOOL_MEAL
 import com.suchelin.android.util.loadSchoolMealMenu
+import com.suchelin.android.util.room.FeedDbInstance
+import com.suchelin.android.util.room.LikeDbInstance
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,6 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
 
     private lateinit var navController: NavController
     private lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

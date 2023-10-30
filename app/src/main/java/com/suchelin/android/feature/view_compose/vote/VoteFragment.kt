@@ -1,6 +1,8 @@
 package com.suchelin.android.feature.view_compose.vote
 
 import android.graphics.drawable.Drawable
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import coil.compose.AsyncImage
@@ -43,8 +46,14 @@ import com.suchelin.android.databinding.FragmentVoteBinding
 import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.util.StoreFilter
 import com.suchelin.android.util.parcelable.StoreDataArgs
+import com.suchelin.android.util.room.LikeDbInstance
 import com.suchelin.android.util.sendMail
+import com.suchelin.android.util.toastMessageShort
+import com.suchelin.android.util.todayDate
 import com.suchelin.domain.model.StoreData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private const val TAG = "VOTE"
 
@@ -53,12 +62,19 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     private val sharedViewModel: MainViewModel by activityViewModels()
     private lateinit var storeListReference: List<StoreData>
     private lateinit var sendStoreInfo: NavDirections
+
     override fun initView() {
         viewModel.readRTDB()
 
         sharedViewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
                 storeListReference = it
+            }
+        }
+
+        viewModel.isLimited.observe(viewLifecycleOwner){ isFull ->
+            if(isFull){
+                toastMessageShort("오늘은 더이상 추천할 수 없어요")
             }
         }
 
@@ -129,7 +145,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                 itemContent = {
                     StoreListItem(
                         filteredStores[it]
-                    ) { viewModel.addVote(filteredStores[it].storeId.toString()) }
+                    ) { viewModel.addVote(filteredStores[it].storeId.toString(), LikeDbInstance.getDatabase(requireContext()).likeDao()) }
                 }
             )
         }
@@ -200,14 +216,14 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
                             .align(CenterVertically)
                             .padding(end = 8.dp)
                     )
-                    vote(resources.getDrawable(R.drawable.heart, null), onClick)
+                    Vote(resources.getDrawable(R.drawable.heart, null), onClick)
                 }
             }
         }
     }
 
     @Composable
-    fun vote(
+    fun Vote(
         img: Drawable, onClick: () -> Unit
     ) {
         AsyncImage(

@@ -30,6 +30,6 @@ object Versions {
     const val LOTTIE = "6.1.0"
 
     const val COMPOSE_UI = "1.5.4"
-    const val ROOM = "2.6.0"
+    const val ROOM = "2.5.2"
 
 }

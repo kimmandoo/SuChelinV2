@@ -35,6 +35,8 @@ import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.util.adRequest
+import com.suchelin.android.util.room.FeedDbInstance
+import com.suchelin.android.util.room.LikeDbInstance
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.toastMessageShort
 import com.suchelin.domain.model.PostData
@@ -46,7 +48,7 @@ class FeedFragment :
     BaseFragment<FragmentSuggestBinding, FeedViewModel>(R.layout.fragment_suggest) {
     override val viewModel: FeedViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
-
+    private val db = FeedDbInstance.getDatabase(requireContext())
 
     override fun initView() {
         binding.adView.loadAd(adRequest)

@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.suchelin.android.util.room.dao.FeedDao
 import com.suchelin.android.util.room.dto.FeedData
 
-@Database(entities = [FeedData::class], version = 1)
+@Database(entities = [FeedData::class], version = 1, exportSchema = false)
 abstract class FeedDB : RoomDatabase() {
     abstract fun feedDao(): FeedDao
 }

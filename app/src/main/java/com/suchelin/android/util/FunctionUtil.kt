@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import androidx.room.Room.databaseBuilder
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.ads.AdRequest
 import com.google.firebase.firestore.ktx.firestore
@@ -29,11 +31,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import java.text.SimpleDateFormat
+import java.util.Date
 
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
 val adRequest = AdRequest.Builder().build()
 
+fun todayDate(): String{
+    return docPostName.format(Date())
+}
 fun loadSchoolMealMenu(){
     CoroutineScope(Dispatchers.IO).launch {
         val url = SCHOOL_MEAL

@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class FeedData(
-    @PrimaryKey val id: Int,
-    @ColumnInfo(name = "date") val date: String?,
+    @PrimaryKey val date: String,
     @ColumnInfo(name = "feed") val feed: Boolean?
 )
