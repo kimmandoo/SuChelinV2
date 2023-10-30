@@ -1,5 +1,6 @@
 package com.suchelin.android.feature.view_compose.feed
 
+import android.view.View
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -36,22 +37,21 @@ import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.util.adRequest
 import com.suchelin.android.util.room.FeedDbInstance
-import com.suchelin.android.util.room.LikeDbInstance
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.toastMessageShort
 import com.suchelin.domain.model.PostData
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 private const val TAG = "FEED"
+
 class FeedFragment :
     BaseFragment<FragmentSuggestBinding, FeedViewModel>(R.layout.fragment_suggest) {
     override val viewModel: FeedViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
-    private val db = FeedDbInstance.getDatabase(requireContext())
 
     override fun initView() {
         binding.adView.loadAd(adRequest)
+        initFeedWriteLimit()
         sharedViewModel.postData.observe(viewLifecycleOwner) { postList ->
             postList?.let {
                 binding.loading.isVisible = false
@@ -65,6 +65,7 @@ class FeedFragment :
                 }
             }
         }
+
         val postAlert = PostAlertDialog(requireContext())
         binding.apply {
             binding.loading.isVisible = true
@@ -73,10 +74,7 @@ class FeedFragment :
             }
             btnSuggest.setOnClickListener {
                 etSuggestPost.text?.let { post ->
-                    // post전에 욕설 필터링이 필요할 것 같음, 하루 최대 한번만 글 쓸 수 있게 글쓰면 광고 팝업 나오게
-                    // 50자 제한, 하루 한번 글 쓰기
-                    // 다이얼로그로 한번만 글 쓸 수 있고, 부적절한 내용시 삭제가능하다고 안내
-                    // 잘못 올린 글은 본인이 삭제할 수 없음
+                    // post전에 욕설 필터링이 필요할 것 같음
                     if (post.length < 10) {
                         toastMessageShort(getString(R.string.post_min_len))
                     } else {
@@ -85,7 +83,10 @@ class FeedFragment :
                             setOnCancelListener {
                                 loading.isVisible = true
                                 lifecycleScope.launch {
-                                    viewModel.postData(post.toString()).await()
+                                    viewModel.postData(
+                                        post.toString(),
+                                        FeedDbInstance.getDatabase(requireContext()).feedDao()
+                                    ).join()
                                     sharedViewModel.postRefresh()
                                     loading.isVisible = false
                                     etSuggestPost.text.clear()
@@ -161,5 +162,14 @@ class FeedFragment :
         }
     }
 
-
+    private fun initFeedWriteLimit() {
+        lifecycleScope.launch {
+            viewModel.initFeedWriteState(FeedDbInstance.getDatabase(requireContext()).feedDao())
+                .join()
+            if (viewModel.isLimited.value!!) {
+                binding.clEdit.visibility = View.GONE
+                toastMessageShort(getString(R.string.feedLimit))
+            }
+        }
+    }
 }

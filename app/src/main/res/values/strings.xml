@@ -17,4 +17,6 @@
     <string name="detail_list">빠르게 목록을 보고 싶을 때</string>
     <string name="empty_store">아직 가게 정보가 없습니다</string>
     <string name="empty_menu">메뉴가 곧 업데이트 될 예정입니다</string>
+    <string name="feedLimit">오늘은 더이상 글을 쓸 수 없어요</string>
+    <string name="likeLimit">오늘은 더이상 추천할 수 없어요</string>
 </resources>

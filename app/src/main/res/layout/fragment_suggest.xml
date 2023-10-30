@@ -48,15 +48,15 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/H1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_feed"
-                            style="@style/H1" />
+                            android:text="@string/title_feed" />
 
                         <TextView
+                            style="@style/B1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/B1"
                             android:text="@string/detail_feed"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -86,9 +86,8 @@
             android:id="@+id/guide_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="100dp"
             android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/cl_edit" />
 
         <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
@@ -100,47 +99,59 @@
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@+id/et_suggest_post"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="2dp"
-            style="@style/B1"
-            android:background="@null"
-            android:gravity="start|top"
-            android:hint="@string/suggest_et_hint"
-            android:maxLength="50"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_suggest"
-            app:layout_constraintHorizontal_weight="4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guide_line" />
-
-        <View
-            android:id="@+id/btn_suggest"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_filter"
-            android:text="게시"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:visibility="visible"
+            android:id="@+id/cl_edit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/et_suggest_post"
-            app:layout_constraintTop_toBottomOf="@+id/guide_line" />
+            app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/btn_iv_suggest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bx_feed_send"
-            app:layout_constraintBottom_toBottomOf="@id/btn_suggest"
-            app:layout_constraintEnd_toEndOf="@id/btn_suggest"
-            app:layout_constraintStart_toStartOf="@id/btn_suggest"
-            app:layout_constraintTop_toTopOf="@id/btn_suggest"
-            app:tint="@color/white" />
+            <EditText
+                android:id="@+id/et_suggest_post"
+                style="@style/B1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="2dp"
+                android:background="@null"
+                android:gravity="start|top"
+                android:hint="@string/suggest_et_hint"
+                android:maxLength="50"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_suggest"
+                app:layout_constraintHorizontal_weight="4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/btn_suggest"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_filter"
+                android:text="게시"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/et_suggest_post"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_iv_suggest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bx_feed_send"
+                app:layout_constraintBottom_toBottomOf="@id/btn_suggest"
+                app:layout_constraintEnd_toEndOf="@id/btn_suggest"
+                app:layout_constraintStart_toStartOf="@id/btn_suggest"
+                app:layout_constraintTop_toTopOf="@id/btn_suggest"
+                app:tint="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -74,7 +74,7 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
 
         viewModel.isLimited.observe(viewLifecycleOwner){ isFull ->
             if(isFull){
-                toastMessageShort("오늘은 더이상 추천할 수 없어요")
+                toastMessageShort(getString(R.string.likeLimit))
             }
         }
 
