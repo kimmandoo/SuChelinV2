@@ -52,6 +52,12 @@ class FeedFragment :
     override fun initView() {
         binding.adView.loadAd(adRequest)
         initFeedWriteLimit()
+
+        viewModel.isLimited.observe(viewLifecycleOwner) { isLimit ->
+            if (isLimit) {
+                binding.clEdit.visibility = View.GONE
+            }
+        }
         sharedViewModel.postData.observe(viewLifecycleOwner) { postList ->
             postList?.let {
                 binding.loading.isVisible = false

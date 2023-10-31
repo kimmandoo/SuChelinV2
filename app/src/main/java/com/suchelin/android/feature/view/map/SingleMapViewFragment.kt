@@ -8,13 +8,8 @@ import com.naver.maps.map.NaverMap
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.databinding.FragmentSingleMapBinding
-import com.suchelin.android.feature.view_compose.detail.DetailFragmentArgs
 import com.suchelin.android.util.adRequest
-import com.suchelin.android.util.initMap
-import com.suchelin.android.util.initMarker
-import com.suchelin.android.util.initViewPager
 import com.suchelin.android.util.parcelable.SingleMapDataArgs
-import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.singleMarker
 

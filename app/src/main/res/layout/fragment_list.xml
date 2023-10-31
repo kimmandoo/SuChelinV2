@@ -30,6 +30,7 @@
             android:layout_marginBottom="68dp"
             app:fabCustomSize="40dp"
             app:maxImageSize="24dp"
+            android:visibility="gone"
             style="@style/FloatingButtonTheme"
             android:src="@drawable/bxs_food_menu"
             app:layout_constraintBottom_toBottomOf="parent"
