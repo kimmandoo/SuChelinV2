@@ -38,6 +38,9 @@
                 android:name="storeInfo"
                 app:argType="com.suchelin.android.util.parcelable.StoreDataArgs"/>
         </action>
+        <action
+            android:id="@+id/action_navigation_main_to_schoolFragment"
+            app:destination="@id/schoolFragment" />
 
     </fragment>
     <fragment
@@ -67,4 +70,8 @@
             android:id="@+id/action_navigation_detail_to_navigation_vote"
             app:destination="@id/navigation_vote" />
     </fragment>
+    <fragment
+        android:id="@+id/schoolFragment"
+        android:name="com.suchelin.android.feature.view_compose.school.SchoolFragment"
+        android:label="SchoolFragment" />
 </navigation>

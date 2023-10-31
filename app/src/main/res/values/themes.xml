@@ -8,6 +8,12 @@
         <item name="useMaterialThemeColors">false</item>
     </style>
 
+    <style name="FloatingButtonTheme">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="rippleColor">#6893A4</item>
+        <item name="tint">@color/white</item>
+    </style>
+
     <style name="Theme.SuchelinV2" parent="Base.Theme.SuchelinV2" />
 
     <style name="Theme.SplashScreen.ShyPolarBear" parent="Theme.SplashScreen">

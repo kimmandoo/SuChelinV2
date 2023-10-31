@@ -22,6 +22,20 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/loading" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/main_school_meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="68dp"
+            app:fabCustomSize="40dp"
+            app:maxImageSize="24dp"
+            style="@style/FloatingButtonTheme"
+            android:src="@drawable/bxs_food_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@android:color/white" />
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -70,13 +84,13 @@
                 </androidx.appcompat.widget.Toolbar>
 
                 <LinearLayout
+                    android:id="@+id/filter_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="4dp"
-                    android:id="@+id/filter_bar"
-                    android:visibility="gone"
                     android:gravity="center"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                     <TextView
