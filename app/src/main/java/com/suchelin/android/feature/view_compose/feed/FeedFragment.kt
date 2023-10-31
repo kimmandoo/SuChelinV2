@@ -29,6 +29,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.MobileAds
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
@@ -50,6 +51,7 @@ class FeedFragment :
     private val sharedViewModel: MainViewModel by activityViewModels()
 
     override fun initView() {
+        MobileAds.initialize(requireContext())
         binding.adView.loadAd(adRequest)
         initFeedWriteLimit()
 
