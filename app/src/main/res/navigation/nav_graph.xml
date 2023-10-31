@@ -69,9 +69,24 @@
         <action
             android:id="@+id/action_navigation_detail_to_navigation_vote"
             app:destination="@id/navigation_vote" />
+        <action
+            android:id="@+id/action_navigation_detail_to_singleMapViewFragment"
+            app:destination="@id/singleMapViewFragment">
+            <argument
+                android:name="mapInfo"
+                app:argType="com.suchelin.android.util.parcelable.SingleMapDataArgs"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/schoolFragment"
         android:name="com.suchelin.android.feature.view_compose.school.SchoolFragment"
         android:label="SchoolFragment" />
+    <fragment
+        android:id="@+id/singleMapViewFragment"
+        android:name="com.suchelin.android.feature.view.map.SingleMapViewFragment"
+        android:label="SingleMapViewFragment">
+        <argument
+            android:name="mapInfo"
+            app:argType="com.suchelin.android.util.parcelable.SingleMapDataArgs"/>
+    </fragment>
 </navigation>

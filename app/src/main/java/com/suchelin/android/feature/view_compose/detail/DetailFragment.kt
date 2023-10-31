@@ -43,6 +43,7 @@ import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentDetailBinding
 import com.suchelin.android.feature.compose.ui.jamsil
+import com.suchelin.android.util.parcelable.SingleMapDataArgs
 import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.domain.model.StoreMenuDetail
 
@@ -80,13 +81,23 @@ class DetailFragment :
                         }
                     }
                 }
-                // rv에 넣을때 item 타입이 StoreMenuDetail 인지, String인지 확인해서 rv 돌리기
             }
         }
 
         binding.apply {
             btnBack.setOnClickListener {
                 findNavController().popBackStack()
+            }
+            detailToMap.setOnClickListener {
+                findNavController().navigate(
+                    DetailFragmentDirections.actionNavigationDetailToSingleMapViewFragment(
+                        SingleMapDataArgs(
+                            storeInfo.storeName,
+                            storeInfo.latitude,
+                            storeInfo.longitude
+                        )
+                    )
+                )
             }
         }
     }

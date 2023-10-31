@@ -22,6 +22,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.suchelin.android.R
 import com.suchelin.android.feature.view.mail.SendMailDialog
+import com.suchelin.android.util.parcelable.SingleMapDataArgs
 import com.suchelin.domain.model.StoreData
 import com.suchelin.domain.model.StoreDetail
 import kotlinx.coroutines.CoroutineScope
@@ -35,29 +36,31 @@ import java.util.Date
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
 val adRequest = AdRequest.Builder().build()
 
-fun todayDate(): String{
+fun todayDate(): String {
     return docPostName.format(Date())
 }
-fun loadSchoolMealMenu(){
+
+fun loadSchoolMealMenu() {
     CoroutineScope(Dispatchers.IO).launch {
         val url = SCHOOL_MEAL
         try {
             val docs = Jsoup.connect(url).get()
             val tableElement = docs.select("div[class=contents_table2]").select("table")
-            val weekDays = tableElement.select("thead").select("th").text().split(" ").subList(1,6) // 월 화 수 목 금
+            val weekDays = tableElement.select("thead").select("th").text().split(" ")
+                .subList(1, 6) // 월 화 수 목 금
             val meal = tableElement.select("tbody").select("td")
             val mealList = mutableListOf<String>()
-            for(item in meal){
+            for (item in meal) {
                 mealList.add(item.text())
             }
-            if(mealList.isNotEmpty()){
-                val momsCook = mealList.subList(2,7)
-                val littleKitchen = mealList.subList(9,14)
-                val officer = mealList.subList(15,mealList.size)
-                Log.d("Jsoup","$momsCook\n$littleKitchen\n$officer")
+            if (mealList.isNotEmpty()) {
+                val momsCook = mealList.subList(2, 7)
+                val littleKitchen = mealList.subList(9, 14)
+                val officer = mealList.subList(15, mealList.size)
+                Log.d("Jsoup", "$momsCook\n$littleKitchen\n$officer")
             }
-        }catch (e: Exception){
-            Log.e("Jsoup","${e.message}")
+        } catch (e: Exception) {
+            Log.e("Jsoup", "${e.message}")
         }
 
     }
@@ -85,6 +88,36 @@ fun NaverMap.initMap() {
             LatLng(37.214185, 126.978792),
             CAMERA_ZOOM
         )
+    }
+}
+
+fun NaverMap.singleMarker(context: Context, singleStoreData: SingleMapDataArgs) {
+    apply {
+        val infoWindowInstance = InfoWindow()
+        uiSettings.apply {
+            isCompassEnabled = true
+            isScaleBarEnabled = false
+            isZoomControlEnabled = false
+            isLocationButtonEnabled = false
+        }
+
+        cameraPosition = CameraPosition(
+            LatLng(singleStoreData.latitude, singleStoreData.longitude),
+            CAMERA_ZOOM + 1
+        )
+
+        infoWindowInstance.adapter = object : InfoWindow.DefaultTextAdapter(context) {
+            override fun getText(infoWindow: InfoWindow): CharSequence {
+                return singleStoreData.storeName
+            }
+        }
+        infoWindowInstance.open(Marker().apply {
+            position = LatLng(singleStoreData.latitude, singleStoreData.longitude)
+            icon = OverlayImage.fromResource(R.drawable.restaurant)
+            map = this@singleMarker
+            height = MARKER_ICON_HEIGHT
+            width = MARKER_ICON_WEIGHT
+        })
     }
 }
 
@@ -208,7 +241,7 @@ fun NaverMap.initMarker(context: Context, storeList: List<StoreData>, mapViewPag
                     data.storeId,
                     data.storeDetailData.name
                 )
-                mapViewPager.currentItem = data.storeId-1
+                mapViewPager.currentItem = data.storeId - 1
                 true
             }
             storeDataList.add(data.storeId, data)
@@ -270,8 +303,8 @@ fun setStoreData(
     // 3까지 입력 됐음
     db.collection("store").document(path.toString())
         .set(docData)
-        .addOnSuccessListener {  }
-        .addOnFailureListener { _ ->  }
+        .addOnSuccessListener { }
+        .addOnFailureListener { _ -> }
 }
 
 fun setStoreMenu(
@@ -293,6 +326,6 @@ fun setStoreMenu(
     db.collection("menu").document(path.toString())
         .set(docData)
         .addOnSuccessListener { }
-        .addOnFailureListener { _ ->  }
+        .addOnFailureListener { _ -> }
 
 }
