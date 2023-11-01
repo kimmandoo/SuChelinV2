@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SuchelinV2</string>
+    <string name="app_name">수슐랭</string>
     <string name="mail_title">수슐랭 문의</string>
     <string name="title_activity_list_compose_fragment">ListComposeFragment</string>
     <string name="suggest_et_hint">한 번 게시된 글은 본인이 삭제할 수 없습니다.\n10글자 이상 작성해주세요(최대 50자)</string>
