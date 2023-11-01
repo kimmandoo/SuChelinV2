@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.ads.MobileAds
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
