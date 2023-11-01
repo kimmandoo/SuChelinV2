@@ -15,7 +15,7 @@ import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentMapBinding
-import com.suchelin.android.util.adRequest
+import com.suchelin.android.util.AdManager
 import com.suchelin.android.util.initMap
 import com.suchelin.android.util.initMarker
 import com.suchelin.android.util.initViewPager
@@ -37,7 +37,7 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     override fun initView() {
         MobileAds.initialize(requireContext())
         binding.apply {
-            adView.loadAd(adRequest)
+            adView.loadAd(AdManager.createAdRequest())
             val mapStoreAdapter = MapViewAdapter(viewModel.storeData.value!!) { store: StoreData ->
                 setOnMapItemClick(store)
             }

@@ -14,6 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
+import com.suchelin.android.util.AdManager
 import com.suchelin.android.util.loadSchoolMealMenu
 import timber.log.Timber
 
@@ -28,7 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        MobileAds.initialize(this)
+        AdManager.initialize(baseContext)
         auth = Firebase.auth
 
     }

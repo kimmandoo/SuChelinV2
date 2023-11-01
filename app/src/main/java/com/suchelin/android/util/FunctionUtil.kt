@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.gms.ads.AdRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.naver.maps.geometry.LatLng
@@ -34,7 +33,6 @@ import java.util.Date
 
 @SuppressLint("SimpleDateFormat")
 val docPostName = SimpleDateFormat("yyyy-MM-dd")
-val adRequest = AdRequest.Builder().build()
 
 fun todayDate(): String {
     return docPostName.format(Date())

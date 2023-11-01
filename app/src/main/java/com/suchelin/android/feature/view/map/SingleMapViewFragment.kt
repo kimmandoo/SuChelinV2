@@ -4,14 +4,13 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.gms.ads.MobileAds
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.suchelin.android.R
 import com.suchelin.android.base.BaseFragment
 import com.suchelin.android.databinding.FragmentSingleMapBinding
-import com.suchelin.android.util.adRequest
+import com.suchelin.android.util.AdManager
 import com.suchelin.android.util.parcelable.SingleMapDataArgs
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.singleMarker
@@ -27,11 +26,10 @@ class SingleMapViewFragment :
     private lateinit var naverMap: NaverMap
 
     override fun initView() {
-        MobileAds.initialize(requireContext())
         val mapInfo: SingleMapDataArgs = args.mapInfo
 
         binding.apply {
-            adView.loadAd(adRequest)
+            adView.loadAd(AdManager.createAdRequest())
             btnBack.setOnClickListener { findNavController().popBackStack() }
             contact.setOnClickListener {
                 sendMail(TAG)
@@ -44,6 +42,7 @@ class SingleMapViewFragment :
             }
         }
     }
+
     override fun onMapReady(p0: NaverMap) {
 
     }

@@ -13,5 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+app/src/main/res/values/ad.xml
+ad.xml
 # Google Services (e.g. APIs or Firebase)
 google-services.json
