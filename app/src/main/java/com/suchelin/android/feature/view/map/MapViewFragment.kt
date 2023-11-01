@@ -35,7 +35,6 @@ class MapViewFragment : BaseFragment<FragmentMapBinding, MainViewModel>(R.layout
     private lateinit var locationManager: LocationManager
 
     override fun initView() {
-        MobileAds.initialize(requireContext())
         binding.apply {
             adView.loadAd(AdManager.createAdRequest())
             val mapStoreAdapter = MapViewAdapter(viewModel.storeData.value!!) { store: StoreData ->
