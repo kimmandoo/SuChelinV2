@@ -35,7 +35,7 @@ import com.suchelin.android.container.MainViewModel
 import com.suchelin.android.databinding.FragmentSuggestBinding
 import com.suchelin.android.feature.compose.ui.AppTheme
 import com.suchelin.android.feature.compose.ui.jamsil
-import com.suchelin.android.util.adRequest
+import com.suchelin.android.util.AdManager
 import com.suchelin.android.util.room.FeedDbInstance
 import com.suchelin.android.util.sendMail
 import com.suchelin.android.util.toastMessageShort
@@ -50,7 +50,7 @@ class FeedFragment :
     private val sharedViewModel: MainViewModel by activityViewModels()
 
     override fun initView() {
-        binding.adView.loadAd(adRequest)
+        binding.adView.loadAd(AdManager.createAdRequest())
         initFeedWriteLimit()
 
         viewModel.isLimited.observe(viewLifecycleOwner) { isLimit ->
