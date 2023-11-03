@@ -1,11 +1,11 @@
 # SuChelinV2
 
-### 2023/09/25 ~ 공사중
+### 2023/09/25 ~ 2023/11/03
 
 * [x] 부분 컴포즈 도입(ComposeView 사용)
 * [x] UI 수정
 * [x] Jetpack Navigation
-* [ ] SharedPreferences(개인정보가 아닌 단일설정값 저장용)
+* [x] Room
 * [ ] DataStore
 * [ ] Hilt 도입(배포 후)❎
 * [x] Jsoup으로 학식 크롤링
