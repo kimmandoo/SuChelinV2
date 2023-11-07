@@ -45,7 +45,6 @@ import com.suchelin.android.util.sendMail
 import com.suchelin.domain.model.StoreData
 
 
-
 private const val TAG = "LIST"
 class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.fragment_list) {
 
@@ -80,6 +79,9 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                 button.setOnClickListener {
                     setComposeView(storeListReference, filter)
                 }
+            }
+            mainSchoolMeal.setOnClickListener{
+                findNavController().navigate(R.id.action_navigation_main_to_schoolFragment)
             }
         }
     }

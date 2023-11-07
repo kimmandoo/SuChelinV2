@@ -30,6 +30,8 @@ class MainViewModel : BaseViewModel() {
     private val _postData = MutableLiveData<List<PostData>>()
     val postData: LiveData<List<PostData>> = _postData
     var totalStoreNumber: Int = 0
+
+
     private fun loadMenuData() {
         _db.collection("menu").get()
             .addOnSuccessListener { result ->
