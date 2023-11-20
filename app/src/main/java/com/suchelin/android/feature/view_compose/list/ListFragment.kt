@@ -51,14 +51,33 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     override val viewModel: MainViewModel by activityViewModels()
     private lateinit var sendStoreInfo: NavDirections
     private lateinit var storeListReference: List<StoreData>
-
+    private lateinit var randomDialog: RandomDialog
     override fun initView() {
+        randomDialog = RandomDialog(requireContext()){ store->
+            sendStoreInfo =
+                ListFragmentDirections.actionNavigationMainToNavigationDetail(
+                    StoreDataArgs(
+                        store.storeId,
+                        store.storeDetailData.name,
+                        store.storeDetailData.imageUrl,
+                        store.storeDetailData.latitude,
+                        store.storeDetailData.longitude
+                    )
+                )
+            findNavController().navigate(sendStoreInfo)
+        }
+
         viewModel.storeData.observe(viewLifecycleOwner) { storeList ->
             storeList?.let {
                 storeListReference = it
                 setComposeView(it, StoreFilter.ALL)
                 binding.loading.isVisible = false
                 binding.filterBar.isVisible = true
+                if(!viewModel.random.value!!){
+                    val randomStore = storeList.random()
+                    randomDialog.showDialog(randomStore)
+                    viewModel.random.value = true
+                }
             }
         }
 
@@ -82,6 +101,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
             }
             mainSchoolMeal.setOnClickListener{
                 findNavController().navigate(R.id.action_navigation_main_to_schoolFragment)
+//                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SCHOOL_MEAL)))
             }
         }
     }

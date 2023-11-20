@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/schoolFragment"
-        android:name="com.suchelin.android.feature.view_compose.school.SchoolFragment"
+        android:name="com.suchelin.android.feature.view.school.SchoolFragment"
         android:label="SchoolFragment" />
     <fragment
         android:id="@+id/singleMapViewFragment"

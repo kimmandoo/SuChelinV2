@@ -20,6 +20,7 @@ class MainViewModel : BaseViewModel() {
     private val _db = Firebase.firestore
     private val _isInit = MutableLiveData<Boolean>(false)
     val isInit: LiveData<Boolean> = _isInit
+    val random = MutableLiveData<Boolean>(false)
     private val _storeList = mutableListOf<StoreData>()
     private val _storeData = MutableLiveData<List<StoreData>>()
     private val _menuList = hashMapOf<Int, StoreMenuData>()
@@ -30,6 +31,7 @@ class MainViewModel : BaseViewModel() {
     private val _postData = MutableLiveData<List<PostData>>()
     val postData: LiveData<List<PostData>> = _postData
     var totalStoreNumber: Int = 0
+
 
 
     private fun loadMenuData() {

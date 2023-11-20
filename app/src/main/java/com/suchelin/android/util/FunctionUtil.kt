@@ -36,30 +36,28 @@ fun todayDate(): String {
     return docPostName.format(Date())
 }
 
-suspend fun loadSchoolMealMenu(): SchoolMealData {
-    lateinit var schoolData: SchoolMealData
-    val url = SCHOOL_MEAL
-    try {
-        val docs = Jsoup.connect(url).get()
-        val tableElement = docs.select("div[class=contents_table2]").select("table")
-        val weekDays = tableElement.select("thead").select("th").text().split(" ")
-            .subList(1, 6) // 월 화 수 목 금
-        val meal = tableElement.select("tbody").select("td")
-        val mealList = mutableListOf<String>()
-        for (item in meal) {
-            mealList.add(item.text())
-        }
-        if (mealList.isNotEmpty()) {
-            val momsCook = mealList.subList(2, 7)
-            val littleKitchen = mealList.subList(9, 14)
-            val officer = mealList.subList(15, mealList.size)
-            schoolData = SchoolMealData(weekDays, momsCook, littleKitchen, officer)
-            Log.d("Jsoup", "$momsCook\n$littleKitchen\n$officer")
-        }
-    } catch (e: Exception) {
-        Log.e("Jsoup", "${e.message}")
+fun loadSchoolMealMenu(): SchoolMealData {
+    val url = JONGHAP
+
+    val docs = Jsoup.connect(url).get()
+    val tableElement = docs.select("div[class=contents_table2]").select("table")
+    val weekDays = tableElement.select("thead").select("th").text().split(" ")
+        .subList(1, 6) // 월 화 수 목 금
+    val meal = tableElement.select("tbody").select("td")
+    val mealList = mutableListOf<String>()
+    for (item in meal) {
+        mealList.add(item.text())
     }
-    return schoolData
+    if (mealList.isNotEmpty()) {
+        Log.d("Jsoup", "${mealList}")
+        val momsCook = mealList.subList(2, 7)
+        val littleKitchen = mealList.subList(9, 14)
+        val officer = mealList.subList(15, mealList.size)
+        return SchoolMealData(weekDays, momsCook, littleKitchen, officer)
+        Log.d("Jsoup", "$momsCook\n$littleKitchen\n$officer")
+    }
+
+    return SchoolMealData(emptyList(), emptyList(), emptyList(), emptyList())
 }
 
 fun Fragment.sendMail(tag: String) {
