@@ -27,9 +27,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        AdManager.initialize(baseContext)
+        AdManager.initialize(applicationContext)
         auth = Firebase.auth
-
     }
 
     override fun onStart() {
