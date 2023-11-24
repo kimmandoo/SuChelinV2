@@ -31,5 +31,5 @@ object Versions {
 
     const val COMPOSE_UI = "1.5.4"
     const val ROOM = "2.5.2"
-
+    const val AD_MOB = "22.5.0"
 }

@@ -13,6 +13,8 @@
     <string name="title_feed">오늘의 수슐랭 피드</string>
     <string name="detail_feed">매일 갱신 됩니다</string>
     <string name="title_main">수슐랭 리스트</string>
+    <string name="title_haksik">이번 주 학식</string>
+
     <string name="detail_map">지도와 같이 보고 싶을 때</string>
     <string name="detail_list">빠르게 목록을 보고 싶을 때</string>
     <string name="empty_store">아직 가게 정보가 없습니다</string>
@@ -20,4 +22,7 @@
     <string name="feedLimit">오늘은 더이상 글을 쓸 수 없어요</string>
     <string name="likeLimit">오늘은 더이상 추천할 수 없어요</string>
     <string name="adTestCode">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="today_suggest">오늘 뭐 먹지</string>
+    <string name="view_to_map">지도로 보기</string>
+    <string name="view_to_tel">전화번호</string>
 </resources>

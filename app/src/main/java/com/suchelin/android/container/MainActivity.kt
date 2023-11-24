@@ -7,7 +7,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -15,7 +14,6 @@ import com.suchelin.android.R
 import com.suchelin.android.base.BaseActivity
 import com.suchelin.android.databinding.ActivityMainBinding
 import com.suchelin.android.util.AdManager
-import com.suchelin.android.util.loadSchoolMealMenu
 import timber.log.Timber
 
 
@@ -29,9 +27,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        AdManager.initialize(baseContext)
+        AdManager.initialize(applicationContext)
         auth = Firebase.auth
-
     }
 
     override fun onStart() {
@@ -51,8 +48,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
 
     override fun initView() {
         initNavBar()
-        loadSchoolMealMenu()
-
         binding.apply {
             navController.addOnDestinationChangedListener { _, destination, arguments ->
                 when (destination.id) {

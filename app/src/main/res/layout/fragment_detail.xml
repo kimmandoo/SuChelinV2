@@ -47,12 +47,12 @@
 
                     <TextView
                         android:id="@+id/detail_store_name"
+                        style="@style/H1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         android:layout_marginVertical="4dp"
+                        android:layout_marginStart="12dp"
                         android:text="가게 이름"
-                        style="@style/H1"
                         android:textSize="30sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/detail_store_img" />
@@ -60,8 +60,8 @@
                     <LinearLayout
                         android:id="@+id/detail_to_tel"
                         android:layout_width="wrap_content"
-                        android:layout_marginVertical="2dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="2dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -73,14 +73,14 @@
                             android:src="@drawable/ic_phone" />
 
                         <TextView
+                            android:id="@+id/tv_detail_to_tel"
+                            style="@style/B2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/B2"
-                            android:id="@+id/tv_detail_to_tel"
                             android:background="@drawable/bg_filter"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
-                            android:text="전화번호"
+                            android:text="@string/view_to_tel"
                             android:textColor="@color/white" />
                     </LinearLayout>
 
@@ -88,11 +88,15 @@
                     <TextView
                         android:id="@+id/detail_to_map"
                         style="@style/B1"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="4dp"
                         android:layout_marginStart="12dp"
-                        android:text="지도로 보기"
+                        android:background="@drawable/bg_filter"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/view_to_map"
+                        android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/detail_to_tel" />
                 </LinearLayout>
