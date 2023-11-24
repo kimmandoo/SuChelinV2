@@ -24,16 +24,16 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/main_school_meal"
+            style="@style/FloatingButtonTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="68dp"
-            app:fabCustomSize="40dp"
-            app:maxImageSize="24dp"
-            style="@style/FloatingButtonTheme"
             android:src="@drawable/bxs_food_menu"
+            app:fabCustomSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="24dp"
             app:tint="@android:color/white" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -89,56 +89,75 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="4dp"
                     android:gravity="center"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:visibility="gone"
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-                    <TextView
-                        android:id="@+id/all"
-                        style="@style/B2"
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_view"
+                        style="@style/B1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_filter"
-                        android:paddingHorizontal="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
                         android:paddingVertical="4dp"
-                        android:text="전체"
-                        android:textColor="@color/white" />
+                        app:iconifiedByDefault="false"
+                        app:queryBackground="@drawable/bg_grey_round_10" />
 
-                    <TextView
-                        android:id="@+id/restaurant"
-                        style="@style/B2"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_filter"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="4dp"
-                        android:text="밥집"
-                        android:textColor="@color/white" />
+                        android:layout_marginVertical="4dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/pub"
-                        style="@style/B2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_filter"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="4dp"
-                        android:text="술집"
-                        android:textColor="@color/white" />
+                        <TextView
+                            android:id="@+id/all"
+                            style="@style/B2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/bg_filter"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:text="전체"
+                            android:textColor="@color/white" />
 
-                    <TextView
-                        android:id="@+id/cafe"
-                        style="@style/B2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_filter"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="4dp"
-                        android:text="카페"
-                        android:textColor="@color/white" />
+                        <TextView
+                            android:id="@+id/restaurant"
+                            style="@style/B2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/bg_filter"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:text="밥집"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/pub"
+                            style="@style/B2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/bg_filter"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:text="술집"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/cafe"
+                            style="@style/B2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_filter"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:text="카페"
+                            android:textColor="@color/white" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
                 </LinearLayout>
             </com.google.android.material.appbar.AppBarLayout>
 

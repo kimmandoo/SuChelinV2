@@ -5,7 +5,8 @@ enum class StoreFilter(val type: String) {
     RESTAURANT("restaurant"),
     PUB("pub"),
     ALL("all"),
-    RANK("rank")
+    RANK("rank"),
+    SEARCH("search")
 }
 
 const val testAdId = "ca-app-pub-3940256099942544/6300978111"
