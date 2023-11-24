@@ -122,11 +122,14 @@ class VoteFragment : BaseFragment<FragmentVoteBinding, VoteViewModel>(R.layout.f
     @Composable
     fun VoteGrid(storeDataList: List<StoreData>, filter: StoreFilter) {
         val filteredStores = when (filter) {
-            StoreFilter.CAFE -> storeDataList.filter { it.storeDetailData.type == "cafe" }
-            StoreFilter.RESTAURANT -> storeDataList.filter { it.storeDetailData.type == "restaurant" }
-            StoreFilter.PUB -> storeDataList.filter { it.storeDetailData.type == "pub" }
+            StoreFilter.CAFE -> storeDataList.filter { it.storeDetailData.type == StoreFilter.CAFE.type }
+            StoreFilter.RESTAURANT -> storeDataList.filter { it.storeDetailData.type == StoreFilter.RESTAURANT.type }
+            StoreFilter.PUB -> storeDataList.filter { it.storeDetailData.type == StoreFilter.PUB.type }
             StoreFilter.ALL -> storeDataList
             StoreFilter.RANK -> rankingFilter(storeDataList)
+            else -> {
+                storeDataList
+            }
         }
 
         val nestedScrollInterop = rememberNestedScrollInteropConnection()

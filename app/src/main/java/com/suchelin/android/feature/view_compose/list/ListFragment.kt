@@ -1,5 +1,6 @@
 package com.suchelin.android.feature.view_compose.list
 
+import androidx.appcompat.widget.SearchView
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,10 +43,12 @@ import com.suchelin.android.feature.compose.ui.jamsil
 import com.suchelin.android.util.StoreFilter
 import com.suchelin.android.util.parcelable.StoreDataArgs
 import com.suchelin.android.util.sendMail
+import com.suchelin.android.util.toastMessageShort
 import com.suchelin.domain.model.StoreData
 
 
 private const val TAG = "LIST"
+
 class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.fragment_list) {
 
     override val viewModel: MainViewModel by activityViewModels()
@@ -53,7 +56,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     private lateinit var storeListReference: List<StoreData>
     private lateinit var randomDialog: RandomDialog
     override fun initView() {
-        randomDialog = RandomDialog(requireContext()){ store->
+        randomDialog = RandomDialog(requireContext()) { store ->
             sendStoreInfo =
                 ListFragmentDirections.actionNavigationMainToNavigationDetail(
                     StoreDataArgs(
@@ -73,7 +76,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                 setComposeView(it, StoreFilter.ALL)
                 binding.loading.isVisible = false
                 binding.filterBar.isVisible = true
-                if(!viewModel.random.value!!){
+                if (!viewModel.random.value!!) {
                     val randomStore = storeList.random()
                     randomDialog.showDialog(randomStore)
                     viewModel.random.value = true
@@ -87,6 +90,31 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                 sendMail(TAG)
             }
 
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    val filteredList = mutableListOf<StoreData>()
+                    for(search in storeListReference){
+                        if(search.storeDetailData.name.contains(query!!,true)){
+                            filteredList.add(search)
+                        }
+                    }
+                    if (filteredList.size > 0 ) {
+                        setComposeView(filteredList, StoreFilter.SEARCH)
+                    }else{
+                        toastMessageShort(getString(R.string.search_none))
+                        setComposeView(filteredList, StoreFilter.ALL)
+                    }
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if(newText!!.isEmpty()){
+                        setComposeView(storeListReference, StoreFilter.ALL)
+                    }
+                    return true
+                }
+            })
+
             val filterButtons = mapOf(
                 all to StoreFilter.ALL,
                 restaurant to StoreFilter.RESTAURANT,
@@ -99,9 +127,8 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
                     setComposeView(storeListReference, filter)
                 }
             }
-            mainSchoolMeal.setOnClickListener{
+            mainSchoolMeal.setOnClickListener {
                 findNavController().navigate(R.id.action_navigation_main_to_schoolFragment)
-//                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SCHOOL_MEAL)))
             }
         }
     }
@@ -109,7 +136,7 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     private fun setComposeView(storeList: List<StoreData>, filter: StoreFilter) {
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent{
+            setContent {
                 StoreRecyclerView(storeList, filter)
             }
         }
@@ -119,12 +146,14 @@ class ListFragment : BaseFragment<FragmentListBinding, MainViewModel>(R.layout.f
     fun StoreRecyclerView(storeDataList: List<StoreData>, filter: StoreFilter) {
         val stores by remember { mutableStateOf(storeDataList) }
         val filteredStores = when (filter) {
-            StoreFilter.CAFE -> stores.filter { it.storeDetailData.type == "cafe" }
-            StoreFilter.RESTAURANT -> stores.filter { it.storeDetailData.type == "restaurant" }
-            StoreFilter.PUB -> stores.filter { it.storeDetailData.type == "pub" }
+            StoreFilter.CAFE -> stores.filter { it.storeDetailData.type == StoreFilter.CAFE.type }
+            StoreFilter.RESTAURANT -> stores.filter { it.storeDetailData.type == StoreFilter.RESTAURANT.type }
+            StoreFilter.PUB -> stores.filter { it.storeDetailData.type == StoreFilter.PUB.type }
             StoreFilter.ALL -> stores
-            else -> {stores}
+            StoreFilter.SEARCH-> storeDataList
+            StoreFilter.RANK -> stores
         }
+
         val nestedScrollInterop = rememberNestedScrollInteropConnection()
         LazyColumn(
             modifier = Modifier.nestedScroll(nestedScrollInterop),
