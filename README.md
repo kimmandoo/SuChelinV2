@@ -1,5 +1,7 @@
 # SuChelinV2
 
+https://github.com/kimmandoo/SuChelin <- refactoring 이전 프로젝트
+
 ### 2023/09/25 ~ 2023/11/03
 
 * [x] 부분 컴포즈 도입(ComposeView 사용)
