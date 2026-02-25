@@ -1,5 +1,6 @@
 import SwiftUI
 import FirebaseCore
+import shared
 
 @main
 struct iOSApp: App {
@@ -7,7 +8,7 @@ struct iOSApp: App {
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
         }
-        KoinHelperKt.doInitKoin()
+        KoinModulesKt.doInitKoin()
     }
 
     var body: some Scene {

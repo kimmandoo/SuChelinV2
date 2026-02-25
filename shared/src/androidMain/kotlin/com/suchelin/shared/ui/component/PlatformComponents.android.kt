@@ -1,6 +1,5 @@
 package com.suchelin.shared.ui.component
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.webkit.WebView
@@ -10,12 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.viewinterop.AndroidView
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -104,31 +100,6 @@ actual fun BannerAd(modifier: Modifier) {
 @Composable
 actual fun LoadingIndicator(modifier: Modifier) {
     CircularProgressIndicator(modifier = modifier)
-}
-
-@Composable
-actual fun PlatformRemoteImage(
-    imageUrl: String?,
-    contentDescription: String,
-    modifier: Modifier,
-    placeholderDrawableName: String?,
-) {
-    val context = LocalContext.current
-    val placeholderRes = placeholderDrawableName
-        ?.let { context.resources.getIdentifier(it, "drawable", context.packageName) }
-        ?.takeIf { it != 0 }
-
-    AsyncImage(
-        model = ImageRequest.Builder(context)
-            .data(imageUrl)
-            .crossfade(true)
-            .build(),
-        contentDescription = contentDescription,
-        modifier = modifier,
-        contentScale = ContentScale.Crop,
-        placeholder = placeholderRes?.let { painterResource(it) },
-        error = placeholderRes?.let { painterResource(it) },
-    )
 }
 
 @Composable

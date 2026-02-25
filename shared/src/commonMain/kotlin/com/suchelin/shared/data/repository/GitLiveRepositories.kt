@@ -147,7 +147,7 @@ class GitLiveVoteRepository : VoteRepository {
         scope.launch {
             runCatching {
                 ensureAuthenticated()
-                Firebase.database.reference("").valueEvents.collect { snapshot ->
+                Firebase.database.reference("/").valueEvents.collect { snapshot ->
                     _votes.value = toVoteMap(snapshot)
                 }
             }.onFailure {
@@ -160,7 +160,7 @@ class GitLiveVoteRepository : VoteRepository {
     override suspend fun vote(key: String) {
         runCatching {
             ensureAuthenticated()
-            val ref = Firebase.database.reference("").child(key)
+            val ref = Firebase.database.reference("/").child(key)
             val current = _votes.value[key] ?: 0L
             ref.setValue(current + 1L)
             refresh()

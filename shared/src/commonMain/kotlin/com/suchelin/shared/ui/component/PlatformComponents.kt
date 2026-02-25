@@ -3,6 +3,8 @@ package com.suchelin.shared.ui.component
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import coil3.compose.AsyncImage
 import com.suchelin.shared.model.StoreData
 
 @Composable
@@ -22,12 +24,19 @@ expect fun BannerAd(modifier: Modifier = Modifier)
 expect fun LoadingIndicator(modifier: Modifier = Modifier)
 
 @Composable
-expect fun PlatformRemoteImage(
+fun PlatformRemoteImage(
     imageUrl: String?,
     contentDescription: String,
     modifier: Modifier = Modifier,
     placeholderDrawableName: String? = null,
-)
+) {
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = contentDescription,
+        modifier = modifier,
+        contentScale = ContentScale.Crop,
+    )
+}
 
 @Composable
 expect fun PlatformDrawableIcon(

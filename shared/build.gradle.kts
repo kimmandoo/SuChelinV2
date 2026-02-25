@@ -6,10 +6,20 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "17"
+            }
+        }
+    }
+
+    listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach {
+        it.binaries.framework {
+            baseName = "shared"
+            isStatic = true
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -30,13 +40,16 @@ kotlin {
                 implementation("dev.gitlive:firebase-database:2.1.0")
                 implementation("androidx.room:room-runtime:2.7.0")
                 implementation("androidx.sqlite:sqlite-bundled:2.5.0")
+                implementation("io.coil-kt.coil3:coil-compose:3.0.4")
+                implementation("io.coil-kt.coil3:coil-network-ktor3:3.0.4")
+                implementation("io.ktor:ktor-client-core:3.0.3")
             }
         }
         val androidMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-android:4.0.0")
                 implementation("io.insert-koin:koin-androidx-compose:4.0.0")
-                implementation("io.coil-kt:coil-compose:2.7.0")
+                implementation("io.ktor:ktor-client-okhttp:3.0.3")
                 implementation("com.google.android.gms:play-services-maps:18.2.0")
                 implementation("com.google.android.gms:play-services-ads:22.5.0")
                 implementation("androidx.webkit:webkit:1.12.1")
@@ -44,6 +57,9 @@ kotlin {
         }
         val iosMain by creating {
             dependsOn(commonMain)
+            dependencies {
+                implementation("io.ktor:ktor-client-darwin:3.0.3")
+            }
         }
         val iosX64Main by getting { dependsOn(iosMain) }
         val iosArm64Main by getting { dependsOn(iosMain) }

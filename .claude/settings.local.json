@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(for f in /Users/mingyukim/Documents/kmp/SuChelinV2/shared/src/commonMain/kotlin/com/suchelin/shared/ui/screen/*/*.kt)",
+      "Bash(done)",
+      "Bash(xcodegen generate:*)",
+      "Bash(./gradlew:*)",
+      "Bash(xcodebuild:*)"
     ]
   }
 }
