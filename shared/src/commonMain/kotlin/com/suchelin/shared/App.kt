@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.fillMaxSize
@@ -107,6 +106,28 @@ fun App() {
                 // Floating pill navbar overlaid on top of content
                 if (route.showInBottomBar) {
                     val bottomBarShape = RoundedCornerShape(22.dp)
+                    val bottomBarModifier = Modifier
+                        .then(
+                            if (isIosPlatform()) {
+                                Modifier
+                            } else {
+                                Modifier.shadow(
+                                    elevation = 12.dp,
+                                    shape = bottomBarShape,
+                                )
+                            },
+                        )
+                        .clip(bottomBarShape)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
+                            shape = bottomBarShape,
+                        )
+                        .border(
+                            width = 1.dp,
+                            color = Color.White.copy(alpha = 0.45f),
+                            shape = bottomBarShape,
+                        )
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
                     Box(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
@@ -116,25 +137,7 @@ fun App() {
                         contentAlignment = Alignment.Center,
                     ) {
                         Row(
-                            modifier = Modifier
-                                // 이게 ios에서 하얀색박스같은걸 만들고있음
-                                .shadow(
-                                    elevation = 12.dp,
-                                    shape = RoundedCornerShape(22.dp),
-//                                    ambientColor = Color.Black.copy(alpha = 0.12f),
-//                                    spotColor = Color.Black.copy(alpha = 0.24f),
-                                )
-                                .clip(bottomBarShape)
-                                .background(
-                                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
-                                    shape = bottomBarShape,
-                                )
-                                .border(
-                                    width = 1.dp,
-                                    color = Color.White.copy(alpha = 0.45f),
-                                    shape = bottomBarShape,
-                                )
-                                .padding(horizontal = 16.dp, vertical = 12.dp),
+                            modifier = bottomBarModifier,
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {

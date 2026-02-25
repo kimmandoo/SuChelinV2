@@ -136,3 +136,18 @@ File: `shared/src/iosMain/kotlin/com/suchelin/shared/AppViewController.kt`
 
 - Process documented from initial report to final patch.
 - Stronger iOS-safe rendering changes applied and compiled successfully for shared/common + iOS simulator target.
+
+맞아요, 핵심 문제는 Row의 .shadow(...)입니다.  
+iOS(Compose Multiplatform/Skia)에서 이 shadow가 오프스크린 레이어를 만들 때 경계가 사각형처럼 합성되면서, 반투명 배경/클립과 겹쳐 흰 박스처럼 보이는 아티팩트가 생깁니다. Android에서는 같은 체인이 상대적으로 덜 드러나고요.
+- 원인 포인트: shared/src/commonMain/kotlin/com/suchelin/shared/App.kt:114의 Modifier.shadow(...) (iOS에서만 시각 아티팩트 유발)
+- 적용한 수정: iOS에서는 shadow를 끄고, Android만 shadow 유지하도록 분기
+    - shared/src/commonMain/kotlin/com/suchelin/shared/App.kt:109 (bottomBarModifier에 isIosPlatform() 조건 분기)
+    - shared/src/commonMain/kotlin/com/suchelin/shared/Platform.kt:3
+    - shared/src/androidMain/kotlin/com/suchelin/shared/Platform.android.kt:3
+    - shared/src/iosMain/kotlin/com/suchelin/shared/Platform.ios.kt:3
+- 결과: iOS 경로에서는 clip + background + border만 사용해서 흰 박스 아티팩트 트리거를 제거
+  검증도 완료했습니다.
+- ./gradlew :shared:compileKotlinMetadata ✅
+- ./gradlew :shared:compileKotlinIosSimulatorArm64 ✅
+- ./gradlew :shared:allTests ✅ (NO-SOURCE)
+  즉, “왜 생기냐”의 정답은 iOS의 shadow 합성 아티팩트이고, 지금 그 지점을 iOS 전용으로 우회해서 막아둔 상태입니다.
