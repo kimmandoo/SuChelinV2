@@ -2,6 +2,7 @@ package com.suchelin.shared.ui.screen.school
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,77 +34,86 @@ import com.suchelin.shared.util.AMARENCE
 import com.suchelin.shared.util.JONGHAP
 
 @Composable
-fun SchoolScreen(modifier: Modifier = Modifier) {
+fun SchoolScreen(
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     var currentUrl by remember { mutableStateOf(JONGHAP) }
 
-    ScreenContainer(modifier = modifier) {
+    ScreenContainer(modifier = modifier, contentPadding = PaddingValues(horizontal = 0.dp)) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            TopBar(title = "학식", subtitle = "이번 주 식단표를 확인해요")
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            Column(
+                modifier = Modifier.padding(horizontal = 16.dp)
             ) {
-                FilterChip(
-                    selected = currentUrl == JONGHAP,
-                    onClick = { currentUrl = JONGHAP },
-                    shape = RoundedCornerShape(20.dp),
-                    border = FilterChipDefaults.filterChipBorder(
-                        borderColor = Color.Transparent,
-                        enabled = true,
-                        selected = currentUrl == JONGHAP,
-                        selectedBorderColor = Color.Transparent,
-                    ),
-                    label = {
-                        Row {
-                            Icon(
-                                imageVector = Icons.Rounded.Restaurant,
-                                contentDescription = null,
-                                modifier = Modifier.padding(end = 4.dp).size(14.dp),
-                            )
-                            Text("종합", style = MaterialTheme.typography.labelLarge)
-                        }
-                    },
-                    colors = FilterChipDefaults.filterChipColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        selectedLabelColor = Color.White,
-                    ),
+                TopBar(
+                    title = "학식",
+                    subtitle = "이번 주 식단표를 확인해요",
+                    showBackButton = true,
+                    onBackClick = onBack,
                 )
-                FilterChip(
-                    selected = currentUrl == AMARENCE,
-                    onClick = { currentUrl = AMARENCE },
-                    shape = RoundedCornerShape(20.dp),
-                    border = FilterChipDefaults.filterChipBorder(
-                        borderColor = Color.Transparent,
-                        enabled = true,
-                        selected = currentUrl == AMARENCE,
-                        selectedBorderColor = Color.Transparent,
-                    ),
-                    label = {
-                        Row {
-                            Icon(
-                                imageVector = Icons.Rounded.Restaurant,
-                                contentDescription = null,
-                                modifier = Modifier.padding(end = 4.dp).size(14.dp),
-                            )
-                            Text("아마랜스", style = MaterialTheme.typography.labelLarge)
-                        }
-                    },
-                    colors = FilterChipDefaults.filterChipColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        selectedLabelColor = Color.White,
-                    ),
-                )
-            }
 
-            PremiumCard(modifier = Modifier.fillMaxWidth().weight(1f)) {
-                WebViewScreen(url = currentUrl, modifier = Modifier.fillMaxSize())
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    FilterChip(
+                        selected = currentUrl == JONGHAP,
+                        onClick = { currentUrl = JONGHAP },
+                        shape = RoundedCornerShape(20.dp),
+                        border = FilterChipDefaults.filterChipBorder(
+                            borderColor = Color.Transparent,
+                            enabled = true,
+                            selected = currentUrl == JONGHAP,
+                            selectedBorderColor = Color.Transparent,
+                        ),
+                        label = {
+                            Row {
+                                Icon(
+                                    imageVector = Icons.Rounded.Restaurant,
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(end = 4.dp).size(14.dp),
+                                )
+                                Text("종합", style = MaterialTheme.typography.labelLarge)
+                            }
+                        },
+                        colors = FilterChipDefaults.filterChipColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            selectedContainerColor = MaterialTheme.colorScheme.primary,
+                            selectedLabelColor = Color.White,
+                        ),
+                    )
+                    FilterChip(
+                        selected = currentUrl == AMARENCE,
+                        onClick = { currentUrl = AMARENCE },
+                        shape = RoundedCornerShape(20.dp),
+                        border = FilterChipDefaults.filterChipBorder(
+                            borderColor = Color.Transparent,
+                            enabled = true,
+                            selected = currentUrl == AMARENCE,
+                            selectedBorderColor = Color.Transparent,
+                        ),
+                        label = {
+                            Row {
+                                Icon(
+                                    imageVector = Icons.Rounded.Restaurant,
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(end = 4.dp).size(14.dp),
+                                )
+                                Text("아마랜스", style = MaterialTheme.typography.labelLarge)
+                            }
+                        },
+                        colors = FilterChipDefaults.filterChipColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            selectedContainerColor = MaterialTheme.colorScheme.primary,
+                            selectedLabelColor = Color.White,
+                        ),
+                    )
+                }
             }
+            WebViewScreen(url = currentUrl, modifier = Modifier.fillMaxWidth().weight(1f))
         }
     }
 }

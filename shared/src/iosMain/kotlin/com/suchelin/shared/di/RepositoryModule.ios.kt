@@ -6,8 +6,10 @@ import com.suchelin.shared.data.repository.GitLiveAuthRepository
 import com.suchelin.shared.data.repository.GitLiveMenuRepository
 import com.suchelin.shared.data.repository.GitLivePostRepository
 import com.suchelin.shared.data.repository.GitLiveStoreRepository
+import com.suchelin.shared.data.repository.GitLiveReportRepository
 import com.suchelin.shared.data.repository.GitLiveVoteRepository
 import com.suchelin.shared.data.repository.MenuRepository
+import com.suchelin.shared.data.repository.ReportRepository
 import com.suchelin.shared.data.repository.PostRepository
 import com.suchelin.shared.data.repository.StoreRepository
 import com.suchelin.shared.data.repository.VoteRepository
@@ -53,4 +55,5 @@ actual val repositoryModule: Module = module {
     single<VoteRepository> { GitLiveVoteRepository() }
     single<AuthRepository> { GitLiveAuthRepository() }
     single<DailyLimitRepository> { IosDailyLimitRepository() }
+    single<ReportRepository> { GitLiveReportRepository() }
 }

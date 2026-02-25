@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ChatBubbleOutline
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.FormatListBulleted
+import androidx.compose.material.icons.rounded.Campaign
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -45,6 +46,7 @@ import com.suchelin.shared.ui.theme.SuChelinTheme
 import com.suchelin.shared.ui.theme.SystemGray3
 import com.suchelin.shared.viewmodel.FeedViewModel
 import com.suchelin.shared.viewmodel.MainViewModel
+import com.suchelin.shared.viewmodel.ReportViewModel
 import com.suchelin.shared.viewmodel.VoteViewModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -55,6 +57,7 @@ fun App() {
     val mainViewModel: MainViewModel = koinInject()
     val feedViewModel: FeedViewModel = koinInject()
     val voteViewModel: VoteViewModel = koinInject()
+    val reportViewModel: ReportViewModel = koinInject()
     var route by remember { mutableStateOf(NavRoutes.LIST) }
     var previousRoute by remember { mutableStateOf<NavRoutes?>(null) }
     var selectedStoreId by remember { mutableStateOf<Int?>(null) }
@@ -93,6 +96,7 @@ fun App() {
                 mainViewModel = mainViewModel,
                 feedViewModel = feedViewModel,
                 voteViewModel = voteViewModel,
+                reportViewModel = reportViewModel,
                 modifier = Modifier
                     .fillMaxSize()
                     .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)),
@@ -139,7 +143,8 @@ fun App() {
                                 NavRoutes.LIST -> Icons.Rounded.FormatListBulleted
                                 NavRoutes.MAP -> Icons.Rounded.Map
                                 NavRoutes.VOTE -> Icons.Rounded.FavoriteBorder
-                                NavRoutes.FEED -> Icons.Rounded.ChatBubbleOutline
+//                                NavRoutes.FEED -> Icons.Rounded.ChatBubbleOutline
+                                NavRoutes.REPORT -> Icons.Rounded.Campaign
                                 else -> Icons.Rounded.FormatListBulleted
                             }
                             val tint by animateColorAsState(

@@ -28,6 +28,13 @@ interface AuthRepository {
     suspend fun signInAnonymously(): String?
 }
 
+interface ReportRepository {
+    suspend fun submitReport(report: com.suchelin.shared.model.ReportData)
+    suspend fun getReports(): List<com.suchelin.shared.model.ReportData>
+    suspend fun upvoteReport(reportId: String)
+    suspend fun downvoteReport(reportId: String)
+}
+
 interface DailyLimitRepository {
     suspend fun canPostToday(): Boolean
     suspend fun markPostUsed()

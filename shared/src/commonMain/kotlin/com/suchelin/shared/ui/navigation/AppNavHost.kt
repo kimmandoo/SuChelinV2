@@ -13,9 +13,11 @@ import com.suchelin.shared.ui.screen.feed.FeedScreen
 import com.suchelin.shared.ui.screen.list.ListScreen
 import com.suchelin.shared.ui.screen.map.MapScreen
 import com.suchelin.shared.ui.screen.school.SchoolScreen
+import com.suchelin.shared.ui.screen.report.ReportScreen
 import com.suchelin.shared.ui.screen.vote.VoteScreen
 import com.suchelin.shared.viewmodel.FeedViewModel
 import com.suchelin.shared.viewmodel.MainViewModel
+import com.suchelin.shared.viewmodel.ReportViewModel
 import com.suchelin.shared.viewmodel.VoteViewModel
 
 @Composable
@@ -28,6 +30,7 @@ fun AppNavHost(
     mainViewModel: MainViewModel,
     feedViewModel: FeedViewModel,
     voteViewModel: VoteViewModel,
+    reportViewModel: ReportViewModel,
     modifier: Modifier = Modifier,
 ) {
     val stores by mainViewModel.storeData.collectAsState()
@@ -36,6 +39,7 @@ fun AppNavHost(
     val isVoteLimited by voteViewModel.isLimited.collectAsState()
     val isFeedLimited by feedViewModel.isLimited.collectAsState()
     val menuData by mainViewModel.menuData.collectAsState()
+    val randomShown by mainViewModel.randomShown.collectAsState()
     val selected = selectedStoreId?.let { id -> stores.firstOrNull { it.storeId == id } }
     val feedMessage by feedViewModel.event.collectAsState(initial = null)
 
@@ -43,22 +47,24 @@ fun AppNavHost(
         when (route) {
             NavRoutes.LIST -> ListScreen(
                 stores = stores,
+                randomAlreadyShown = randomShown,
+                onRandomShown = { mainViewModel.markRandomShown() },
                 onStoreClick = {
                     onSelectStore(it)
                     onRouteChange(NavRoutes.DETAIL)
                 },
-                onContactClick = { onRouteChange(NavRoutes.FEED) },
+                onContactClick = { onRouteChange(NavRoutes.SCHOOL) },
             )
-            NavRoutes.FEED -> FeedScreen(
-                posts = posts,
-                isLimited = isFeedLimited,
-                onSubmitPost = {
-                    feedViewModel.submitPost(it) {
-                        mainViewModel.postRefresh()
-                    }
-                },
-                message = feedMessage,
-            )
+//            NavRoutes.FEED -> FeedScreen(
+//                posts = posts,
+//                isLimited = isFeedLimited,
+//                onSubmitPost = {
+//                    feedViewModel.submitPost(it) {
+//                        mainViewModel.postRefresh()
+//                    }
+//                },
+//                message = feedMessage,
+//            )
             NavRoutes.VOTE -> VoteScreen(
                 stores = stores,
                 rankedStores = voteViewModel.sortByRank(stores),
@@ -70,6 +76,7 @@ fun AppNavHost(
                     onRouteChange(NavRoutes.DETAIL)
                 },
             )
+
             NavRoutes.MAP -> MapScreen(
                 stores = stores,
                 onStoreClick = {
@@ -77,10 +84,18 @@ fun AppNavHost(
                     onRouteChange(NavRoutes.DETAIL)
                 },
             )
-            NavRoutes.SCHOOL -> SchoolScreen()
+
+            NavRoutes.REPORT -> ReportScreen(
+                stores = stores,
+                menuData = menuData,
+                reportViewModel = reportViewModel,
+            )
+
+            NavRoutes.SCHOOL -> SchoolScreen(onBack = onBack)
             NavRoutes.DETAIL -> DetailScreen(
                 store = selected,
-                menu = selected?.let { mainViewModel.getMenuDetailByStoreId(it.storeId) } ?: emptyList(),
+                menu = selected?.let { mainViewModel.getMenuDetailByStoreId(it.storeId) }
+                    ?: emptyList(),
                 tel = selected?.let { menuData[it.storeId]?.tel } ?: "",
                 onOpenMap = { onRouteChange(NavRoutes.MAP) },
                 onCall = {

@@ -12,5 +12,6 @@ data class StoreDetail(
     val latitude: Double,
     val longitude: Double,
     val menuImageUrl: String?,
-    val type: String
+    val type: String,
+    val isClosed: Boolean = false,
 )

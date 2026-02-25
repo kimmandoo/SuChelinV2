@@ -52,6 +52,8 @@ import com.suchelin.shared.util.StoreFilter
 @Composable
 fun ListScreen(
     stores: List<StoreData>,
+    randomAlreadyShown: Boolean,
+    onRandomShown: () -> Unit,
     onStoreClick: (StoreData) -> Unit,
     onContactClick: () -> Unit = {},
     modifier: Modifier = Modifier,
@@ -61,10 +63,11 @@ fun ListScreen(
     var showRandom by remember { mutableStateOf(false) }
     var randomStore by remember { mutableStateOf<StoreData?>(null) }
 
-    LaunchedEffect(stores) {
-        if (stores.isNotEmpty() && randomStore == null) {
+    LaunchedEffect(stores, randomAlreadyShown) {
+        if (stores.isNotEmpty() && randomStore == null && !randomAlreadyShown) {
             randomStore = stores.random()
             showRandom = true
+            onRandomShown()
         }
     }
 
@@ -88,7 +91,8 @@ fun ListScreen(
                 TopBar(
                     title = "수슐랭",
                     subtitle = "캠퍼스 근처 맛집을 탐색해요",
-                    contactLabel = "문의",
+                    contactLabel = "학식",
+                    contactIconDrawableName = "bxs_food_menu",
                     onContactClick = onContactClick,
                 )
                 Spacer(modifier = Modifier.height(12.dp))

@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.HelpOutline
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +24,10 @@ fun TopBar(
     title: String,
     subtitle: String,
     modifier: Modifier = Modifier,
+    showBackButton: Boolean = false,
+    onBackClick: (() -> Unit)? = null,
     contactLabel: String? = null,
+    contactIconDrawableName: String = "bx_question",
     onContactClick: (() -> Unit)? = null,
 ) {
     Column(
@@ -36,6 +39,17 @@ fun TopBar(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            if (showBackButton && onBackClick != null) {
+                IconButton(onClick = onBackClick) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                        contentDescription = "뒤로가기",
+                        modifier = Modifier.size(24.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
@@ -56,8 +70,8 @@ fun TopBar(
 
             if (contactLabel != null && onContactClick != null) {
                 IconButton(onClick = onContactClick) {
-                    Icon(
-                        imageVector = Icons.Rounded.HelpOutline,
+                    PlatformDrawableIcon(
+                        drawableName = contactIconDrawableName,
                         contentDescription = contactLabel,
                         modifier = Modifier.size(24.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,

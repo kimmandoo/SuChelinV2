@@ -1,4 +1,5 @@
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
@@ -67,6 +68,11 @@ android {
         dataBinding = true
         compose = true
     }
+
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    exclude("**/com/suchelin/android/v2/**")
 }
 
 dependencies {

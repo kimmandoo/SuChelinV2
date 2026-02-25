@@ -8,6 +8,7 @@ import com.suchelin.shared.data.repository.StoreRepository
 import com.suchelin.shared.data.repository.VoteRepository
 import com.suchelin.shared.viewmodel.FeedViewModel
 import com.suchelin.shared.viewmodel.MainViewModel
+import com.suchelin.shared.viewmodel.ReportViewModel
 import com.suchelin.shared.viewmodel.VoteViewModel
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
@@ -17,6 +18,7 @@ val sharedModule = module {
     single { MainViewModel(get(), get(), get()) }
     single { FeedViewModel(get(), get()) }
     single { VoteViewModel(get(), get()) }
+    single { ReportViewModel(get()) }
 }
 
 expect val platformModule: org.koin.core.module.Module

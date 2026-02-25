@@ -9,5 +9,5 @@ data class StoreDataArgs(
     val storeName: String,
     val imageUrl: String,
     val latitude: Double,
-    val longitude: Double
-): Parcelable
+    val longitude: Double,
+) : Parcelable
