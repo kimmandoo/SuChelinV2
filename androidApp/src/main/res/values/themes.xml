@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SuchelinV2" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/apple_accent</item>
+        <item name="colorSecondary">@color/apple_accent_soft</item>
+        <item name="colorPrimaryVariant">@color/apple_text_primary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/apple_bg_bottom</item>
+        <item name="useMaterialThemeColors">false</item>
+    </style>
+
+    <style name="FloatingButtonTheme">
+        <item name="android:backgroundTint">@color/apple_accent</item>
+        <item name="rippleColor">@color/apple_accent_soft</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="Theme.SuchelinV2" parent="Base.Theme.SuchelinV2" />
+
+    <style name="Theme.SplashScreen.ShyPolarBear" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.SuchelinV2</item>
+    </style>
+</resources>

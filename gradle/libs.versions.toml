@@ -1,0 +1,21 @@
+[versions]
+kotlin = "2.1.0"
+agp = "8.7.3"
+gradle = "8.9"
+ksp = "2.1.0-1.0.29"
+cmp = "1.7.3"
+room = "2.7.0"
+koin = "4.0.0"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+[libraries]
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }

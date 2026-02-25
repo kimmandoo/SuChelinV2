@@ -1,14 +1,12 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    dependencies{
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN_VERSION}")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.NAV_SAFE_ARGS_VERSION}")
-    }
-}
-
 plugins {
-    id("com.android.application") version "8.1.1" apply false
-    id("com.google.devtools.ksp") version "1.8.0-1.0.9" apply false
+    id("com.android.application") version "8.7.3" apply false
+    id("com.android.library") version "8.7.3" apply false
+    id("org.jetbrains.kotlin.android") version "2.1.0" apply false
+    id("org.jetbrains.kotlin.multiplatform") version "2.1.0" apply false
+    id("org.jetbrains.kotlin.plugin.compose") version "2.1.0" apply false
+    id("org.jetbrains.compose") version "1.7.3" apply false
+    id("com.google.devtools.ksp") version "2.1.0-1.0.29" apply false
+    id("androidx.navigation.safeargs.kotlin") version "2.8.5" apply false
     id("com.google.gms.google-services") version "4.3.15" apply false
     id("com.google.firebase.crashlytics") version "2.9.9" apply false
 }

@@ -10,10 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven("https://naver.jfrog.io/artifactory/maven/")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
 rootProject.name = "SuchelinV2"
-include(":app")
-include(":domain")
+include(":androidApp")
+include(":shared")
